@@ -1,0 +1,17 @@
+{
+  "name": "price-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "packageManager": "yarn@4.9.1",
+  "devDependencies": {
+    "@types/google-apps-script": "^1.0.97",
+    "clasp": "^1.0.0",
+    "typescript": "^5.8.3"
+  }
+}
