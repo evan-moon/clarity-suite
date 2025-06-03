@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "commonjs",
     "lib": ["esnext"],
     "target": "ES2019",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "strict": true,
+    "noImplicitAny": true
   }
 }

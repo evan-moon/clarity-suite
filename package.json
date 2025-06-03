@@ -1,14 +1,16 @@
 {
   "name": "price-tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "스프레드시트 데이터를 노션 데이터베이스에 동기화",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "build": "yarn typecheck && esbuild src/index.ts --bundle --outfile=dist/index.js --target=es2019 --format=esm --tree-shaking=false --platform=browser && cp appsscript.json dist/",
     "deploy": "yarn build && clasp push",
+    "dev": "clasp push --watch",
     "play": "clasp run"
   },
-  "author": "",
+  "author": "evan-moon",
   "license": "ISC",
   "packageManager": "yarn@4.9.1",
   "devDependencies": {
