@@ -24,7 +24,7 @@ function main() {
     const result = getDataFromNotion(NOTION_DATABASE_ID, {
       filter: {
         property: '종목',
-        rich_text: {
+        title: {
           equals: symbol,
         },
       },

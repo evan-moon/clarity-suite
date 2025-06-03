@@ -38,7 +38,7 @@ export function createDataInNotion<T>(databaseId: string, data: T) {
     headers: NOTION_REQUEST_HEADER,
     payload: JSON.stringify({
       parent: { database_id: databaseId },
-      ...data,
+      properties: { ...data },
     }),
   });
 
