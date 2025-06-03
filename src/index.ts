@@ -14,12 +14,12 @@ function main() {
     return;
   }
 
-  const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 9).getValues();
+  const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 10).getValues();
 
   Logger.log(`${TARGET_SHEET_NAME} 시트에서 종목 데이터를 불러왔어요.`);
   Logger.log(data);
 
-  data.forEach(([티커, 종목명, 현재가, 전일종가, 변동폭, 연최고가, 연최저가, PE, EPS]) => {
+  data.forEach(([티커, 종목명, 현재가, 전일종가, 변동폭, 연최고가, 연최저가, 배당률, PE, EPS]) => {
     if (!티커) {
       return;
     }
@@ -59,6 +59,9 @@ function main() {
       },
       '52주최저가': {
         number: parseFloat(연최저가),
+      },
+      배당률: {
+        number: parseFloat(배당률) / 100,
       },
       PE: {
         number: parseFloat(PE),
