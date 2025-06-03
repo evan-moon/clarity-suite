@@ -1,14 +1,17 @@
 import { NOTION_TOKEN } from './constants';
 
+const NOTION_REQUEST_HEADER = {
+  Authorization: `Bearer ${NOTION_TOKEN}`,
+  'Content-Type': 'application/json',
+  'Notion-Version': '2022-06-28',
+};
+
 export function getDataFromNotion<T>(databaseId: string, data: T) {
   const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
 
   const result = UrlFetchApp.fetch(queryUrl, {
     method: 'post',
-    headers: {
-      Authorization: `Bearer ${NOTION_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
+    headers: NOTION_REQUEST_HEADER,
     payload: JSON.stringify(data),
   });
 
@@ -20,10 +23,7 @@ export function updateDataInNotion<T>(pageId: string, data: T) {
 
   const result = UrlFetchApp.fetch(queryUrl, {
     method: 'patch',
-    headers: {
-      Authorization: `Bearer ${NOTION_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
+    headers: NOTION_REQUEST_HEADER,
     payload: JSON.stringify(data),
   });
 
@@ -35,10 +35,7 @@ export function createDataInNotion<T>(databaseId: string, data: T) {
 
   const result = UrlFetchApp.fetch(queryUrl, {
     method: 'post',
-    headers: {
-      Authorization: `Bearer ${NOTION_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
+    headers: NOTION_REQUEST_HEADER,
     payload: JSON.stringify({
       parent: { database_id: databaseId },
       ...data,

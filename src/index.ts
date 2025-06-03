@@ -3,9 +3,14 @@ import { createDataInNotion, getDataFromNotion, updateDataInNotion } from './not
 import { getSheet } from './sheet';
 
 function main() {
+  if (TARGET_SHEET_NAME == null) {
+    Logger.log(`Apps Script 속성에 대상 시트 이름을 등록해주세요.`);
+    return;
+  }
+
   const sheet = getSheet(TARGET_SHEET_NAME);
   if (sheet == null) {
-    Logger.log('시트50 시트가 존재하지 않습니다.');
+    Logger.log(`${TARGET_SHEET_NAME} 시트가 존재하지 않습니다.`);
     return;
   }
 
