@@ -1,3 +1,3 @@
 export const TARGET_SHEET_NAME = PropertiesService.getScriptProperties().getProperty('SHEET_NAME');
 export const NOTION_TOKEN = PropertiesService.getScriptProperties().getProperty('NOTION_SECRET');
-export const NOTION_DATABASE_ID = '205c097cb36e80e6b854f4bcb92a8c97';
+export const NOTION_DATABASE_ID = PropertiesService.getScriptProperties().getProperty('NOTION_DATABASE_ID');

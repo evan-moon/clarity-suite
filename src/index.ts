@@ -3,20 +3,28 @@ import { createDataInNotion, getDataFromNotion, updateDataInNotion } from './not
 import { getSheet } from './sheet';
 
 function main() {
-  if (TARGET_SHEET_NAME == null) {
+  const sheetName = TARGET_SHEET_NAME;
+  const notionDataBaseId = NOTION_DATABASE_ID;
+
+  if (sheetName == null) {
     Logger.log(`Apps Script 속성에 대상 시트 이름을 등록해주세요.`);
     return;
   }
 
-  const sheet = getSheet(TARGET_SHEET_NAME);
+  if (notionDataBaseId == null) {
+    Logger.log(`Apps Script 속성에 노션 데이터베이스 ID를 등록해주세요.`);
+    return;
+  }
+
+  const sheet = getSheet(sheetName);
   if (sheet == null) {
-    Logger.log(`${TARGET_SHEET_NAME} 시트가 존재하지 않습니다.`);
+    Logger.log(`${sheetName} 시트가 존재하지 않습니다.`);
     return;
   }
 
   const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 10).getValues();
 
-  Logger.log(`${TARGET_SHEET_NAME} 시트에서 종목 데이터를 불러왔어요.`);
+  Logger.log(`${sheetName} 시트에서 종목 데이터를 불러왔어요.`);
   Logger.log(data);
 
   data.forEach(([티커, 종목명, 현재가, 전일종가, 변동폭, 연최고가, 연최저가, 배당률, PE, EPS]) => {
@@ -26,7 +34,7 @@ function main() {
 
     Logger.log(`${종목명} 업데이트를 시작합니다.`);
 
-    const result = getDataFromNotion(NOTION_DATABASE_ID, {
+    const result = getDataFromNotion(notionDataBaseId, {
       filter: {
         property: 'Ticker',
         title: {
@@ -83,7 +91,7 @@ function main() {
 
       Logger.log(`${종목명} 종목 정보를 업데이트했어요.`);
     } else {
-      createDataInNotion(NOTION_DATABASE_ID, {
+      createDataInNotion(notionDataBaseId, {
         Ticker: {
           title: [{ text: { content: 티커 } }],
         },
