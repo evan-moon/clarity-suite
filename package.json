@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "yarn typecheck && esbuild src/index.ts --bundle --outfile=dist/index.js --target=es2019 --format=esm --tree-shaking=false --platform=browser && cp appsscript.json dist/",
+    "build": "yarn typecheck && node esbuild.config.js && cp appsscript.json dist/",
     "deploy": "yarn build && clasp push",
     "dev": "clasp push --watch",
     "play": "clasp run"

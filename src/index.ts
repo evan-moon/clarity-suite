@@ -2,7 +2,7 @@ import { NOTION_DATABASE_ID, TARGET_SHEET_NAME } from './constants';
 import { createDataInNotion, getDataFromNotion, updateDataInNotion } from './notion';
 import { getSheet } from './sheet';
 
-function main() {
+function sync() {
   const sheetName = TARGET_SHEET_NAME;
   const notionDataBaseId = NOTION_DATABASE_ID;
 
@@ -102,3 +102,5 @@ function main() {
     }
   });
 }
+
+sync();
