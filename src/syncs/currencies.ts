@@ -8,7 +8,7 @@ export function syncCurrencies(sheetName: string, notionDbId: string) {
     return;
   }
 
-  const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 10).getValues();
+  const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4).getValues();
 
   Logger.log(`${sheetName} 시트에서 환율 데이터를 불러왔어요.`);
   Logger.log(data);
@@ -56,7 +56,7 @@ export function syncCurrencies(sheetName: string, notionDbId: string) {
     };
 
     Logger.log('노션에서 해당 환율의 정보를 찾아왔어요.');
-    Logger.log(propertiesPayload);
+    Logger.log(result);
 
     if (result.results.length > 0) {
       const pageId = result.results[0].id;

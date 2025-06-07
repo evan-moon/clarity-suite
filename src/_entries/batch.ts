@@ -1,9 +1,9 @@
-import { appsScriptProperties } from './appsScriptProperties';
-import { syncStocks } from './syncs/stocks';
-import { assertEnvs } from './asserts';
-import { syncCurrencies } from './syncs/currencies';
+import { appsScriptProperties } from '../appsScriptProperties';
+import { syncStocks } from '../syncs/stocks';
+import { assertEnvs } from '../asserts';
+import { syncCurrencies } from '../syncs/currencies';
 
-function sync() {
+function batch() {
   assertEnvs(appsScriptProperties);
 
   const { STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID } =
@@ -13,4 +13,4 @@ function sync() {
   syncCurrencies(CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID);
 }
 
-sync();
+batch();

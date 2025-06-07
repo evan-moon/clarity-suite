@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "yarn typecheck && node esbuild.config.js && cp appsscript.json dist/",
+    "build": "yarn typecheck && node esbuild.config.js",
     "deploy": "yarn build && clasp push",
-    "dev": "clasp push --watch",
     "play": "clasp run"
   },
   "author": "evan-moon",
@@ -16,6 +15,7 @@
   "devDependencies": {
     "@types/google-apps-script": "^1.0.97",
     "clasp": "^1.0.0",
+    "esbuild": "^0.25.5",
     "typescript": "^5.8.3"
   }
 }

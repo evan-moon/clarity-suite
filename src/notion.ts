@@ -8,6 +8,7 @@ const NOTION_REQUEST_HEADER = {
 
 export function getDataFromNotion<T>(databaseId: string, data: T) {
   const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
+  Logger.log(queryUrl);
 
   const result = UrlFetchApp.fetch(queryUrl, {
     method: 'post',

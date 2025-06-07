@@ -66,7 +66,7 @@ export function syncStocks(sheetName: string, notionDbId: string) {
     };
 
     Logger.log('노션에서 해당 종목의 정보를 찾아왔어요.');
-    Logger.log(propertiesPayload);
+    Logger.log(result);
 
     if (result.results.length > 0) {
       const pageId = result.results[0].id;
