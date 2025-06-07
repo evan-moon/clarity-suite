@@ -1,7 +1,7 @@
-import { NOTION_TOKEN } from './constants';
+import { appsScriptProperties } from './appsScriptProperties';
 
 const NOTION_REQUEST_HEADER = {
-  Authorization: `Bearer ${NOTION_TOKEN}`,
+  Authorization: `Bearer ${appsScriptProperties.NOTION_SECRET}`,
   'Content-Type': 'application/json',
   'Notion-Version': '2022-06-28',
 };
