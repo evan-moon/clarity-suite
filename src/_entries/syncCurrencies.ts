@@ -1,5 +1,5 @@
 import { appsScriptProperties } from '../appsScriptProperties';
-import { syncCurrencies as origin } from '../syncs/currencies';
+import { syncCurrencies as origin } from '../batches/currencies';
 import { assertEnvs } from '../asserts';
 
 function syncCurrencies() {

@@ -180,6 +180,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@notionhq/client@npm:^3.1.3":
+  version: 3.1.3
+  resolution: "@notionhq/client@npm:3.1.3"
+  checksum: 10c0/8948c1947bedb737f4e7b3451a31a778dcf6d3c19d84c5588ab65ad73adc6631726f06f3c11a9650aca64dae89044b569fdec59a807ec58b0f4aaba83f0726e8
+  languageName: node
+  linkType: hard
+
 "@types/google-apps-script@npm:^1.0.97":
   version: 1.0.97
   resolution: "@types/google-apps-script@npm:1.0.97"
@@ -284,6 +291,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "price-tracker@workspace:."
   dependencies:
+    "@notionhq/client": "npm:^3.1.3"
     "@types/google-apps-script": "npm:^1.0.97"
     clasp: "npm:^1.0.0"
     esbuild: "npm:^0.25.5"

@@ -1,4 +1,4 @@
-import { createDataInNotion, getDataFromNotion, updateDataInNotion } from '../notion';
+import { createDataInNotion, getDataFromNotion, updateDataInNotion } from '../notion/api';
 import { getSheet } from '../sheet';
 
 export function syncCurrencies(sheetName: string, notionDbId: string) {

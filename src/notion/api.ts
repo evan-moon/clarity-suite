@@ -1,4 +1,9 @@
-import { appsScriptProperties } from './appsScriptProperties';
+import { appsScriptProperties } from '../appsScriptProperties';
+import {
+  PartialDatabaseObjectResponse,
+  QueryDatabaseParameters,
+  QueryDatabaseResponse,
+} from '@notionhq/client/build/src/api-endpoints';
 
 const NOTION_REQUEST_HEADER = {
   Authorization: `Bearer ${appsScriptProperties.NOTION_SECRET}`,
@@ -6,7 +11,10 @@ const NOTION_REQUEST_HEADER = {
   'Notion-Version': '2022-06-28',
 };
 
-export function getDataFromNotion<T>(databaseId: string, data: T) {
+export function getDataFromNotion(
+  databaseId: string,
+  data: Omit<QueryDatabaseParameters, 'database_id'>
+): QueryDatabaseResponse {
   const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
   Logger.log(queryUrl);
 
@@ -19,7 +27,7 @@ export function getDataFromNotion<T>(databaseId: string, data: T) {
   return JSON.parse(result.getContentText());
 }
 
-export function updateDataInNotion<T>(pageId: string, data: T) {
+export function updateDataInNotion<Payload = any>(pageId: string, data: Payload) {
   const queryUrl = `https://api.notion.com/v1/pages/${pageId}`;
 
   const result = UrlFetchApp.fetch(queryUrl, {
@@ -31,7 +39,7 @@ export function updateDataInNotion<T>(pageId: string, data: T) {
   return JSON.parse(result.getContentText());
 }
 
-export function createDataInNotion<T>(databaseId: string, data: T) {
+export function createDataInNotion<Payload = any>(databaseId: string, data: Payload) {
   const queryUrl = `https://api.notion.com/v1/pages`;
 
   const result = UrlFetchApp.fetch(queryUrl, {

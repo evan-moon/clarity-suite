@@ -28,6 +28,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@notionhq/client", "npm:3.1.3"],\
           ["@types/google-apps-script", "npm:1.0.97"],\
           ["clasp", "npm:1.0.0"],\
           ["esbuild", "npm:0.25.5"],\
@@ -262,6 +263,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@notionhq/client", [\
+      ["npm:3.1.3", {\
+        "packageLocation": "../../../.yarn/berry/cache/@notionhq-client-npm-3.1.3-8c4ac13388-10c0.zip/node_modules/@notionhq/client/",\
+        "packageDependencies": [\
+          ["@notionhq/client", "npm:3.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/google-apps-script", [\
       ["npm:1.0.97", {\
         "packageLocation": "../../../.yarn/berry/cache/@types-google-apps-script-npm-1.0.97-42c79c1eee-10c0.zip/node_modules/@types/google-apps-script/",\
@@ -318,6 +328,7 @@ const RAW_RUNTIME_STATE =
       ["workspace:.", {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@notionhq/client", "npm:3.1.3"],\
           ["@types/google-apps-script", "npm:1.0.97"],\
           ["clasp", "npm:1.0.0"],\
           ["esbuild", "npm:0.25.5"],\

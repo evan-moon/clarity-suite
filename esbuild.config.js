@@ -31,10 +31,10 @@ Promise.all(
       .build({
         entryPoints: [`src/_entries/${functionName}.ts`],
         outfile,
-        minify: true,
+        // minify: true,
         bundle: true,
-        treeShaking: false,
-        target: 'es2019',
+        treeShaking: true,
+        target: 'es2015',
         platform: 'browser',
         format: 'iife',
         globalName: functionName,
