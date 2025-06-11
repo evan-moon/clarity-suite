@@ -14,9 +14,9 @@ export function syncStocks(sheetName: string, notionDbId: string) {
   const notionPages = getNotionEmptyPricePages(notionDbId);
   notionPages.results.forEach((page, index) => {
     if (isFullPage(page)) {
-      const ticker = getTitleText(page.properties['Ticker']);
-      calcStockData(sheet, index + 1, ticker);
-      Logger.log(`${ticker} 정보가 시트에 입력되었어요.`);
+      const 티커 = getTitleText(page.properties['Ticker']);
+      calcStockData(sheet, index + 1, 티커);
+      Logger.log(`${티커} 정보가 시트에 입력되었어요.`);
     }
   });
 

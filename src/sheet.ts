@@ -3,6 +3,7 @@ export function getSheet(sheetName: string) {
 }
 
 export type RealtimeGoogleFinanceProperty =
+  | ''
   | 'name'
   | 'price'
   | 'priceopen'
@@ -30,17 +31,18 @@ export function getGoogleFinanceQuery(cell: string, property: PastGoogleFinanceP
 export function getGoogleFinanceQuery(cell: string, properties: RealtimeGoogleFinanceProperty): string;
 export function getGoogleFinanceQuery(
   cell: string,
-  properties: PastGoogleFinanceProperty | RealtimeGoogleFinanceProperty,
+  property: PastGoogleFinanceProperty | RealtimeGoogleFinanceProperty,
   date?: Date
 ): string {
+  const propretyString = property === '' ? '' : `, "${property}"`;
   if (date == null) {
     return `=iferror(
-              googlefinance(${cell}, "${properties}")
+              googlefinance(${cell}${propretyString})
             , "")`;
   } else {
     return `=iferror(
               index(
-                googlefinance(${cell}, "${properties}"),
+                googlefinance(${cell}${propretyString}),
                 2,
                 2
               )

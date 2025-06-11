@@ -1,6 +1,7 @@
-import { RealtimeGoogleFinanceProperty } from '../../sheet';
+import type { NotionPropertyName } from '../../notion/types';
+import type { RealtimeGoogleFinanceProperty } from '../../sheet';
 
-export const STOCK_DATA: [string, RealtimeGoogleFinanceProperty][] = [
+export const STOCK_DATA: [NotionPropertyName, RealtimeGoogleFinanceProperty][] = [
   ['종목명', 'name'],
   ['현재가', 'price'],
   ['전일종가', 'closeyest'],
