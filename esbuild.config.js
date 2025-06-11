@@ -2,7 +2,7 @@ const esbuild = require('esbuild');
 const fs = require('fs');
 const path = require('path');
 
-const builds = ['batch', 'onOpen', 'syncStocks', 'syncCurrencies'];
+const builds = ['batch', 'onOpen', 'syncStocks', 'syncCurrencies', 'syncTransactions'];
 
 const replaceIIFEtoExpression = (filePath, functionName) => {
   const code = fs.readFileSync(filePath, 'utf-8');
