@@ -30,16 +30,14 @@ export function syncCurrencyInTransactions(sheetName: string, notionDbId: string
     const from = fromSelect ? fromSelect.name : '';
     const to = toSelect ? toSelect.name : '';
 
+    const isUSD = from === 'USD' && to === 'USD';
+
     sheet.getRange(row, 1).setValue(date);
     sheet.getRange(row, 2).setValue(from);
     sheet.getRange(row, 3).setValue(to);
-    sheet.getRange(row, 4).setFormula(`=iferror(
-      index(
-        googlefinance(B${row}&C${row},"price",A${row},A${row}),
-        2,
-        2
-      ),
-      "")`);
+    sheet
+      .getRange(row, 4)
+      .setFormula(isUSD ? '1' : `=iferror(index(googlefinance(B${row}&C${row},"price",A${row},A${row}), 2, 2), "")`);
   });
 
   SpreadsheetApp.flush();
