@@ -12,9 +12,9 @@ interface StockData extends BatchData {
   변동폭: number;
   연최고가: number;
   연최저가: number;
-  배당률: number;
   PE: number;
   EPS: number;
+  배당률: number;
 }
 
 export function syncStocks(sheetName: string, notionDbId: string) {
@@ -61,14 +61,14 @@ export function syncStocks(sheetName: string, notionDbId: string) {
           '52주최저가': {
             number: parseFloat(data[6]),
           },
-          배당률: {
-            number: 0,
-          },
           PE: {
             number: parseFloat(data[7]),
           },
           EPS: {
             number: parseFloat(data[8]),
+          },
+          배당률: {
+            number: parseFloat(data[9]),
           },
         },
       };

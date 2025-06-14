@@ -1,6 +1,6 @@
 import { isFullPage } from '@notionhq/client';
 import { getSheet } from '../../sheet';
-import { getTitleText } from '../../notion/utils';
+import { getTitleText, isFullPageWithId } from '../../notion/utils';
 import { updateDataInNotionBatch } from '../../notion/api';
 import type { BatchConfig, BatchData } from './types';
 
@@ -31,7 +31,7 @@ export function syncBatch<T extends BatchData>(sheetName: string, notionDbId: st
   Logger.log(`모든 정보가 시트에서 계산되었어요.`);
 
   const updates = allPages.results
-    .filter((page): page is typeof page & { id: string } => isFullPage(page))
+    .filter(isFullPageWithId)
     .map(page => {
       const name = getTitleText(page.properties[config.titlePropertyName]);
       const data = config.getDataFromSheet(sheet, allPages.results.indexOf(page) + 1, name);

@@ -1,6 +1,7 @@
 import { isFullPage } from '@notionhq/client';
 import { updateDataInNotionBatch } from '../../notion/api';
 import { queryNotionEmptyRatePages } from './utils';
+import { isFullPageWithId } from '../../notion/utils';
 
 export function syncCurrencyInTransactions(sheetName: string, notionDbId: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
@@ -43,7 +44,7 @@ export function syncCurrencyInTransactions(sheetName: string, notionDbId: string
   SpreadsheetApp.flush();
 
   const updates = pages
-    .filter((page): page is typeof page & { id: string } => isFullPage(page))
+    .filter(isFullPageWithId)
     .map((page, i) => {
       const row = i + 2;
       const rate = sheet.getRange(row, 4).getValue();
