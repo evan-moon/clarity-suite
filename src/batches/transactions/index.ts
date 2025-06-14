@@ -1,5 +1,5 @@
 import { isFullPage } from '@notionhq/client';
-import { updateDataInNotion } from '../../notion/api';
+import { updateDataInNotionBatch } from '../../notion/api';
 import { queryNotionEmptyRatePages } from './utils';
 
 export function syncCurrencyInTransactions(sheetName: string, notionDbId: string) {
@@ -42,15 +42,27 @@ export function syncCurrencyInTransactions(sheetName: string, notionDbId: string
 
   SpreadsheetApp.flush();
 
-  pages.forEach((page, i) => {
-    const row = i + 2;
-    const rate = sheet.getRange(row, 4).getValue();
-    if (rate !== '' && !isNaN(rate)) {
-      updateDataInNotion(page.id, {
-        properties: {
-          '환율 (자동입력)': { number: rate },
-        },
-      });
-    }
-  });
+  const updates = pages
+    .filter((page): page is typeof page & { id: string } => isFullPage(page))
+    .map((page, i) => {
+      const row = i + 2;
+      const rate = sheet.getRange(row, 4).getValue();
+      if (rate !== '' && !isNaN(rate)) {
+        return {
+          pageId: page.id,
+          data: {
+            properties: {
+              '환율 (자동입력)': { number: rate },
+            },
+          },
+        };
+      }
+      return null;
+    })
+    .filter((update): update is NonNullable<typeof update> => update != null);
+
+  if (updates.length > 0) {
+    updateDataInNotionBatch(updates);
+    Logger.log(`${updates.length}개의 환율이 노션에 업데이트되었어요.`);
+  }
 }

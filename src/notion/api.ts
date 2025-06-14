@@ -39,17 +39,16 @@ export function updateDataInNotion<Payload = any>(pageId: string, data: Payload)
   return JSON.parse(result.getContentText());
 }
 
-export function createDataInNotion<Payload = any>(databaseId: string, data: Payload) {
-  const queryUrl = `https://api.notion.com/v1/pages`;
+export function updateDataInNotionBatch<Payload = any>(updates: { pageId: string; data: Payload }[]) {
+  if (updates.length === 0) return [];
 
-  const result = UrlFetchApp.fetch(queryUrl, {
-    method: 'post',
+  const requests = updates.map(({ pageId, data }) => ({
+    url: `https://api.notion.com/v1/pages/${pageId}`,
+    method: 'patch' as const,
     headers: NOTION_REQUEST_HEADER,
-    payload: JSON.stringify({
-      parent: { database_id: databaseId },
-      properties: { ...data },
-    }),
-  });
+    payload: JSON.stringify(data),
+  }));
 
-  return JSON.parse(result.getContentText());
+  const results = UrlFetchApp.fetchAll(requests);
+  return results.map(result => JSON.parse(result.getContentText()));
 }

@@ -9,8 +9,11 @@ export interface BatchData {
 export interface BatchConfig<T extends BatchData> {
   getPages: (notionDbId: string) => { results: PageObjectResponse[] };
   calcData: (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, name: string) => void;
-  updateNotion: (pageId: string, data: T) => Promise<void>;
-  getDataFromSheet: (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, name: string) => T | null;
+  getDataFromSheet: (
+    sheet: GoogleAppsScript.Spreadsheet.Sheet,
+    row: number,
+    name: string
+  ) => { properties: Record<string, any> } | null;
   getDataColumnCount: number;
   titlePropertyName: string;
 }

@@ -1,6 +1,6 @@
 import { getSheet } from '../../sheet';
 import { CURRENCY_DATA } from './constants';
-import { calcCurrencyData, getAllCurrencyPages, updateNotionCurrency } from './utils';
+import { calcCurrencyData, getAllCurrencyPages } from './utils';
 import { syncBatch } from '../common/sync';
 import type { BatchData } from '../common/types';
 
@@ -21,19 +21,38 @@ export function syncCurrencies(sheetName: string, notionDbId: string) {
   syncBatch<CurrencyData>(sheetName, notionDbId, {
     getPages: getAllCurrencyPages,
     calcData: calcCurrencyData,
-    updateNotion: updateNotionCurrency,
     getDataFromSheet: (sheet, row, name) => {
       const result = sheet.getRange(row, 1, sheet.getLastRow() - 1, CURRENCY_DATA.length + 3).getValues();
       const data = result.find(row => row[0] === name);
       if (data == null) return null;
 
       return {
-        id: '',
-        name: data[0],
-        환율이름: data[0],
-        기준통화: data[1],
-        대상통화: data[2],
-        환율: parseFloat(data[3]),
+        properties: {
+          이름: {
+            title: [{ text: { content: data[0] } }],
+          },
+          기준통화: {
+            rich_text: [
+              {
+                text: {
+                  content: data[1],
+                },
+              },
+            ],
+          },
+          대상통화: {
+            rich_text: [
+              {
+                text: {
+                  content: data[2],
+                },
+              },
+            ],
+          },
+          환율: {
+            number: parseFloat(data[3]),
+          },
+        },
       };
     },
     getDataColumnCount: CURRENCY_DATA.length + 3,

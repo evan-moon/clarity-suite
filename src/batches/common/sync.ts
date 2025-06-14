@@ -1,6 +1,7 @@
 import { isFullPage } from '@notionhq/client';
 import { getSheet } from '../../sheet';
 import { getTitleText } from '../../notion/utils';
+import { updateDataInNotionBatch } from '../../notion/api';
 import type { BatchConfig, BatchData } from './types';
 
 export function syncBatch<T extends BatchData>(sheetName: string, notionDbId: string, config: BatchConfig<T>) {
@@ -29,17 +30,18 @@ export function syncBatch<T extends BatchData>(sheetName: string, notionDbId: st
   SpreadsheetApp.flush();
   Logger.log(`모든 정보가 시트에서 계산되었어요.`);
 
-  allPages.results.forEach((page, index) => {
-    if (isFullPage(page) === false) {
-      return;
-    }
+  const updates = allPages.results
+    .filter((page): page is typeof page & { id: string } => isFullPage(page))
+    .map(page => {
+      const name = getTitleText(page.properties[config.titlePropertyName]);
+      const data = config.getDataFromSheet(sheet, allPages.results.indexOf(page) + 1, name);
+      Logger.log(`${name}의 계산된 데이터를 가져왔어요`);
+      return data != null ? { pageId: page.id, data } : null;
+    })
+    .filter((update): update is NonNullable<typeof update> => update != null);
 
-    const name = getTitleText(page.properties[config.titlePropertyName]);
-    const data = config.getDataFromSheet(sheet, index + 1, name);
-    Logger.log(`${name}의 계산된 데이터를 가져왔어요`);
-
-    if (data != null) {
-      config.updateNotion(page.id, data);
-    }
-  });
+  if (updates.length > 0) {
+    updateDataInNotionBatch(updates);
+    Logger.log(`${updates.length}개의 데이터가 노션에 업데이트되었어요.`);
+  }
 }

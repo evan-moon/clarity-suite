@@ -1,4 +1,4 @@
-import { getDataFromNotion, updateDataInNotion } from '../../notion/api';
+import { getDataFromNotion } from '../../notion/api';
 import { getGoogleFinanceQuery } from '../../sheet';
 import { CURRENCY_DATA } from './constants';
 import { CurrencyData } from './types';
@@ -14,36 +14,6 @@ export const calcCurrencyData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row:
     sheet.getRange(row, column).setValue(getGoogleFinanceQuery(`"CURRENCY:"&$B${row}&C${row}`, proprety));
   });
 };
-
-export const updateNotionCurrency = (pageId: string, { 환율이름, 기준통화, 대상통화, 환율 }: CurrencyData) =>
-  updateDataInNotion(pageId, {
-    properties: {
-      이름: {
-        title: [{ text: { content: 환율이름 } }],
-      },
-      기준통화: {
-        rich_text: [
-          {
-            text: {
-              content: 기준통화,
-            },
-          },
-        ],
-      },
-      대상통화: {
-        rich_text: [
-          {
-            text: {
-              content: 대상통화,
-            },
-          },
-        ],
-      },
-      환율: {
-        number: 환율,
-      },
-    },
-  });
 
 export const getAllCurrencyPages = (notionDbId: string) =>
   getDataFromNotion(notionDbId, {
