@@ -15,14 +15,6 @@ export const calcCurrencyData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row:
   });
 };
 
-export const getNotionEmptyCurrencyPages = (notionDbId: string) =>
-  getDataFromNotion(notionDbId, {
-    filter: {
-      property: '환율',
-      number: { is_empty: true },
-    },
-  });
-
 export const updateNotionCurrency = (pageId: string, { 환율이름, 기준통화, 대상통화, 환율 }: CurrencyData) =>
   updateDataInNotion(pageId, {
     properties: {
@@ -49,6 +41,16 @@ export const updateNotionCurrency = (pageId: string, { 환율이름, 기준통�
       },
       환율: {
         number: 환율,
+      },
+    },
+  });
+
+export const getAllCurrencyPages = (notionDbId: string) =>
+  getDataFromNotion(notionDbId, {
+    filter: {
+      property: '이름',
+      title: {
+        is_not_empty: true,
       },
     },
   });

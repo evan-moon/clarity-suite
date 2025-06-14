@@ -31,7 +31,7 @@ Promise.all(
       .build({
         entryPoints: [`src/_entries/${functionName}.ts`],
         outfile,
-        minify: true,
+        // minify: true,
         bundle: true,
         treeShaking: true,
         target: 'es2015',

@@ -12,14 +12,6 @@ export const calcStockData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: nu
   });
 };
 
-export const getNotionEmptyPricePages = (notionDbId: string) =>
-  getDataFromNotion(notionDbId, {
-    filter: {
-      property: '현재가',
-      number: { is_empty: true },
-    },
-  });
-
 export const updateNotionStockPrice = (
   pageId: string,
   { 티커, 종목명, 현재가, 전일종가, 변동폭, 연최고가, 연최저가, 배당률, PE, EPS }: StockPriceData
@@ -61,6 +53,16 @@ export const updateNotionStockPrice = (
       },
       EPS: {
         number: EPS,
+      },
+    },
+  });
+
+export const getAllStockPages = (notionDbId: string) =>
+  getDataFromNotion(notionDbId, {
+    filter: {
+      property: 'Ticker',
+      title: {
+        is_not_empty: true,
       },
     },
   });

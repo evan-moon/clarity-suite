@@ -1,6 +1,6 @@
 import { appsScriptProperties } from '../appsScriptProperties';
 import {
-  PartialDatabaseObjectResponse,
+  PageObjectResponse,
   QueryDatabaseParameters,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
@@ -14,7 +14,7 @@ const NOTION_REQUEST_HEADER = {
 export function getDataFromNotion(
   databaseId: string,
   data: Omit<QueryDatabaseParameters, 'database_id'>
-): QueryDatabaseResponse {
+): { results: PageObjectResponse[] } {
   const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
   Logger.log(queryUrl);
 

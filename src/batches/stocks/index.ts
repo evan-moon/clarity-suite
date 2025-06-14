@@ -1,8 +1,21 @@
-import { getTitleText } from '../../notion/utils';
 import { getSheet } from '../../sheet';
 import { STOCK_DATA } from './constants';
-import { calcStockData, getNotionEmptyPricePages, updateNotionStockPrice } from './utils';
-import { isFullPage } from '@notionhq/client';
+import { calcStockData, getAllStockPages, updateNotionStockPrice } from './utils';
+import { syncBatch } from '../common/sync';
+import type { BatchData } from '../common/types';
+
+interface StockData extends BatchData {
+  티커: string;
+  종목명: string;
+  현재가: number;
+  전일종가: number;
+  변동폭: number;
+  연최고가: number;
+  연최저가: number;
+  배당률: number;
+  PE: number;
+  EPS: number;
+}
 
 export function syncStocks(sheetName: string, notionDbId: string) {
   const sheet = getSheet(sheetName);
@@ -11,31 +24,18 @@ export function syncStocks(sheetName: string, notionDbId: string) {
     return;
   }
 
-  const notionPages = getNotionEmptyPricePages(notionDbId);
-  notionPages.results.forEach((page, index) => {
-    if (isFullPage(page) === false) {
-      return;
-    }
+  syncBatch<StockData>(sheetName, notionDbId, {
+    getPages: getAllStockPages,
+    calcData: calcStockData,
+    updateNotion: updateNotionStockPrice,
+    getDataFromSheet: (sheet, row, name) => {
+      const result = sheet.getRange(row, 1, sheet.getLastRow() - 1, STOCK_DATA.length + 1).getValues();
+      const data = result.find(row => row[0] === name);
+      if (data == null) return null;
 
-    const 티커 = getTitleText(page.properties['Ticker']);
-    calcStockData(sheet, index + 1, 티커);
-    Logger.log(`${티커} 정보가 시트에 입력되었어요.`);
-  });
-
-  SpreadsheetApp.flush();
-  Logger.log(`모든 종목 정보가 시트에서 계산되었어요.`);
-
-  notionPages.results.forEach((page, index) => {
-    if (isFullPage(page) === false) {
-      return;
-    }
-
-    const result = sheet.getRange(index + 1, 1, sheet.getLastRow() - 1, STOCK_DATA.length + 1).getValues();
-    const data = result.find(row => row[0] === getTitleText(page.properties['Ticker']));
-    Logger.log(`${getTitleText(page.properties['Ticker'])}의 계산된 데이터를 가져왔어요`);
-
-    if (data != null) {
-      updateNotionStockPrice(page.id, {
+      return {
+        id: '',
+        name: data[0],
         티커: data[0],
         종목명: data[1],
         현재가: parseFloat(data[2]),
@@ -43,10 +43,12 @@ export function syncStocks(sheetName: string, notionDbId: string) {
         변동폭: parseFloat(data[4]),
         연최고가: parseFloat(data[5]),
         연최저가: parseFloat(data[6]),
-        배당률: 0, // 배당률 정보는 현재 시트에 없음
+        배당률: 0,
         PE: parseFloat(data[7]),
         EPS: parseFloat(data[8]),
-      });
-    }
+      };
+    },
+    getDataColumnCount: STOCK_DATA.length + 1,
+    titlePropertyName: 'Ticker',
   });
 }
