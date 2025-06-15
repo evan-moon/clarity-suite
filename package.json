@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "yarn typecheck && node esbuild.config.js",
+    "build": "yarn typecheck && node ./_esbuild/esbuild.config.js",
     "deploy": "yarn build && clasp push",
     "play": "clasp run"
   },
