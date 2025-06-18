@@ -15,12 +15,16 @@ export const calcCurrencyData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row:
   });
 };
 
-export const getAllCurrencyPages = (notionDbId: string) =>
-  getDataFromNotion(notionDbId, {
-    filter: {
-      property: '이름',
-      title: {
-        is_not_empty: true,
+export const getAllCurrencyPages = (notionDbId: string, token: string) =>
+  getDataFromNotion(
+    notionDbId,
+    {
+      filter: {
+        property: '이름',
+        title: {
+          is_not_empty: true,
+        },
       },
     },
-  });
+    token
+  );

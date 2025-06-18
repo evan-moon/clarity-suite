@@ -26,13 +26,17 @@ export function applySettingsFromSheet(): void {
     return;
   }
 
-  const finalProps: Record<string, string> = { NOTION_SECRET: notionSecret };
-  DATABASE_PROPERTIES.forEach(key => {
-    const val = rawProps[key];
-    if (!val) return;
-    finalProps[key] = findDatabaseId(notionSecret, val);
-  });
+  try {
+    const finalProps: Record<string, string> = { NOTION_SECRET: notionSecret };
+    DATABASE_PROPERTIES.forEach(key => {
+      const val = rawProps[key];
+      if (!val) return;
+      finalProps[key] = findDatabaseId(notionSecret, val);
+    });
 
-  PropertiesService.getScriptProperties().setProperties(finalProps, true);
-  SpreadsheetApp.getActiveSpreadsheet().toast('✅ 노션과 성공적으로 연동되었습니다', '완료', 5);
+    PropertiesService.getScriptProperties().setProperties(finalProps, true);
+    SpreadsheetApp.getActiveSpreadsheet().toast('✅ 노션과 성공적으로 연동되었습니다', '완료', 5);
+  } catch {
+    SpreadsheetApp.getActiveSpreadsheet().toast('❌ 노션 연동 중 오류가 발생했습니다', '오류', 5);
+  }
 }

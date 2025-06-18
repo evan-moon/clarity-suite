@@ -4,7 +4,8 @@ import { assertEnvs } from '../asserts';
 
 function syncTransactions() {
   assertEnvs(appsScriptProperties);
-  origin(appsScriptProperties.TRANSACTION_CURRENCIES_SHEET_NAME, appsScriptProperties.TRANSACTION_NOTION_DB_ID);
+  const { TRANSACTION_CURRENCIES_SHEET_NAME, TRANSACTION_NOTION_DB_ID, NOTION_SECRET } = appsScriptProperties;
+  origin(TRANSACTION_CURRENCIES_SHEET_NAME, TRANSACTION_NOTION_DB_ID, NOTION_SECRET);
 }
 
 syncTransactions();

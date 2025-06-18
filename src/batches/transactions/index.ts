@@ -3,11 +3,11 @@ import { updateDataInNotionBatch } from '../../notion/api';
 import { queryNotionEmptyRatePages } from './utils';
 import { isFullPageWithId } from '../../notion/utils';
 
-export function syncCurrencyInTransactions(sheetName: string, notionDbId: string) {
+export function syncCurrencyInTransactions(sheetName: string, notionDbId: string, token: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
   if (!sheet) throw new Error(`시트를 찾을 수 없습니다: ${sheetName}`);
 
-  const pages = queryNotionEmptyRatePages(notionDbId);
+  const pages = queryNotionEmptyRatePages(notionDbId, token);
   if (pages.length === 0) return;
 
   pages.forEach((page, i) => {
@@ -63,7 +63,7 @@ export function syncCurrencyInTransactions(sheetName: string, notionDbId: string
     .filter((update): update is NonNullable<typeof update> => update != null);
 
   if (updates.length > 0) {
-    updateDataInNotionBatch(updates);
+    updateDataInNotionBatch(updates, token);
     Logger.log(`${updates.length}개의 환율이 노션에 업데이트되었어요.`);
   }
 }

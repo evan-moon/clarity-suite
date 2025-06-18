@@ -1,54 +1,73 @@
-import { appsScriptProperties } from '../appsScriptProperties';
 import {
+  DatabaseObjectResponse,
   PageObjectResponse,
   QueryDatabaseParameters,
-  QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 
-const NOTION_REQUEST_HEADER = {
-  Authorization: `Bearer ${appsScriptProperties.NOTION_SECRET}`,
-  'Content-Type': 'application/json',
-  'Notion-Version': '2022-06-28',
-};
+function getNotionHeaders(token: string) {
+  return {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'Notion-Version': '2022-06-28',
+  };
+}
 
 export function getDataFromNotion(
   databaseId: string,
-  data: Omit<QueryDatabaseParameters, 'database_id'>
+  data: Omit<QueryDatabaseParameters, 'database_id'>,
+  token: string
 ): { results: PageObjectResponse[] } {
   const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
   Logger.log(queryUrl);
 
   const result = UrlFetchApp.fetch(queryUrl, {
     method: 'post',
-    headers: NOTION_REQUEST_HEADER,
+    headers: getNotionHeaders(token),
     payload: JSON.stringify(data),
   });
 
   return JSON.parse(result.getContentText());
 }
 
-export function updateDataInNotion<Payload = any>(pageId: string, data: Payload) {
+export function updateDataInNotion<Payload = any>(pageId: string, data: Payload, token: string) {
   const queryUrl = `https://api.notion.com/v1/pages/${pageId}`;
 
   const result = UrlFetchApp.fetch(queryUrl, {
     method: 'patch',
-    headers: NOTION_REQUEST_HEADER,
+    headers: getNotionHeaders(token),
     payload: JSON.stringify(data),
   });
 
   return JSON.parse(result.getContentText());
 }
 
-export function updateDataInNotionBatch<Payload = any>(updates: { pageId: string; data: Payload }[]) {
+export function updateDataInNotionBatch<Payload = any>(updates: { pageId: string; data: Payload }[], token: string) {
   if (updates.length === 0) return [];
 
   const requests = updates.map(({ pageId, data }) => ({
     url: `https://api.notion.com/v1/pages/${pageId}`,
     method: 'patch' as const,
-    headers: NOTION_REQUEST_HEADER,
+    headers: getNotionHeaders(token),
     payload: JSON.stringify(data),
   }));
 
   const results = UrlFetchApp.fetchAll(requests);
   return results.map(result => JSON.parse(result.getContentText()));
+}
+
+export function findNotionDatabaseByName(name: string, token: string): { results: DatabaseObjectResponse[] } {
+  const queryUrl = 'https://api.notion.com/v1/search';
+
+  const result = UrlFetchApp.fetch(queryUrl, {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify({
+      query: name,
+      filter: { property: 'object', value: 'database' },
+    }),
+    headers: getNotionHeaders(token),
+    muteHttpExceptions: true,
+  });
+
+  return JSON.parse(result.getContentText());
 }

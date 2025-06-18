@@ -4,7 +4,12 @@ import { getTitleText, isFullPageWithId } from '../../notion/utils';
 import { updateDataInNotionBatch } from '../../notion/api';
 import type { BatchConfig, BatchData } from './types';
 
-export function syncBatch<T extends BatchData>(sheetName: string, notionDbId: string, config: BatchConfig<T>) {
+export function syncBatch<T extends BatchData>(
+  sheetName: string,
+  notionDbId: string,
+  config: BatchConfig<T>,
+  token: string
+) {
   const sheet = getSheet(sheetName);
   if (sheet == null) {
     Logger.log(`${sheetName} 시트가 존재하지 않습니다.`);
@@ -41,7 +46,7 @@ export function syncBatch<T extends BatchData>(sheetName: string, notionDbId: st
     .filter((update): update is NonNullable<typeof update> => update != null);
 
   if (updates.length > 0) {
-    updateDataInNotionBatch(updates);
+    updateDataInNotionBatch(updates, token);
     Logger.log(`${updates.length}개의 데이터가 노션에 업데이트되었어요.`);
   }
 }

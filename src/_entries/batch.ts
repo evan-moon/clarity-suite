@@ -6,11 +6,11 @@ import { syncCurrencies } from '../batches/currencies';
 function batch() {
   assertEnvs(appsScriptProperties);
 
-  const { STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID } =
+  const { STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID, NOTION_SECRET } =
     appsScriptProperties;
 
-  syncStocks(STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID);
-  syncCurrencies(CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID);
+  syncStocks(STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, NOTION_SECRET);
+  syncCurrencies(CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID, NOTION_SECRET);
 }
 
 batch();

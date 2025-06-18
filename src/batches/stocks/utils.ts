@@ -19,12 +19,16 @@ export const calcStockData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: nu
     );
 };
 
-export const getAllStockPages = (notionDbId: string) =>
-  getDataFromNotion(notionDbId, {
-    filter: {
-      property: 'Ticker',
-      title: {
-        is_not_empty: true,
+export const getAllStockPages = (notionDbId: string, token: string) =>
+  getDataFromNotion(
+    notionDbId,
+    {
+      filter: {
+        property: 'Ticker',
+        title: {
+          is_not_empty: true,
+        },
       },
     },
-  });
+    token
+  );
