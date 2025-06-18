@@ -9,4 +9,4 @@ export const appsScriptProperties = {
   STOCKS_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('STOCKS_NOTION_DB_ID'),
   CURRENCIES_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('CURRENCIES_NOTION_DB_ID'),
   TRANSACTION_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('TRANSACTION_NOTION_DB_ID'),
-} as const;
+};
