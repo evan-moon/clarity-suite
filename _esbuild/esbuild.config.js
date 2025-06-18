@@ -1,6 +1,6 @@
 const { buildIndividualFunctions, combineBuiltFiles, finalizeBuild } = require('./utils');
 
-const builds = ['batch', 'onOpen', 'syncStocks', 'syncCurrencies', 'syncTransactions'];
+const builds = ['batch', 'onOpen', 'syncStocks', 'syncCurrencies', 'syncTransactions', 'applySettingsFromSheet'];
 
 const runBuild = async () => {
   try {
