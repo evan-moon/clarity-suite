@@ -1,39 +1,6 @@
-export type Language = 'ko' | 'en';
+import { I18nConfig } from './types';
 
-export interface I18nConfig {
-  language: Language;
-  properties: {
-    // Common properties
-    name: string;
-    title: string;
-
-    // Currency properties
-    currencyName: string;
-    baseCurrency: string;
-    targetCurrency: string;
-    exchangeRate: string;
-
-    // Stock properties
-    ticker: string;
-    stockName: string;
-    currentPrice: string;
-    previousClose: string;
-    change: string;
-    yearHigh: string;
-    yearLow: string;
-    pe: string;
-    eps: string;
-    dividendYield: string;
-
-    // Transaction properties
-    date: string;
-    transactionCurrency: string;
-    transactionTargetCurrency: string;
-    exchangeRateAuto: string;
-  };
-}
-
-const koConfig: I18nConfig = {
+export const koConfig: I18nConfig = {
   language: 'ko',
   properties: {
     name: '이름',
@@ -65,7 +32,7 @@ const koConfig: I18nConfig = {
   },
 };
 
-const enConfig: I18nConfig = {
+export const enConfig: I18nConfig = {
   language: 'en',
   properties: {
     name: 'Name',
@@ -96,20 +63,3 @@ const enConfig: I18nConfig = {
     exchangeRateAuto: 'Exchange Rate (Auto)',
   },
 };
-
-let currentConfig: I18nConfig = koConfig;
-
-export function setLanguage(language: Language): void {
-  currentConfig = language === 'ko' ? koConfig : enConfig;
-}
-
-export function getConfig(): I18nConfig {
-  return currentConfig;
-}
-
-export function t(key: keyof I18nConfig['properties']): string {
-  return currentConfig.properties[key];
-}
-
-// Default to Korean
-setLanguage('ko');

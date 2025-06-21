@@ -1,9 +1,4 @@
-import { initializeLanguage } from '../config/settings';
-
 function onOpen() {
-  // 언어 설정 초기화
-  initializeLanguage();
-
   SpreadsheetApp.getUi().createMenu('⚙️ Settings').addItem('Connect to Notion', 'applySettingsFromSheet').addToUi();
 
   SpreadsheetApp.getUi()
