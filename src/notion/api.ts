@@ -29,18 +29,6 @@ export function getDataFromNotion(
   return JSON.parse(result.getContentText());
 }
 
-export function updateDataInNotion<Payload = any>(pageId: string, data: Payload, token: string) {
-  const queryUrl = `https://api.notion.com/v1/pages/${pageId}`;
-
-  const result = UrlFetchApp.fetch(queryUrl, {
-    method: 'patch',
-    headers: getNotionHeaders(token),
-    payload: JSON.stringify(data),
-  });
-
-  return JSON.parse(result.getContentText());
-}
-
 export function updateDataInNotionBatch<Payload = any>(updates: { pageId: string; data: Payload }[], token: string) {
   if (updates.length === 0) return [];
 

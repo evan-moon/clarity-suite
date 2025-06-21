@@ -3,7 +3,7 @@ import { CURRENCY_DATA } from './constants';
 import { calcCurrencyData, getAllCurrencyPages } from './utils';
 import { syncBatch } from '../common/sync';
 import type { BatchData } from '../common/types';
-import { t } from '../../config/i18n';
+import { t } from '../../i18n';
 
 interface CurrencyData extends BatchData {
   환율이름: string;

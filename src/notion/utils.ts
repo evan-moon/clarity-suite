@@ -1,4 +1,4 @@
-import { isFullPage, PageObjectResponse, RichTextItemResponse } from '@notionhq/client';
+import { isFullPage, PageObjectResponse } from '@notionhq/client';
 
 export const getTitleText = (property: PageObjectResponse['properties'][string] | undefined) => {
   if (property == null || property.type !== 'title') {

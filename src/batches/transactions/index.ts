@@ -2,7 +2,7 @@ import { isFullPage } from '@notionhq/client';
 import { updateDataInNotionBatch } from '../../notion/api';
 import { queryNotionEmptyRatePages } from './utils';
 import { isFullPageWithId } from '../../notion/utils';
-import { t } from '../../config/i18n';
+import { t } from '../../i18n';
 
 export function syncCurrencyInTransactions(sheetName: string, notionDbId: string, token: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
