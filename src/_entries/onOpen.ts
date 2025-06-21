@@ -1,11 +1,16 @@
+import { initializeLanguage } from '../config/settings';
+
 function onOpen() {
-  SpreadsheetApp.getUi().createMenu('⚙️ 설정').addItem('노션과 연동하기', 'applySettingsFromSheet').addToUi();
+  // 언어 설정 초기화
+  initializeLanguage();
+
+  SpreadsheetApp.getUi().createMenu('⚙️ Settings').addItem('Connect to Notion', 'applySettingsFromSheet').addToUi();
 
   SpreadsheetApp.getUi()
-    .createMenu('수동 동기화')
-    .addItem('실시간 주식 정보 동기화', 'syncStocks')
-    .addItem('실시간 환율 정보 동기화', 'syncCurrencies')
-    .addItem('거래 내역 환율 동기화', 'syncTransactions')
+    .createMenu('Manual Sync')
+    .addItem('Sync Real-time Stock Information', 'syncStocks')
+    .addItem('Sync Real-time Currency Information', 'syncCurrencies')
+    .addItem('Sync Transaction Currency Rates', 'syncTransactions')
     .addToUi();
 }
 

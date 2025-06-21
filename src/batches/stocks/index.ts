@@ -3,6 +3,7 @@ import { STOCK_DATA } from './constants';
 import { calcStockData, getAllStockPages } from './utils';
 import { syncBatch } from '../common/sync';
 import type { BatchData } from '../common/types';
+import { t } from '../../config/i18n';
 
 interface StockData extends BatchData {
   티커: string;
@@ -37,10 +38,10 @@ export function syncStocks(sheetName: string, notionDbId: string, token: string)
 
         return {
           properties: {
-            Ticker: {
+            [t('ticker')]: {
               title: [{ text: { content: data[0] } }],
             },
-            종목명: {
+            [t('stockName')]: {
               rich_text: [
                 {
                   text: {
@@ -49,35 +50,35 @@ export function syncStocks(sheetName: string, notionDbId: string, token: string)
                 },
               ],
             },
-            현재가: {
+            [t('currentPrice')]: {
               number: parseFloat(data[2]),
             },
-            전일종가: {
+            [t('previousClose')]: {
               number: parseFloat(data[3]),
             },
-            변동: {
+            [t('change')]: {
               number: parseFloat(data[4]) / 100,
             },
-            '52주최고가': {
+            [t('yearHigh')]: {
               number: parseFloat(data[5]),
             },
-            '52주최저가': {
+            [t('yearLow')]: {
               number: parseFloat(data[6]),
             },
-            PE: {
+            [t('pe')]: {
               number: parseFloat(data[7]),
             },
-            EPS: {
+            [t('eps')]: {
               number: parseFloat(data[8]),
             },
-            배당률: {
+            [t('dividendYield')]: {
               number: parseFloat(data[9]),
             },
           },
         };
       },
       getDataColumnCount: STOCK_DATA.length + 1,
-      titlePropertyName: 'Ticker',
+      titlePropertyName: t('ticker'),
     },
     token
   );

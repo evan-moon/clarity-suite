@@ -2,6 +2,7 @@ import { isFullPage } from '@notionhq/client';
 import { updateDataInNotionBatch } from '../../notion/api';
 import { queryNotionEmptyRatePages } from './utils';
 import { isFullPageWithId } from '../../notion/utils';
+import { t } from '../../config/i18n';
 
 export function syncCurrencyInTransactions(sheetName: string, notionDbId: string, token: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
@@ -17,9 +18,9 @@ export function syncCurrencyInTransactions(sheetName: string, notionDbId: string
 
     const row = i + 2;
 
-    const dateProperty = page.properties['날짜'];
-    const fromProperty = page.properties['거래통화'];
-    const toProperty = page.properties['대상통화'];
+    const dateProperty = page.properties[t('date')];
+    const fromProperty = page.properties[t('transactionCurrency')];
+    const toProperty = page.properties[t('transactionTargetCurrency')];
 
     if (dateProperty.type !== 'date' || fromProperty.type !== 'select' || toProperty.type !== 'select') {
       return;
@@ -53,7 +54,7 @@ export function syncCurrencyInTransactions(sheetName: string, notionDbId: string
           pageId: page.id,
           data: {
             properties: {
-              '환율 (자동입력)': { number: rate },
+              [t('exchangeRateAuto')]: { number: rate },
             },
           },
         };

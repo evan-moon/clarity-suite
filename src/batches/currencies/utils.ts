@@ -2,6 +2,7 @@ import { getDataFromNotion } from '../../notion/api';
 import { getGoogleFinanceQuery } from '../../sheet';
 import { CURRENCY_DATA } from './constants';
 import { CurrencyData } from './types';
+import { t } from '../../config/i18n';
 
 export const calcCurrencyData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, 환율이름: string) => {
   sheet.getRange(row, 1).setValue(환율이름);
@@ -20,7 +21,7 @@ export const getAllCurrencyPages = (notionDbId: string, token: string) =>
     notionDbId,
     {
       filter: {
-        property: '이름',
+        property: t('name'),
         title: {
           is_not_empty: true,
         },

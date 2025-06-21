@@ -4,7 +4,7 @@ import { findDatabaseId, isValidScriptProperty } from './utils';
 export function applySettingsFromSheet(): void {
   const sheet = SpreadsheetApp.getActive().getSheetByName('Setting');
   if (!sheet) {
-    SpreadsheetApp.getUi().alert('⚠️ "Setting" 시트를 찾을 수 없습니다.');
+    SpreadsheetApp.getUi().alert('⚠️ "Setting" sheet not found.');
     return;
   }
 
@@ -22,7 +22,7 @@ export function applySettingsFromSheet(): void {
 
   const notionSecret = rawProps['NOTION_SECRET'];
   if (!notionSecret) {
-    SpreadsheetApp.getUi().alert('⚠️ Notion 토큰을 먼저 입력해주세요.');
+    SpreadsheetApp.getUi().alert('⚠️ Please enter Notion token first.');
     return;
   }
 
@@ -35,8 +35,8 @@ export function applySettingsFromSheet(): void {
     });
 
     PropertiesService.getScriptProperties().setProperties(finalProps, true);
-    SpreadsheetApp.getActiveSpreadsheet().toast('✅ 노션과 성공적으로 연동되었습니다', '완료', 5);
+    SpreadsheetApp.getActiveSpreadsheet().toast('✅ Successfully connected to Notion', 'Complete', 5);
   } catch {
-    SpreadsheetApp.getActiveSpreadsheet().toast('❌ 노션 연동 중 오류가 발생했습니다', '오류', 5);
+    SpreadsheetApp.getActiveSpreadsheet().toast('❌ Error occurred while connecting to Notion', 'Error', 5);
   }
 }

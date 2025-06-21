@@ -3,6 +3,7 @@ import { CURRENCY_DATA } from './constants';
 import { calcCurrencyData, getAllCurrencyPages } from './utils';
 import { syncBatch } from '../common/sync';
 import type { BatchData } from '../common/types';
+import { t } from '../../config/i18n';
 
 interface CurrencyData extends BatchData {
   환율이름: string;
@@ -31,10 +32,10 @@ export function syncCurrencies(sheetName: string, notionDbId: string, token: str
 
         return {
           properties: {
-            이름: {
+            [t('name')]: {
               title: [{ text: { content: data[0] } }],
             },
-            기준통화: {
+            [t('baseCurrency')]: {
               rich_text: [
                 {
                   text: {
@@ -43,7 +44,7 @@ export function syncCurrencies(sheetName: string, notionDbId: string, token: str
                 },
               ],
             },
-            대상통화: {
+            [t('targetCurrency')]: {
               rich_text: [
                 {
                   text: {
@@ -52,14 +53,14 @@ export function syncCurrencies(sheetName: string, notionDbId: string, token: str
                 },
               ],
             },
-            환율: {
+            [t('exchangeRate')]: {
               number: parseFloat(data[3]),
             },
           },
         };
       },
       getDataColumnCount: CURRENCY_DATA.length + 3,
-      titlePropertyName: '이름',
+      titlePropertyName: t('name'),
     },
     token
   );
