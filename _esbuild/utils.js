@@ -30,6 +30,15 @@ const buildIndividualFunctions = async builds => {
         platform: 'browser',
         format: 'iife',
         globalName: functionName,
+        alias: {
+          batches: path.resolve(__dirname, '../src/batches'),
+          notion: path.resolve(__dirname, '../src/notion'),
+          setting: path.resolve(__dirname, '../src/setting'),
+          i18n: path.resolve(__dirname, '../src/i18n'),
+          asserts: path.resolve(__dirname, '../src/asserts.ts'),
+          appsScriptProperties: path.resolve(__dirname, '../src/appsScriptProperties.ts'),
+          sheet: path.resolve(__dirname, '../src/sheet.ts'),
+        },
       });
 
       console.log(`🎁 ${functionName} 빌드가 완료되었어요.`);

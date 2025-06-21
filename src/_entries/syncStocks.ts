@@ -1,6 +1,6 @@
-import { appsScriptProperties } from '../appsScriptProperties';
-import { syncStocks as origin } from '../batches/stocks';
-import { assertEnvs } from '../asserts';
+import { appsScriptProperties } from 'appsScriptProperties';
+import { syncStocks as origin } from 'batches/stocks';
+import { assertEnvs } from 'asserts';
 
 function syncStocks() {
   assertEnvs(appsScriptProperties);

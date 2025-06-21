@@ -1,7 +1,7 @@
-import { appsScriptProperties } from '../appsScriptProperties';
-import { syncStocks } from '../batches/stocks';
-import { assertEnvs } from '../asserts';
-import { syncCurrencies } from '../batches/currencies';
+import { appsScriptProperties } from 'appsScriptProperties';
+import { syncStocks } from 'batches/stocks';
+import { assertEnvs } from 'asserts';
+import { syncCurrencies } from 'batches/currencies';
 
 function batch() {
   assertEnvs(appsScriptProperties);

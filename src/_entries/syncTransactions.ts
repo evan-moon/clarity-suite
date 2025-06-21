@@ -1,6 +1,6 @@
-import { appsScriptProperties } from '../appsScriptProperties';
-import { syncCurrencyInTransactions as origin } from '../batches/transactions';
-import { assertEnvs } from '../asserts';
+import { appsScriptProperties } from 'appsScriptProperties';
+import { syncCurrencyInTransactions as origin } from 'batches/transactions';
+import { assertEnvs } from 'asserts';
 
 function syncTransactions() {
   assertEnvs(appsScriptProperties);

@@ -1,7 +1,7 @@
 import { isFullPage } from '@notionhq/client';
-import { getSheet } from '../../sheet';
-import { getTitleText, isFullPageWithId } from '../../notion/utils';
-import { updateDataInNotionBatch } from '../../notion/api';
+import { getSheet } from 'sheet';
+import { getTitleText, isFullPageWithId } from 'notion/utils';
+import { updateDataInNotionBatch } from 'notion/api';
 import type { BatchConfig, BatchData } from './types';
 
 export function syncBatch<T extends BatchData>(

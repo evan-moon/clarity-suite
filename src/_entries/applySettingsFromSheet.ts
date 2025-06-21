@@ -1,4 +1,4 @@
-import { applySettingsFromSheet as origin } from '../setting';
+import { applySettingsFromSheet as origin } from 'setting';
 
 function applySettingsFromSheet() {
   origin();

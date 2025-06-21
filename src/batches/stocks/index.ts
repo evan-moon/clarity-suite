@@ -1,9 +1,9 @@
-import { getSheet } from '../../sheet';
+import { getSheet } from 'sheet';
 import { STOCK_DATA } from './constants';
 import { calcStockData, getAllStockPages } from './utils';
-import { syncBatch } from '../common/sync';
-import type { BatchData } from '../common/types';
-import { t } from '../../i18n';
+import { syncBatch } from 'batches/common/sync';
+import type { BatchData } from 'batches/common/types';
+import { t } from 'i18n';
 
 interface StockData extends BatchData {
   티커: string;

@@ -1,5 +1,5 @@
-import { getDataFromNotion } from '../../notion/api';
-import { getGoogleFinanceQuery } from '../../sheet';
+import { getDataFromNotion } from 'notion/api';
+import { getGoogleFinanceQuery } from 'sheet';
 import { STOCK_DATA } from './constants';
 
 export const calcStockData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, ticker: string) => {

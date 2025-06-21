@@ -1,8 +1,8 @@
 import { isFullPage } from '@notionhq/client';
-import { updateDataInNotionBatch } from '../../notion/api';
+import { updateDataInNotionBatch } from 'notion/api';
 import { queryNotionEmptyRatePages } from './utils';
-import { isFullPageWithId } from '../../notion/utils';
-import { t } from '../../i18n';
+import { isFullPageWithId } from 'notion/utils';
+import { t } from 'i18n';
 
 export function syncCurrencyInTransactions(sheetName: string, notionDbId: string, token: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);

@@ -1,4 +1,4 @@
-import { getDataFromNotion } from '../../notion/api';
+import { getDataFromNotion } from 'notion/api';
 
 export function queryNotionEmptyRatePages(notionDbId: string, token: string) {
   const res = getDataFromNotion(
