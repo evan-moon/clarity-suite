@@ -36,7 +36,8 @@ export function applySettingsFromSheet(): void {
 
     PropertiesService.getScriptProperties().setProperties(finalProps, true);
     SpreadsheetApp.getActiveSpreadsheet().toast('✅ Successfully connected to Notion', 'Complete', 5);
-  } catch {
-    SpreadsheetApp.getActiveSpreadsheet().toast('❌ Error occurred while connecting to Notion', 'Error', 5);
+  } catch (e) {
+    const message = e instanceof Error ? e.message : 'An unknown error occurred.';
+    SpreadsheetApp.getUi().alert(`❌ ${message}`);
   }
 }

@@ -6,7 +6,7 @@ import { t } from 'i18n';
 
 export function syncCurrencyInTransactions(sheetName: string, notionDbId: string, token: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
-  if (!sheet) throw new Error(`시트를 찾을 수 없습니다: ${sheetName}`);
+  if (!sheet) throw new Error(`Sheet not found: ${sheetName}`);
 
   const pages = queryNotionEmptyRatePages(notionDbId, token);
   if (pages.length === 0) return;

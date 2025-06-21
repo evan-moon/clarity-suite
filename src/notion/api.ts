@@ -43,7 +43,7 @@ export function updateDataInNotionBatch<Payload = any>(updates: { pageId: string
   return results.map(result => JSON.parse(result.getContentText()));
 }
 
-export function findNotionDatabaseByName(name: string, token: string): { results: DatabaseObjectResponse[] } {
+export function findNotionDatabaseByName(name: string, token: string) {
   const queryUrl = 'https://api.notion.com/v1/search';
 
   const result = UrlFetchApp.fetch(queryUrl, {
@@ -57,5 +57,14 @@ export function findNotionDatabaseByName(name: string, token: string): { results
     muteHttpExceptions: true,
   });
 
-  return JSON.parse(result.getContentText());
+  const response = JSON.parse(result.getContentText()) as { results: DatabaseObjectResponse[] };
+
+  if (response.results) {
+    response.results = response.results.filter(db => {
+      const titleProperty = db.title[0];
+      return titleProperty?.plain_text === name;
+    });
+  }
+
+  return response;
 }

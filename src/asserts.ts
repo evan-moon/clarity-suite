@@ -7,7 +7,7 @@ function assert<T>(variable: T, message: string): asserts variable is NonNullabl
 }
 
 function assertEnv(envName: string, env?: string | null): asserts env {
-  assert(env, `Apps Script 속성에 ${envName} 값이 존재하지 않아요. 프로젝트 설정 > 스크립트 속성 메뉴를 확인해주세요.`);
+  assert(env, `The script property "${envName}" is not set. Please check Project Settings > Script properties.`);
 }
 
 type ValidatedAppsScriptProperties = {
