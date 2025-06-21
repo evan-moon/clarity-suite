@@ -1,8 +1,8 @@
 import { findNotionDatabaseByName } from '../notion/api';
-import { 스크립트속성 } from './constants';
+import { SCRIPT_PROPERTIES_MAP } from './constants';
 
-export function isValidScriptProperty(key: string): key is keyof typeof 스크립트속성 {
-  return key in 스크립트속성;
+export function isValidScriptProperty(key: string): key is keyof typeof SCRIPT_PROPERTIES_MAP {
+  return key in SCRIPT_PROPERTIES_MAP;
 }
 
 export function findDatabaseId(token: string, name: string): string {

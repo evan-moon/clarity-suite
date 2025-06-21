@@ -1,4 +1,4 @@
-import { 스크립트속성, DATABASE_PROPERTIES } from './constants';
+import { SCRIPT_PROPERTIES_MAP, DATABASE_PROPERTIES } from './constants';
 import { findDatabaseId, isValidScriptProperty } from './utils';
 
 export function applySettingsFromSheet(): void {
@@ -15,7 +15,7 @@ export function applySettingsFromSheet(): void {
   values.forEach(([name, value]) => {
     const trimmedName = name.trim();
     if (isValidScriptProperty(trimmedName)) {
-      const key = 스크립트속성[trimmedName];
+      const key = SCRIPT_PROPERTIES_MAP[trimmedName];
       rawProps[key] = String(value).trim();
     }
   });
