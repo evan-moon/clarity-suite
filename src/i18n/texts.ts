@@ -26,9 +26,8 @@ export const koConfig: I18nConfig = {
 
     // Transaction properties
     date: '날짜',
-    transactionCurrency: '거래통화',
-    transactionTargetCurrency: '대상통화',
-    exchangeRateAuto: '환율 (자동입력)',
+    tradeCurrency: '거래통화',
+    accountCurrency: '대상통화',
   },
 };
 
@@ -58,8 +57,7 @@ export const enConfig: I18nConfig = {
 
     // Transaction properties
     date: 'Date',
-    transactionCurrency: 'Transaction Currency',
-    transactionTargetCurrency: 'Target Currency',
-    exchangeRateAuto: 'Exchange Rate (Auto)',
+    tradeCurrency: 'Trade Currency',
+    accountCurrency: 'Account Currency',
   },
 };

@@ -22,8 +22,7 @@ export type RealtimeGoogleFinanceProperty =
   | 'beta'
   | 'changepct'
   | 'closeyest'
-  | 'shares'
-  | '통화';
+  | 'shares';
 
 type PastGoogleFinanceProperty = 'open' | 'close' | 'high' | 'low' | 'volume' | 'all';
 

@@ -18,7 +18,6 @@ export function getDataFromNotion(
   token: string
 ): { results: PageObjectResponse[] } {
   const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
-  Logger.log(queryUrl);
 
   const result = UrlFetchApp.fetch(queryUrl, {
     method: 'post',

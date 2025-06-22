@@ -13,8 +13,6 @@ export function findDatabaseId(token: string, name: string): string {
   if (name.replace(/-/g, '').length >= 32) return name.replace(/-/g, '');
 
   const response = findNotionDatabaseByName(name, token);
-  Logger.log(response.results.map(response => `https://www.notion.so/kiwituna/${response.id.replace(/-/g, '')}`));
-
   if (response.results.length === 0) {
     throw new Error(`Could not find a database named "${name}".`);
   }

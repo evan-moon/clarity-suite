@@ -1,3 +1,4 @@
+import { t } from 'i18n/index';
 import { getDataFromNotion } from 'notion/api';
 
 export function queryNotionEmptyRatePages(notionDbId: string, token: string) {
@@ -6,10 +7,10 @@ export function queryNotionEmptyRatePages(notionDbId: string, token: string) {
     {
       filter: {
         and: [
-          { property: '날짜', date: { is_not_empty: true } },
-          { property: '거래통화', select: { is_not_empty: true } },
-          { property: '대상통화', select: { is_not_empty: true } },
-          { property: '환율 (자동입력)', number: { is_empty: true } },
+          { property: t('date'), date: { is_not_empty: true } },
+          { property: t('tradeCurrency'), select: { is_not_empty: true } },
+          { property: t('accountCurrency'), formula: { string: { is_not_empty: true } } },
+          { property: t('exchangeRate'), number: { is_empty: true } },
         ],
       },
     },

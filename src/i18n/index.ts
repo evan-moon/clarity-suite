@@ -1,7 +1,7 @@
 import { enConfig, koConfig } from './texts';
 import { I18nConfig, Language } from './types';
 
-const LANGUAGE: Language = 'ko';
+const LANGUAGE: Language = 'en';
 
 export function t(key: keyof I18nConfig['properties']): string {
   switch (LANGUAGE) {

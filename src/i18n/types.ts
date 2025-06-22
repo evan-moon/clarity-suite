@@ -27,8 +27,7 @@ export interface I18nConfig {
 
     // Transaction properties
     date: string;
-    transactionCurrency: string;
-    transactionTargetCurrency: string;
-    exchangeRateAuto: string;
+    tradeCurrency: string;
+    accountCurrency: string;
   };
 }

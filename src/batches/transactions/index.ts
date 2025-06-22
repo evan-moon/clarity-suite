@@ -19,27 +19,29 @@ export function syncCurrencyInTransactions(sheetName: string, notionDbId: string
     const row = i + 2;
 
     const dateProperty = page.properties[t('date')];
-    const fromProperty = page.properties[t('transactionCurrency')];
-    const toProperty = page.properties[t('transactionTargetCurrency')];
+    const fromProperty = page.properties[t('tradeCurrency')];
+    const toProperty = page.properties[t('accountCurrency')];
 
-    if (dateProperty.type !== 'date' || fromProperty.type !== 'select' || toProperty.type !== 'select') {
+    if (dateProperty.type !== 'date' || fromProperty.type !== 'select' || toProperty.type !== 'formula') {
       return;
     }
 
     const date = dateProperty.date?.start;
     const fromSelect = fromProperty.select;
-    const toSelect = toProperty.select;
+    const toFormula = toProperty.formula;
     const from = fromSelect ? fromSelect.name : '';
-    const to = toSelect ? toSelect.name : '';
+    const to = toFormula.type === 'string' ? toFormula.string ?? '' : '';
 
-    const isUSD = from === 'USD' && to === 'USD';
+    const isSameCurrency = from === to;
 
     sheet.getRange(row, 1).setValue(date);
     sheet.getRange(row, 2).setValue(from);
     sheet.getRange(row, 3).setValue(to);
     sheet
       .getRange(row, 4)
-      .setFormula(isUSD ? '1' : `=iferror(index(googlefinance(B${row}&C${row},"price",A${row},A${row}), 2, 2), "")`);
+      .setFormula(
+        isSameCurrency ? '1' : `=iferror(index(googlefinance(B${row}&C${row},"price",A${row},A${row}), 2, 2), "")`
+      );
   });
 
   SpreadsheetApp.flush();
@@ -54,7 +56,7 @@ export function syncCurrencyInTransactions(sheetName: string, notionDbId: string
           pageId: page.id,
           data: {
             properties: {
-              [t('exchangeRateAuto')]: { number: rate },
+              [t('exchangeRate')]: { number: rate },
             },
           },
         };
