@@ -1,45 +1,79 @@
-import { CreatePageParameters } from '@notionhq/client';
 import { SNAPSHOT_PROPERTY_MAP } from './constants';
+import { NotionProperties, PropertyValue } from './\btypes';
 
 export function formatYYYYMM(date: Date): string {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
 }
 
-type NotionProperties = CreatePageParameters['properties'];
-export function buildSnapshotProperties(properties: any, pageId: string, now: Date): NotionProperties {
+function handleNumber(value: PropertyValue) {
+  if (value.type !== 'number') return undefined;
+  return { number: value.number };
+}
+function handleSelect(value: PropertyValue) {
+  if (value.type !== 'select') return undefined;
+  return { select: value.select };
+}
+function handleRelation(value: PropertyValue) {
+  if (value.type !== 'relation') return undefined;
+  return { relation: value.relation as { id: string }[] };
+}
+function handleFormula(value: PropertyValue) {
+  if (value.type !== 'formula') return undefined;
+  switch (value.formula.type) {
+    case 'number':
+      return { number: value.formula.number };
+    case 'string':
+      return { rich_text: [{ type: 'text', text: { content: value.formula.string ?? '' } }] };
+    case 'boolean':
+      return { checkbox: value.formula.boolean ?? false };
+    case 'date':
+      return { date: value.formula.date };
+    default:
+      return undefined;
+  }
+}
+function handleRollup(value: PropertyValue) {
+  if (value.type !== 'rollup') return undefined;
+  switch (value.rollup.type) {
+    case 'number':
+      return { number: value.rollup.number };
+    case 'date':
+      return { date: value.rollup.date };
+    default:
+      return undefined;
+  }
+}
+function handleCheckbox(value: PropertyValue) {
+  if (value.type !== 'checkbox') return undefined;
+  return { checkbox: value.checkbox };
+}
+function handleRichText(value: PropertyValue) {
+  if (value.type !== 'rich_text') return undefined;
+  return { rich_text: value.rich_text };
+}
+
+const typeHandlers: Record<string, (value: PropertyValue) => any> = {
+  number: handleNumber,
+  select: handleSelect,
+  relation: handleRelation,
+  formula: handleFormula,
+  rollup: handleRollup,
+  checkbox: handleCheckbox,
+  rich_text: handleRichText,
+};
+
+export function buildSnapshotProperties(
+  properties: Record<string, PropertyValue>,
+  pageId: string,
+  now: Date
+): NotionProperties {
   const snapshotProperties = Object.entries(SNAPSHOT_PROPERTY_MAP).reduce((acc, [snapshotKey, infoKey]) => {
     const value = properties[infoKey];
     if (!value) return acc;
-    if (value.type === 'number') {
-      acc[snapshotKey] = { number: value.number };
-    } else if (value.type === 'select') {
-      acc[snapshotKey] = { select: value.select };
-    } else if (value.type === 'relation') {
-      acc[snapshotKey] = { relation: value.relation as { id: string }[] };
-    } else if (value.type === 'formula') {
-      if (value.formula.type === 'number') {
-        acc[snapshotKey] = { number: value.formula.number };
-      } else if (value.formula.type === 'string') {
-        acc[snapshotKey] = {
-          rich_text: [{ type: 'text', text: { content: value.formula.string ?? '' } }],
-        };
-      } else if (value.formula.type === 'boolean') {
-        acc[snapshotKey] = { checkbox: value.formula.boolean ?? false };
-      } else if (value.formula.type === 'date') {
-        acc[snapshotKey] = { date: value.formula.date };
-      }
-    } else if (value.type === 'rollup') {
-      if (value.rollup.type === 'number') {
-        acc[snapshotKey] = { number: value.rollup.number };
-      } else if (value.rollup.type === 'date') {
-        acc[snapshotKey] = { date: value.rollup.date };
-      } else if (value.rollup.type === 'array') {
-        // 필요시 array 처리
-      }
-    } else if (value.type === 'checkbox') {
-      acc[snapshotKey] = { checkbox: value.checkbox };
-    } else if (value.type === 'rich_text') {
-      acc[snapshotKey] = { rich_text: value.rich_text };
+    const handler = typeHandlers[value.type];
+    if (handler) {
+      const result = handler(value);
+      if (result !== undefined) acc[snapshotKey] = result;
     }
     return acc;
   }, {} as NotionProperties);
