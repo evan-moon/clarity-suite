@@ -51,6 +51,7 @@ export const createNotionClient = (token: string) => ({
         filter: { property: 'object', value: 'database' },
       }),
       headers: {
+        ...requestHeader,
         Authorization: `Bearer ${token}`,
       },
     });
