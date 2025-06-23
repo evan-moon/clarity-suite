@@ -1,7 +1,7 @@
-import { applySettingsFromSheet as origin } from 'setting';
+import { applySettingsFromSheet as _applySettingsFromSheet } from 'setting';
 
 function applySettingsFromSheet() {
-  origin();
+  _applySettingsFromSheet();
 }
 
 applySettingsFromSheet();

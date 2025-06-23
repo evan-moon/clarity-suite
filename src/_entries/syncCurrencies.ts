@@ -1,12 +1,12 @@
 import { appsScriptProperties } from 'appsScriptProperties';
-import { syncCurrencies as origin } from 'core/currencies';
+import { syncRealtimeCurrencies as _syncRealtimeCurrencies } from 'services/realtimeCurrencies';
 import { assertEnvs } from 'asserts';
 
-function syncCurrencies() {
+function syncRealtimeCurrencies() {
   assertEnvs(appsScriptProperties);
 
   const { CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID, NOTION_SECRET } = appsScriptProperties;
-  origin(CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID, NOTION_SECRET);
+  _syncRealtimeCurrencies(CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID, NOTION_SECRET);
 }
 
-syncCurrencies();
+syncRealtimeCurrencies();

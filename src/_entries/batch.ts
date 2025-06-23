@@ -1,7 +1,7 @@
 import { appsScriptProperties } from 'appsScriptProperties';
-import { syncStocks } from 'core/stocks';
+import { syncRealtimeStocks } from 'services/realtimeStocks';
 import { assertEnvs } from 'asserts';
-import { syncCurrencies } from 'core/currencies';
+import { syncRealtimeCurrencies } from 'services/realtimeCurrencies';
 
 function batch() {
   assertEnvs(appsScriptProperties);
@@ -9,8 +9,8 @@ function batch() {
   const { STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID, NOTION_SECRET } =
     appsScriptProperties;
 
-  syncStocks(STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, NOTION_SECRET);
-  syncCurrencies(CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID, NOTION_SECRET);
+  syncRealtimeStocks(STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, NOTION_SECRET);
+  syncRealtimeCurrencies(CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID, NOTION_SECRET);
 }
 
 batch();

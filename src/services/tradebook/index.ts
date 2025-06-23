@@ -4,7 +4,7 @@ import { queryNotionEmptyRatePages } from './utils';
 import { isFullPageWithId } from 'notion/utils';
 import { t } from 'i18n';
 
-export function syncStockTransactionsCurrencies(sheetName: string, notionDbId: string, token: string) {
+export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbId: string, token: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
   if (!sheet) throw new Error(`Sheet not found: ${sheetName}`);
 

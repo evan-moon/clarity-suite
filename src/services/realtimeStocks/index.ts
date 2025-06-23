@@ -1,8 +1,8 @@
 import { getSheet } from 'sheet';
 import { STOCK_DATA } from './constants';
 import { calcStockData, getAllStockPages } from './utils';
-import { syncBatch } from 'core/common/sync';
-import type { BatchData } from 'core/common/types';
+import { syncBatch } from 'services/_shared/sync';
+import type { BatchData } from 'services/_shared/types';
 import { t } from 'i18n';
 
 interface StockData extends BatchData {
@@ -18,7 +18,7 @@ interface StockData extends BatchData {
   배당률: number;
 }
 
-export function syncStocks(sheetName: string, notionDbId: string, token: string) {
+export function syncRealtimeStocks(sheetName: string, notionDbId: string, token: string) {
   const sheet = getSheet(sheetName);
   if (sheet == null) {
     Logger.log(`${sheetName} 시트가 존재하지 않습니다.`);

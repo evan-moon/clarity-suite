@@ -1,12 +1,12 @@
 import { appsScriptProperties } from 'appsScriptProperties';
-import { syncStocks as origin } from 'core/stocks';
+import { syncRealtimeStocks as _syncRealtimeStocks } from 'services/realtimeStocks';
 import { assertEnvs } from 'asserts';
 
-function syncStocks() {
+function syncRealtimeStocks() {
   assertEnvs(appsScriptProperties);
 
   const { STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, NOTION_SECRET } = appsScriptProperties;
-  origin(STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, NOTION_SECRET);
+  _syncRealtimeStocks(STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID, NOTION_SECRET);
 }
 
-syncStocks();
+syncRealtimeStocks();

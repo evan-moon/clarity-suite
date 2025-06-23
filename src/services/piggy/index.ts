@@ -1,10 +1,10 @@
 import { isFullPage } from '@notionhq/client';
 import { updateDataInNotionBatch } from 'notion/api';
-import { queryNotionEmptyRatePocketbookPages } from './utils';
 import { isFullPageWithId } from 'notion/utils';
 import { t } from 'i18n';
+import { queryNotionEmptyRatePocketbookPages } from './utils';
 
-export function syncPocketbookTransactionsCurrencies(sheetName: string, notionDbId: string, token: string) {
+export function syncPiggyTransactionsCurrencies(sheetName: string, notionDbId: string, token: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
   if (!sheet) throw new Error(`Sheet not found: ${sheetName}`);
 

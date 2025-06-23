@@ -1,8 +1,8 @@
 import { getSheet } from 'sheet';
 import { CURRENCY_DATA } from './constants';
 import { calcCurrencyData, getAllCurrencyPages } from './utils';
-import { syncBatch } from 'core/common/sync';
-import type { BatchData } from 'core/common/types';
+import { syncBatch } from 'services/_shared/sync';
+import type { BatchData } from 'services/_shared/types';
 import { t } from 'i18n';
 
 interface CurrencyData extends BatchData {
@@ -12,7 +12,7 @@ interface CurrencyData extends BatchData {
   환율: number;
 }
 
-export function syncCurrencies(sheetName: string, notionDbId: string, token: string) {
+export function syncRealtimeCurrencies(sheetName: string, notionDbId: string, token: string) {
   const sheet = getSheet(sheetName);
   if (sheet == null) {
     Logger.log(`${sheetName} 시트가 존재하지 않습니다.`);
