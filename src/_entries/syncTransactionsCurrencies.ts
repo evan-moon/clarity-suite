@@ -2,7 +2,7 @@ import { appsScriptProperties } from 'appsScriptProperties';
 import {
   syncPocketbookTransactionsCurrencies as originPocketbook,
   syncStockTransactionsCurrencies as originStock,
-} from 'batches/transactions';
+} from 'core/transactions';
 
 import { assertEnvs } from 'asserts';
 

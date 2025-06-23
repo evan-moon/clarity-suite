@@ -1,8 +1,8 @@
 import { getSheet } from 'sheet';
 import { CURRENCY_DATA } from './constants';
 import { calcCurrencyData, getAllCurrencyPages } from './utils';
-import { syncBatch } from 'batches/common/sync';
-import type { BatchData } from 'batches/common/types';
+import { syncBatch } from 'core/common/sync';
+import type { BatchData } from 'core/common/types';
 import { t } from 'i18n';
 
 interface CurrencyData extends BatchData {
