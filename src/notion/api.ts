@@ -1,4 +1,5 @@
 import {
+  CreatePageParameters,
   DatabaseObjectResponse,
   PageObjectResponse,
   QueryDatabaseParameters,
@@ -66,5 +67,18 @@ export const createNotionClient = (token: string) => ({
     }
 
     return response;
+  },
+  createPage: (databaseId: string, properties: CreatePageParameters['properties']) => {
+    const url = 'https://api.notion.com/v1/pages';
+    const result = UrlFetchApp.fetch(url, {
+      method: 'post',
+      headers: requestHeader,
+      payload: JSON.stringify({
+        parent: { database_id: databaseId },
+        properties,
+      }),
+    });
+
+    return JSON.parse(result.getContentText());
   },
 });

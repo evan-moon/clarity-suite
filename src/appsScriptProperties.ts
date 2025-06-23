@@ -13,4 +13,6 @@ export const appsScriptProperties = {
   POCKETBOOK_TRANSACTION_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
     'POCKETBOOK_TRANSACTION_NOTION_DB_ID'
   ),
+  ACCOUNT_HUB_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('ACCOUNT_HUB_NOTION_DB_ID'),
+  ACCOUNT_SNAPSHOT_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('ACCOUNT_SNAPSHOT_NOTION_DB_ID'),
 };

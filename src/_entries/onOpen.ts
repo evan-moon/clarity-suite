@@ -7,6 +7,8 @@ function onOpen() {
     .addItem('Sync Real-time Currency Info', 'syncRealtimeCurrencies')
     .addItem('Sync Transaction Currency Rates (Max 50)', 'syncTransactionsCurrencies')
     .addToUi();
+
+  SpreadsheetApp.getUi().createMenu('📄 Report').addItem('Snapshot Account Hub', 'takeAccountHubSnapshots').addToUi();
 }
 
 onOpen();
