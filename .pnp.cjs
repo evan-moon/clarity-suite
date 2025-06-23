@@ -29,7 +29,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@notionhq/client", "npm:3.1.3"],\
-          ["@types/google-apps-script", "npm:1.0.97"],\
+          ["@types/google-apps-script", "npm:1.0.99"],\
           ["clasp", "npm:1.0.0"],\
           ["esbuild", "npm:0.25.5"],\
           ["price-tracker", "workspace:."],\
@@ -273,10 +273,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/google-apps-script", [\
-      ["npm:1.0.97", {\
-        "packageLocation": "../../../.yarn/berry/cache/@types-google-apps-script-npm-1.0.97-42c79c1eee-10c0.zip/node_modules/@types/google-apps-script/",\
+      ["npm:1.0.99", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-google-apps-script-npm-1.0.99-7bd985362a-10c0.zip/node_modules/@types/google-apps-script/",\
         "packageDependencies": [\
-          ["@types/google-apps-script", "npm:1.0.97"]\
+          ["@types/google-apps-script", "npm:1.0.99"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -329,7 +329,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@notionhq/client", "npm:3.1.3"],\
-          ["@types/google-apps-script", "npm:1.0.97"],\
+          ["@types/google-apps-script", "npm:1.0.99"],\
           ["clasp", "npm:1.0.0"],\
           ["esbuild", "npm:0.25.5"],\
           ["price-tracker", "workspace:."],\
