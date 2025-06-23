@@ -13,16 +13,8 @@ function syncTransactionsCurrencies() {
     POCKETBOOK_TRANSACTION_NOTION_DB_ID,
     NOTION_SECRET,
   } = appsScriptProperties;
-  _syncTradebookTransactionsCurrencies(
-    STOCK_TRANSACTION_CURRENCIES_SHEET_NAME,
-    STOCK_TRANSACTION_NOTION_DB_ID,
-    NOTION_SECRET
-  );
-  _syncPiggyTransactionsCurrencies(
-    POCKETBOOK_TRANSACTION_SHEET_NAME,
-    POCKETBOOK_TRANSACTION_NOTION_DB_ID,
-    NOTION_SECRET
-  );
+  _syncTradebookTransactionsCurrencies(STOCK_TRANSACTION_CURRENCIES_SHEET_NAME, STOCK_TRANSACTION_NOTION_DB_ID);
+  _syncPiggyTransactionsCurrencies(POCKETBOOK_TRANSACTION_SHEET_NAME, POCKETBOOK_TRANSACTION_NOTION_DB_ID);
 }
 
 syncTransactionsCurrencies();

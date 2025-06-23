@@ -6,13 +6,11 @@ export const koConfig: I18nConfig = {
     name: '이름',
     title: '제목',
 
-    // Currency properties
+    // Realtime Currencies
     currencyName: '환율이름',
-    baseCurrency: '기준통화',
-    targetCurrency: '대상통화',
     exchangeRate: '환율',
 
-    // Stock properties
+    // Realtime Stocks
     ticker: 'Ticker',
     stockName: '종목명',
     currentPrice: '현재가',
@@ -24,7 +22,7 @@ export const koConfig: I18nConfig = {
     eps: 'EPS',
     dividendYield: '배당률',
 
-    // Transaction properties
+    // Tradebook
     date: '날짜',
     tradeCurrency: '거래통화',
     accountCurrency: '대상통화',
@@ -38,25 +36,23 @@ export const enConfig: I18nConfig = {
     name: 'Name',
     title: 'Title',
 
-    // Currency properties
+    // Realtime Currencies
     currencyName: 'Currency Name',
-    baseCurrency: 'Base Currency',
-    targetCurrency: 'Target Currency',
     exchangeRate: 'Exchange Rate',
 
-    // Stock properties
+    // Realtime Stocks
     ticker: 'Ticker',
-    stockName: 'Stock Name',
+    stockName: 'Name',
     currentPrice: 'Current Price',
     previousClose: 'Previous Close',
     change: 'Change',
     yearHigh: '52 Week High',
     yearLow: '52 Week Low',
-    pe: 'PE',
-    eps: 'EPS',
+    pe: 'P/E Ratio',
+    eps: 'Earnings Per Share (EPS)',
     dividendYield: 'Dividend Yield',
 
-    // Transaction properties
+    // Tradebook
     date: 'Date',
     tradeCurrency: 'Trade Currency',
     accountCurrency: 'Account Currency',

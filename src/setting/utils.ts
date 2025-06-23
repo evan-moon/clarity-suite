@@ -1,4 +1,4 @@
-import { findNotionDatabaseByName } from 'notion/api';
+import { createNotionClient } from 'notion/api';
 import { SCRIPT_PROPERTIES_MAP } from './constants';
 
 export function isValidScriptProperty(key: string): key is keyof typeof SCRIPT_PROPERTIES_MAP {
@@ -6,13 +6,14 @@ export function isValidScriptProperty(key: string): key is keyof typeof SCRIPT_P
 }
 
 export function findDatabaseId(token: string, name: string): string {
+  const notion = createNotionClient(token);
   if (!token || !name) {
     return '';
   }
 
   if (name.replace(/-/g, '').length >= 32) return name.replace(/-/g, '');
 
-  const response = findNotionDatabaseByName(name, token);
+  const response = notion.findDatabaseByName(name, token);
   if (response.results.length === 0) {
     throw new Error(`Could not find a database named "${name}".`);
   }

@@ -6,7 +6,7 @@ export const appsScriptProperties = {
   CURRENCIES_SHEET_NAME: 'Currencies',
   STOCK_TRANSACTION_CURRENCIES_SHEET_NAME: 'Stock Transaction Currencies',
   POCKETBOOK_TRANSACTION_SHEET_NAME: 'Pocketbook Transaction Currencies',
-  NOTION_SECRET: PropertiesService.getScriptProperties().getProperty('NOTION_SECRET'),
+  NOTION_SECRET: PropertiesService.getScriptProperties().getProperty('NOTION_SECRET') ?? 'INVALID_SECRET',
   STOCKS_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('STOCKS_NOTION_DB_ID'),
   CURRENCIES_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('CURRENCIES_NOTION_DB_ID'),
   STOCK_TRANSACTION_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('STOCK_TRANSACTION_NOTION_DB_ID'),

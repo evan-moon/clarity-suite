@@ -1,15 +1,22 @@
-import { isFullPage } from '@notionhq/client';
+import { isFullPage, PageObjectResponse } from '@notionhq/client';
 import { getSheet } from 'sheet';
 import { getTitleText, isFullPageWithId } from 'notion/utils';
-import { updateDataInNotionBatch } from 'notion/api';
-import type { BatchConfig, BatchData } from './types';
+import { createNotionClient } from 'notion/api';
+import { appsScriptProperties } from 'appsScriptProperties';
 
-export function syncBatch<T extends BatchData>(
-  sheetName: string,
-  notionDbId: string,
-  config: BatchConfig<T>,
-  token: string
-) {
+interface Config {
+  getPages: (notionDbId: string) => { results: PageObjectResponse[] };
+  calcData: (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, name: string) => void;
+  getDataFromSheet: (
+    sheet: GoogleAppsScript.Spreadsheet.Sheet,
+    row: number,
+    name: string
+  ) => { properties: Record<string, any> } | null;
+  getDataColumnCount: number;
+  titlePropertyName: string;
+}
+
+export function syncTable(sheetName: string, notionDbId: string, config: Config) {
   const sheet = getSheet(sheetName);
   if (sheet == null) {
     Logger.log(`${sheetName} 시트가 존재하지 않습니다.`);
@@ -46,7 +53,8 @@ export function syncBatch<T extends BatchData>(
     .filter((update): update is NonNullable<typeof update> => update != null);
 
   if (updates.length > 0) {
-    updateDataInNotionBatch(updates, token);
+    const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
+    notion.updateAll(updates);
     Logger.log(`${updates.length}개의 데이터가 노션에 업데이트되었어요.`);
   }
 }

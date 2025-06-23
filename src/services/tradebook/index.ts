@@ -1,14 +1,15 @@
 import { isFullPage } from '@notionhq/client';
-import { updateDataInNotionBatch } from 'notion/api';
+import { createNotionClient } from 'notion/api';
 import { queryNotionEmptyRatePages } from './utils';
 import { isFullPageWithId } from 'notion/utils';
 import { t } from 'i18n';
+import { appsScriptProperties } from 'appsScriptProperties';
 
-export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbId: string, token: string) {
+export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbId: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
   if (!sheet) throw new Error(`Sheet not found: ${sheetName}`);
 
-  const pages = queryNotionEmptyRatePages(notionDbId, token);
+  const pages = queryNotionEmptyRatePages(notionDbId);
   if (pages.length === 0) return;
 
   pages.forEach((page, i) => {
@@ -66,7 +67,8 @@ export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbI
     .filter((update): update is NonNullable<typeof update> => update != null);
 
   if (updates.length > 0) {
-    updateDataInNotionBatch(updates, token);
+    const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
+    notion.updateAll(updates);
     Logger.log(`${updates.length}개의 환율이 노션에 업데이트되었어요.`);
   }
 }

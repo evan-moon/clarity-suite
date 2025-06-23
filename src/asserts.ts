@@ -6,7 +6,7 @@ function assert<T>(variable: T, message: string): asserts variable is NonNullabl
   }
 }
 
-function assertEnv(envName: string, env?: string | null): asserts env {
+export function assertEnv(envName: string, env?: string | null): asserts env {
   assert(env, `The script property "${envName}" is not set. Please check Project Settings > Script properties.`);
 }
 

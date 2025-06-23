@@ -9,8 +9,6 @@ export interface I18nConfig {
 
     // Currency properties
     currencyName: string;
-    baseCurrency: string;
-    targetCurrency: string;
     exchangeRate: string;
 
     // Stock properties

@@ -1,6 +1,7 @@
-import { getDataFromNotion } from 'notion/api';
+import { createNotionClient } from 'notion/api';
 import { getGoogleFinanceQuery } from 'sheet';
 import { STOCK_DATA } from './constants';
+import { appsScriptProperties } from 'appsScriptProperties';
 
 export const calcStockData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, ticker: string) => {
   sheet.getRange(row, 1).setValue(ticker);
@@ -19,16 +20,14 @@ export const calcStockData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: nu
     );
 };
 
-export const getAllStockPages = (notionDbId: string, token: string) =>
-  getDataFromNotion(
-    notionDbId,
-    {
-      filter: {
-        property: 'Ticker',
-        title: {
-          is_not_empty: true,
-        },
+export const getAllStockPages = (notionDbId: string) => {
+  const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
+  return notion.getPages(notionDbId, {
+    filter: {
+      property: 'Ticker',
+      title: {
+        is_not_empty: true,
       },
     },
-    token
-  );
+  });
+};
