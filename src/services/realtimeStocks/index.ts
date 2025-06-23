@@ -3,7 +3,7 @@ import { calcStockData, getAllStockPages } from './utils';
 import { syncTable } from 'services/_shared/syncTable';
 import { t } from 'i18n';
 
-export function syncRealtimeStocks(sheetName: string, notionDbId: string, token: string) {
+export function syncRealtimeStocks(sheetName: string, notionDbId: string) {
   syncTable(sheetName, notionDbId, {
     getPages: notionDbId => getAllStockPages(notionDbId),
     calcData: calcStockData,

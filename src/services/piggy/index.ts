@@ -4,6 +4,7 @@ import { isFullPageWithId } from 'notion/utils';
 import { t } from 'i18n';
 import { queryNotionEmptyRatePocketbookPages } from './utils';
 import { appsScriptProperties } from 'appsScriptProperties';
+import { clearSheet } from 'services/_shared/clearSheet';
 
 export function syncPiggyTransactionsCurrencies(sheetName: string, notionDbId: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
@@ -71,4 +72,5 @@ export function syncPiggyTransactionsCurrencies(sheetName: string, notionDbId: s
     notion.updateAll(updates);
     Logger.log(`${updates.length}개의 환율이 노션에 업데이트되었어요.`);
   }
+  clearSheet(sheetName);
 }

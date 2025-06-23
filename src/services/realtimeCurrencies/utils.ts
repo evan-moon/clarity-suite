@@ -14,7 +14,7 @@ export const calcCurrencyData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row:
   });
 };
 
-export const getAllCurrencyPages = (notionDbId: string, token: string) => {
+export const getAllCurrencyPages = (notionDbId: string) => {
   const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
   return notion.getPages(notionDbId, {
     filter: {

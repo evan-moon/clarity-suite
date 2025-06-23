@@ -3,9 +3,9 @@ import { calcCurrencyData, getAllCurrencyPages } from './utils';
 import { syncTable } from 'services/_shared/syncTable';
 import { t } from 'i18n';
 
-export function syncRealtimeCurrencies(sheetName: string, notionDbId: string, token: string) {
+export function syncRealtimeCurrencies(sheetName: string, notionDbId: string) {
   syncTable(sheetName, notionDbId, {
-    getPages: notionDbId => getAllCurrencyPages(notionDbId, token),
+    getPages: notionDbId => getAllCurrencyPages(notionDbId),
     calcData: calcCurrencyData,
     getDataFromSheet: (sheet, row, name) => {
       const result = sheet.getRange(row, 1, sheet.getLastRow() - 1, CURRENCY_DATA.length + 3).getValues();

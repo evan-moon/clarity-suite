@@ -3,6 +3,7 @@ import { getSheet } from 'sheet';
 import { getTitleText, isFullPageWithId } from 'notion/utils';
 import { createNotionClient } from 'notion/api';
 import { appsScriptProperties } from 'appsScriptProperties';
+import { clearSheet } from './clearSheet';
 
 interface Config {
   getPages: (notionDbId: string) => { results: PageObjectResponse[] };
@@ -56,5 +57,7 @@ export function syncTable(sheetName: string, notionDbId: string, config: Config)
     const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
     notion.updateAll(updates);
     Logger.log(`${updates.length}개의 데이터가 노션에 업데이트되었어요.`);
+
+    clearSheet(sheetName);
   }
 }

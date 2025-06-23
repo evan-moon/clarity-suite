@@ -5,7 +5,7 @@ function onOpen() {
     .createMenu('📲 Manual Sync')
     .addItem('Sync Real-time Stock Info', 'syncRealtimeStocks')
     .addItem('Sync Real-time Currency Info', 'syncRealtimeCurrencies')
-    .addItem('Sync Tradebook Transaction Currency Rates', 'syncTradebookCurrencies')
+    .addItem('Sync Transaction Currency Rates (Max 50)', 'syncTransactionsCurrencies')
     .addToUi();
 }
 
