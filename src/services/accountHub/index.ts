@@ -3,14 +3,14 @@ import { appsScriptProperties } from 'appsScriptProperties';
 import { createNotionClient } from 'notion/api';
 import { buildSnapshotProperties } from './utils';
 
-const PENDING_KEY = 'Snapshot Pending';
+const PENDING_KEY = 'Snapshot Status';
 
 export async function takeAccountHubSnapshots(originDbId: string, snapshotDbId: string): Promise<void> {
   assertEnvs(appsScriptProperties);
   const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
   const filter = {
     property: PENDING_KEY,
-    checkbox: { equals: true },
+    select: { equals: 'Creating...' },
   };
   const { results: pages } = notion.getPages(originDbId, { filter });
   if (!pages.length) return;
@@ -29,7 +29,7 @@ export async function takeAccountHubSnapshots(originDbId: string, snapshotDbId: 
       pageId,
       data: {
         properties: {
-          [PENDING_KEY]: { checkbox: false },
+          [PENDING_KEY]: { select: { name: 'Ready' } },
         },
       },
     };
