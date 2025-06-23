@@ -1,13 +1,12 @@
 const { buildIndividualFunctions, combineBuiltFiles, finalizeBuild } = require('./utils');
+const fs = require('fs');
+const path = require('path');
 
-const builds = [
-  'batch',
-  'onOpen',
-  'syncStocks',
-  'syncCurrencies',
-  'syncTransactionsCurrencies',
-  'applySettingsFromSheet',
-];
+const entriesDir = path.resolve(__dirname, '../src/_entries');
+const builds = fs
+  .readdirSync(entriesDir)
+  .filter(file => file.endsWith('.ts'))
+  .map(file => path.basename(file, '.ts'));
 
 const runBuild = async () => {
   try {
