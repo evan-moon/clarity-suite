@@ -5,7 +5,7 @@ function onOpen() {
     .createMenu('Manual Sync')
     .addItem('Sync Real-time Stock Information', 'syncStocks')
     .addItem('Sync Real-time Currency Information', 'syncCurrencies')
-    .addItem('Sync Transaction Currency Rates', 'syncTransactions')
+    .addItem('Sync Transaction Currency Rates', 'syncTransactionsCurrencies')
     .addToUi();
 }
 

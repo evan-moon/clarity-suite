@@ -28,6 +28,7 @@ export const koConfig: I18nConfig = {
     date: '날짜',
     tradeCurrency: '거래통화',
     accountCurrency: '대상통화',
+    currency: '통화',
   },
 };
 
@@ -59,5 +60,6 @@ export const enConfig: I18nConfig = {
     date: 'Date',
     tradeCurrency: 'Trade Currency',
     accountCurrency: 'Account Currency',
+    currency: 'Currency',
   },
 };

@@ -29,5 +29,6 @@ export interface I18nConfig {
     date: string;
     tradeCurrency: string;
     accountCurrency: string;
+    currency: string;
   };
 }
