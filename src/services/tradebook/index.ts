@@ -42,7 +42,7 @@ export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbI
     sheet
       .getRange(row, 4)
       .setFormula(
-        isSameCurrency ? '1.2' : `=iferror(index(googlefinance(B${row}&C${row},"price",A${row},A${row} + 2), 2, 2), "")`
+        isSameCurrency ? '1' : `=iferror(index(googlefinance(B${row}&C${row},"price",A${row},A${row} + 2), 2, 2), "")`
       );
   });
 
