@@ -1,4 +1,4 @@
-import { applySettingsFromSheet as _applySettingsFromSheet } from 'setting';
+import { applySettingsFromSheet as _applySettingsFromSheet } from 'services/settings';
 
 function applySettingsFromSheet() {
   _applySettingsFromSheet();
