@@ -12,28 +12,38 @@ export async function takeAccountHubSnapshots(originDbId: string, snapshotDbId: 
     property: PENDING_KEY,
     select: { equals: 'Creating...' },
   };
-  const { results: pages } = notion.getPages(originDbId, { filter });
-  if (!pages.length) return;
+  try {
+    const { results: pages } = notion.getPages(originDbId, { filter });
+    Logger.log(`${pages.length}개의 페이지를 발견했습니다. 스냅샷을 찍을게요.`);
 
-  const now = new Date();
-
-  const updates = pages.map(page => {
-    const { properties, id: pageId } = page;
-    const snapshotProperties = buildSnapshotProperties(properties, pageId, now);
-    try {
-      notion.createPage(snapshotDbId, snapshotProperties);
-    } catch (e) {
-      Logger.log(e);
+    if (!pages.length) {
+      return;
     }
-    return {
-      pageId,
-      data: {
-        properties: {
-          [PENDING_KEY]: { select: { name: 'Ready' } },
-        },
-      },
-    };
-  });
 
-  notion.updateAll(updates);
+    const now = new Date();
+
+    const updates = pages.map(page => {
+      const { properties, id: pageId } = page;
+      const snapshotProperties = buildSnapshotProperties(properties, pageId, now);
+      try {
+        notion.createPage(snapshotDbId, snapshotProperties);
+      } catch (e) {
+        Logger.log(e);
+      }
+      return {
+        pageId,
+        data: {
+          properties: {
+            [PENDING_KEY]: { select: { name: 'Ready' } },
+          },
+        },
+      };
+    });
+
+    notion.updateAll(updates);
+
+    Logger.log(`${pages.length}개의 페이지의 스냅샷을 찍었어요.`);
+  } catch (e) {
+    Logger.log(e);
+  }
 }

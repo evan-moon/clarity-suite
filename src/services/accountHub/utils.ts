@@ -77,6 +77,7 @@ export function buildSnapshotProperties(
     }
     return acc;
   }, {} as NotionProperties);
+  Logger.log(snapshotProperties);
 
   return {
     ...snapshotProperties,
