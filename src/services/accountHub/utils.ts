@@ -11,7 +11,12 @@ function handleNumber(value: PropertyValue) {
 }
 function handleSelect(value: PropertyValue) {
   if (value.type !== 'select') return undefined;
-  return { select: value.select };
+  return { rich_text: [{ type: 'text', text: { content: value.select?.name ?? '' } }] };
+}
+function handleMultiSelect(value: PropertyValue) {
+  if (value.type !== 'multi_select') return undefined;
+  const names = value.multi_select?.map(opt => opt.name).join(', ') ?? '';
+  return { rich_text: [{ type: 'text', text: { content: names } }] };
 }
 function handleRelation(value: PropertyValue) {
   if (value.type !== 'relation') return undefined;
@@ -55,6 +60,7 @@ function handleRichText(value: PropertyValue) {
 const typeHandlers: Record<string, (value: PropertyValue) => any> = {
   number: handleNumber,
   select: handleSelect,
+  multi_select: handleMultiSelect,
   relation: handleRelation,
   formula: handleFormula,
   rollup: handleRollup,
