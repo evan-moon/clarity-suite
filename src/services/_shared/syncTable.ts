@@ -4,6 +4,7 @@ import { getTitleText, isFullPageWithId } from 'notion/utils';
 import { createNotionClient } from 'notion/api';
 import { appsScriptProperties } from 'appsScriptProperties';
 import { clearSheet } from './clearSheet';
+import { assertEnv } from 'asserts';
 
 interface Config {
   getPages: (notionDbId: string) => { results: PageObjectResponse[] };
@@ -54,6 +55,8 @@ export function syncTable(sheetName: string, notionDbId: string, config: Config)
     .filter((update): update is NonNullable<typeof update> => update != null);
 
   if (updates.length > 0) {
+    assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+
     const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
     notion.updateAll(updates);
     Logger.log(`${updates.length}개의 데이터가 노션에 업데이트되었어요.`);

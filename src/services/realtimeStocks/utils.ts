@@ -2,6 +2,7 @@ import { createNotionClient } from 'notion/api';
 import { getGoogleFinanceQuery } from 'sheet';
 import { STOCK_DATA } from './constants';
 import { appsScriptProperties } from 'appsScriptProperties';
+import { assertEnv } from 'asserts';
 
 export const calcStockData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, ticker: string) => {
   sheet.getRange(row, 1).setValue(ticker);
@@ -21,6 +22,8 @@ export const calcStockData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: nu
 };
 
 export const getAllStockPages = (notionDbId: string) => {
+  assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+
   const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
   return notion.getPages(notionDbId, {
     filter: {

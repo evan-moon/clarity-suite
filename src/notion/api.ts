@@ -81,4 +81,26 @@ export const createNotionClient = (token: string) => ({
 
     return JSON.parse(result.getContentText());
   },
+  deleteAllPagesInDatabase: (databaseId: string): number => {
+    const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
+    const result = UrlFetchApp.fetch(queryUrl, {
+      method: 'post',
+      headers: requestHeader,
+      payload: JSON.stringify({}),
+    });
+
+    const { results } = JSON.parse(result.getContentText());
+
+    Logger.log(`${databaseId} 테이블에서 ${results.length}개의 Row를 발견했어요.`);
+    if (!results || results.length === 0) return 0;
+
+    const requests = results.map((page: { id: string }) => ({
+      url: `https://api.notion.com/v1/pages/${page.id}`,
+      method: 'patch' as const,
+      headers: requestHeader,
+      payload: JSON.stringify({ archived: true }),
+    }));
+    UrlFetchApp.fetchAll(requests);
+    return results.length;
+  },
 });

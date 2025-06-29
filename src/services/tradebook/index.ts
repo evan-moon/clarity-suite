@@ -5,6 +5,7 @@ import { isFullPageWithId } from 'notion/utils';
 import { t } from 'i18n';
 import { appsScriptProperties } from 'appsScriptProperties';
 import { clearSheet } from 'services/_shared/clearSheet';
+import { assertEnv } from 'asserts';
 
 export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbId: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
@@ -68,6 +69,8 @@ export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbI
     .filter((update): update is NonNullable<typeof update> => update != null);
 
   if (updates.length > 0) {
+    assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+
     const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
     notion.updateAll(updates);
     Logger.log(`${updates.length}개의 환율이 노션에 업데이트되었어요.`);

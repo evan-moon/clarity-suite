@@ -11,7 +11,12 @@ function onOpen() {
     .addSubMenu(
       SpreadsheetApp.getUi().createMenu('📜 Generate Report').addItem('Snapshot Account Hub', 'takeAccountHubSnapshots')
     )
-    .addSubMenu(SpreadsheetApp.getUi().createMenu('⚙️ Settings').addItem('Connect to Notion', 'applySettingsFromSheet'))
+    .addSubMenu(
+      SpreadsheetApp.getUi()
+        .createMenu('⚙️ Settings')
+        .addItem('Connect to Notion', 'applySettingsFromSheet')
+        .addItem('Clean Up Clarity Life ', 'cleanUpClarityLife')
+    )
     .addToUi();
 }
 

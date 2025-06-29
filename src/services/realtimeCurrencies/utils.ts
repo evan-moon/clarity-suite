@@ -3,6 +3,7 @@ import { getGoogleFinanceQuery } from 'sheet';
 import { CURRENCY_DATA } from './constants';
 import { t } from 'i18n';
 import { appsScriptProperties } from 'appsScriptProperties';
+import { assertEnv } from 'asserts';
 
 export const calcCurrencyData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, 환율이름: string) => {
   sheet.getRange(row, 1).setValue(환율이름);
@@ -15,6 +16,8 @@ export const calcCurrencyData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row:
 };
 
 export const getAllCurrencyPages = (notionDbId: string) => {
+  assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+
   const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
   return notion.getPages(notionDbId, {
     filter: {

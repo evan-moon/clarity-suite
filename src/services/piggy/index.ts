@@ -2,15 +2,16 @@ import { isFullPage } from '@notionhq/client';
 import { createNotionClient } from 'notion/api';
 import { isFullPageWithId } from 'notion/utils';
 import { t } from 'i18n';
-import { queryNotionEmptyRatePocketbookPages } from './utils';
+import { queryNotionEmptyRatePiggyPages } from './utils';
 import { appsScriptProperties } from 'appsScriptProperties';
 import { clearSheet } from 'services/_shared/clearSheet';
+import { assertEnv } from 'asserts';
 
 export function syncPiggyTransactionsCurrencies(sheetName: string, notionDbId: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
   if (!sheet) throw new Error(`Sheet not found: ${sheetName}`);
 
-  const pages = queryNotionEmptyRatePocketbookPages(notionDbId);
+  const pages = queryNotionEmptyRatePiggyPages(notionDbId);
   if (pages.length === 0) return;
 
   pages.forEach((page, i) => {
@@ -68,6 +69,8 @@ export function syncPiggyTransactionsCurrencies(sheetName: string, notionDbId: s
     .filter((update): update is NonNullable<typeof update> => update != null);
 
   if (updates.length > 0) {
+    assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+
     const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
     notion.updateAll(updates);
     Logger.log(`${updates.length}개의 환율이 노션에 업데이트되었어요.`);

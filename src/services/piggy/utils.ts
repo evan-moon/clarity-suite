@@ -1,8 +1,11 @@
 import { appsScriptProperties } from 'appsScriptProperties';
+import { assertEnv } from 'asserts';
 import { t } from 'i18n';
 import { createNotionClient } from 'notion/api';
 
-export function queryNotionEmptyRatePocketbookPages(notionDbId: string) {
+export function queryNotionEmptyRatePiggyPages(notionDbId: string) {
+  assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+
   const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
   const res = notion.getPages(notionDbId, {
     filter: {
