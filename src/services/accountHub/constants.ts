@@ -7,7 +7,6 @@ export const SNAPSHOT_PROPERTY_MAP: Record<SnapshotDBKey, OriginDBKey> = {
   Stocks: 'Stocks',
   'Transactions (General)': 'Transactions (General)',
   'Transactions(Investment)': 'Transactions(Investment)',
-  'Exchange Source': 'Exchange Source',
   Inverted: 'Inverted',
   'Exchange Rate': 'Exchange Rate',
   'Financial Institution': 'Financial Institution',
