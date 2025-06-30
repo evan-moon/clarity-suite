@@ -3,6 +3,18 @@ import { assertEnvs } from 'asserts';
 import { clearNotionTable } from 'services/common/index';
 
 function cleanUpClarityLife() {
+  const ui = SpreadsheetApp.getUi();
+  const response = ui.alert(
+    'Are you sure you want to delete all data?',
+    'This action cannot be undone. Do you want to continue?',
+    ui.ButtonSet.OK_CANCEL
+  );
+
+  if (response !== ui.Button.OK) {
+    SpreadsheetApp.getActiveSpreadsheet().toast('Operation cancelled.', 'Cancelled', 3);
+    return;
+  }
+
   assertEnvs(appsScriptProperties);
 
   const {
