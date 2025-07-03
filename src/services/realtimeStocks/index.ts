@@ -47,9 +47,6 @@ export function syncRealtimeStocks(sheetName: string, notionDbId: string) {
           [t('eps')]: {
             number: parseFloat(data[8]),
           },
-          [t('dividendYield')]: {
-            number: parseFloat(data[9]),
-          },
         },
       };
     },
