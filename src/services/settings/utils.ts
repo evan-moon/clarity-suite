@@ -1,4 +1,4 @@
-import { createNotionClient } from 'notion/api';
+import { createNotionClient } from 'services/_shared/notion/api';
 import { SCRIPT_PROPERTIES_MAP } from './constants';
 
 export function isValidScriptProperty(key: string): key is keyof typeof SCRIPT_PROPERTIES_MAP {

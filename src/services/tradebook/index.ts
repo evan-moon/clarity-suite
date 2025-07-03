@@ -1,11 +1,11 @@
 import { isFullPage } from '@notionhq/client';
-import { createNotionClient } from 'notion/api';
+import { createNotionClient } from 'services/_shared/notion/api';
 import { queryNotionEmptyRatePages } from './utils';
-import { isFullPageWithId } from 'notion/utils';
-import { t } from 'i18n';
-import { appsScriptProperties } from 'appsScriptProperties';
-import { clearSheet } from 'services/_shared/clearSheet';
-import { assertEnv } from 'asserts';
+import { isFullPageWithId } from 'services/_shared/notion/utils';
+import { t } from 'services/_shared/i18n';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+import { assertEnv } from 'services/_shared/asserts';
+import { clearSheet } from 'services/_shared/sheet';
 
 export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbId: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
@@ -75,5 +75,6 @@ export function syncTradebookTransactionsCurrencies(sheetName: string, notionDbI
     notion.updateAll(updates);
     Logger.log(`${updates.length}개의 환율이 노션에 업데이트되었어요.`);
   }
+
   clearSheet(sheetName);
 }

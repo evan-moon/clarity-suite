@@ -1,7 +1,7 @@
 import { SNAPSHOT_PROPERTY_MAP } from './constants';
 import { formatYYYYMM } from '../_shared/date';
-import { convertValueToNotionProperty } from 'notion/utils';
-import { NotionProperties, PropertyValue } from 'notion/types';
+import { convertValueToNotionProperty } from 'services/_shared/notion/utils';
+import { NotionProperties, PropertyValue } from 'services/_shared/notion/types';
 
 export function buildPortfolioSnapshotProperties(
   properties: Record<string, PropertyValue>,

@@ -4,7 +4,7 @@ import {
   PageObjectResponse,
   QueryDatabaseParameters,
 } from '@notionhq/client/build/src/api-endpoints';
-import { appsScriptProperties } from 'appsScriptProperties';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 
 const requestHeader = {
   Authorization: `Bearer ${appsScriptProperties.NOTION_SECRET}`,

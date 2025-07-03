@@ -1,11 +1,11 @@
 import { isFullPage } from '@notionhq/client';
-import { createNotionClient } from 'notion/api';
-import { isFullPageWithId } from 'notion/utils';
-import { t } from 'i18n';
+import { createNotionClient } from 'services/_shared/notion/api';
+import { isFullPageWithId } from 'services/_shared/notion/utils';
+import { t } from 'services/_shared/i18n';
 import { queryNotionEmptyRatePiggyPages } from './utils';
-import { appsScriptProperties } from 'appsScriptProperties';
-import { clearSheet } from 'services/_shared/clearSheet';
-import { assertEnv } from 'asserts';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+import { assertEnv } from 'services/_shared/asserts';
+import { clearSheet } from 'services/_shared/sheet';
 
 export function syncPiggyTransactionsCurrencies(sheetName: string, notionDbId: string) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);

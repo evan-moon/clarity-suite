@@ -1,10 +1,10 @@
 import { isFullPage, PageObjectResponse } from '@notionhq/client';
-import { getSheet } from 'sheet';
-import { getTitleText, isFullPageWithId } from 'notion/utils';
-import { createNotionClient } from 'notion/api';
-import { appsScriptProperties } from 'appsScriptProperties';
-import { clearSheet } from './clearSheet';
-import { assertEnv } from 'asserts';
+import { clearSheet, getSheet } from 'services/_shared/sheet';
+import { getTitleText, isFullPageWithId } from 'services/_shared/notion/utils';
+import { createNotionClient } from 'services/_shared/notion/api';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+
+import { assertEnv } from 'services/_shared/asserts';
 
 interface Config {
   getPages: (notionDbId: string) => { results: PageObjectResponse[] };

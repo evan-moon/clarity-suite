@@ -1,8 +1,8 @@
-import { createNotionClient } from 'notion/api';
-import { getGoogleFinanceQuery } from 'sheet';
+import { createNotionClient } from 'services/_shared/notion/api';
+import { getGoogleFinanceQuery } from 'services/_shared/sheet';
 import { STOCK_DATA } from './constants';
-import { appsScriptProperties } from 'appsScriptProperties';
-import { assertEnv } from 'asserts';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+import { assertEnv } from 'services/_shared/asserts';
 
 export const calcStockData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, ticker: string) => {
   sheet.getRange(row, 1).setValue(ticker);

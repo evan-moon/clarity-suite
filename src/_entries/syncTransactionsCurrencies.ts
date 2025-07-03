@@ -1,8 +1,8 @@
-import { appsScriptProperties } from 'appsScriptProperties';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { syncTradebookTransactionsCurrencies as _syncTradebookTransactionsCurrencies } from 'services/tradebook';
 import { syncPiggyTransactionsCurrencies as _syncPiggyTransactionsCurrencies } from 'services/piggy';
 
-import { assertEnv } from 'asserts';
+import { assertEnv } from 'services/_shared/asserts';
 
 function syncTransactionsCurrencies() {
   const {

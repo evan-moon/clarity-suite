@@ -1,7 +1,7 @@
 import { CURRENCY_DATA } from './constants';
 import { calcCurrencyData, getAllCurrencyPages } from './utils';
 import { syncTable } from 'services/_shared/syncTable';
-import { t } from 'i18n';
+import { t } from 'services/_shared/i18n';
 
 export function syncRealtimeCurrencies(sheetName: string, notionDbId: string) {
   syncTable(sheetName, notionDbId, {

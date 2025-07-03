@@ -1,6 +1,6 @@
-import { assertEnvs } from 'asserts';
-import { appsScriptProperties } from 'appsScriptProperties';
-import { createNotionClient } from 'notion/api';
+import { assertEnvs } from 'services/_shared/asserts';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+import { createNotionClient } from 'services/_shared/notion/api';
 import { buildSnapshotProperties } from './utils';
 
 const PENDING_KEY = 'Snapshot Status';

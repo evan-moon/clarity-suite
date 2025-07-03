@@ -1,5 +1,5 @@
-import { appsScriptProperties } from 'appsScriptProperties';
-import { assertEnvs } from 'asserts';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+import { assertEnvs } from 'services/_shared/asserts';
 import { clearNotionTable } from 'services/common/index';
 
 function cleanUpClarityLife() {

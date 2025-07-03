@@ -1,6 +1,6 @@
-import { createNotionClient } from 'notion/api';
-import { appsScriptProperties } from 'appsScriptProperties';
-import { assertEnv } from 'asserts';
+import { createNotionClient } from 'services/_shared/notion/api';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+import { assertEnv } from 'services/_shared/asserts';
 
 export function clearNotionTable(notionDbId: string) {
   assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);

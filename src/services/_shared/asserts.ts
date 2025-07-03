@@ -1,4 +1,4 @@
-import { appsScriptProperties } from 'appsScriptProperties';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 
 function assert<T>(variable: T, message: string): asserts variable is NonNullable<T> {
   if (variable == null) {

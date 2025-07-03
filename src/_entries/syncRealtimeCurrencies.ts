@@ -1,6 +1,6 @@
-import { appsScriptProperties } from 'appsScriptProperties';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { syncRealtimeCurrencies as _syncRealtimeCurrencies } from 'services/realtimeCurrencies';
-import { assertEnv } from 'asserts';
+import { assertEnv } from 'services/_shared/asserts';
 
 function syncRealtimeCurrencies() {
   const { CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID } = appsScriptProperties;

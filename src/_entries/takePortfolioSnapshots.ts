@@ -1,6 +1,6 @@
-import { appsScriptProperties } from 'appsScriptProperties';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { takePortfolioSnapshots as _takePortfolioSnapshots } from 'services/portfolio';
-import { assertEnv } from 'asserts';
+import { assertEnv } from 'services/_shared/asserts';
 
 function takePortfolioSnapshots() {
   const { PORTFOLIO_NOTION_DB_ID, PORTFOLIO_SNAPSHOT_NOTION_DB_ID } = appsScriptProperties;

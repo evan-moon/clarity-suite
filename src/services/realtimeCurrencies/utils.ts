@@ -1,9 +1,9 @@
-import { createNotionClient } from 'notion/api';
-import { getGoogleFinanceQuery } from 'sheet';
+import { createNotionClient } from 'services/_shared/notion/api';
+import { getGoogleFinanceQuery } from 'services/_shared/sheet';
 import { CURRENCY_DATA } from './constants';
-import { t } from 'i18n';
-import { appsScriptProperties } from 'appsScriptProperties';
-import { assertEnv } from 'asserts';
+import { t } from 'services/_shared/i18n';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+import { assertEnv } from 'services/_shared/asserts';
 
 export const calcCurrencyData = (sheet: GoogleAppsScript.Spreadsheet.Sheet, row: number, 환율이름: string) => {
   sheet.getRange(row, 1).setValue(환율이름);

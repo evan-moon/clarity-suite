@@ -1,7 +1,7 @@
-import { appsScriptProperties } from 'appsScriptProperties';
-import { assertEnv } from 'asserts';
-import { t } from 'i18n';
-import { createNotionClient } from 'notion/api';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
+import { assertEnv } from 'services/_shared/asserts';
+import { t } from 'services/_shared/i18n';
+import { createNotionClient } from 'services/_shared/notion/api';
 
 export function queryNotionEmptyRatePiggyPages(notionDbId: string) {
   assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
