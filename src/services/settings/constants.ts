@@ -6,7 +6,8 @@ export type ScriptPropertyKeys =
   | 'PIGGY_TRANSACTION_NOTION_DB_ID'
   | 'ACCOUNT_HUB_NOTION_DB_ID'
   | 'ACCOUNT_SNAPSHOT_NOTION_DB_ID'
-  | 'PORTFOLIO_NOTION_DB_ID';
+  | 'PORTFOLIO_NOTION_DB_ID'
+  | 'PORTFOLIO_SNAPSHOT_NOTION_DB_ID';
 type DatabasePropertyKeys = Exclude<ScriptPropertyKeys, 'NOTION_SECRET'>;
 
 type PropertyKeyInSpreadSheet = string;
@@ -19,6 +20,7 @@ export const SCRIPT_PROPERTIES_MAP: Record<PropertyKeyInSpreadSheet, ScriptPrope
   'Account Hub DB': 'ACCOUNT_HUB_NOTION_DB_ID',
   'Account Snapshot DB': 'ACCOUNT_SNAPSHOT_NOTION_DB_ID',
   'Portfolio DB': 'PORTFOLIO_NOTION_DB_ID',
+  'Portfolio Snapshot DB': 'PORTFOLIO_SNAPSHOT_NOTION_DB_ID',
 };
 
 export const DATABASE_PROPERTIES: DatabasePropertyKeys[] = [
@@ -29,4 +31,5 @@ export const DATABASE_PROPERTIES: DatabasePropertyKeys[] = [
   'ACCOUNT_HUB_NOTION_DB_ID',
   'ACCOUNT_SNAPSHOT_NOTION_DB_ID',
   'PORTFOLIO_NOTION_DB_ID',
+  'PORTFOLIO_SNAPSHOT_NOTION_DB_ID',
 ];

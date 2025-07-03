@@ -22,4 +22,7 @@ export const appsScriptProperties: Record<ScriptPropertyKeys | SheetNameProperti
   ACCOUNT_HUB_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('ACCOUNT_HUB_NOTION_DB_ID'),
   ACCOUNT_SNAPSHOT_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('ACCOUNT_SNAPSHOT_NOTION_DB_ID'),
   PORTFOLIO_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty('PORTFOLIO_NOTION_DB_ID'),
+  PORTFOLIO_SNAPSHOT_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
+    'PORTFOLIO_SNAPSHOT_NOTION_DB_ID'
+  ),
 };

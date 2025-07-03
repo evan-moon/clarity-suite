@@ -5,8 +5,9 @@ import { buildSnapshotProperties } from './utils';
 
 const PENDING_KEY = 'Snapshot Status';
 
-export async function takeAccountHubSnapshots(originDbId: string, snapshotDbId: string): Promise<void> {
+export function takeAccountHubSnapshots(originDbId: string, snapshotDbId: string) {
   assertEnvs(appsScriptProperties);
+
   const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
   const filter = {
     property: PENDING_KEY,

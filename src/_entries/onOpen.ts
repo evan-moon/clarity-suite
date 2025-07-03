@@ -13,6 +13,7 @@ function onOpen() {
         SpreadsheetApp.getUi()
           .createMenu('📜 Generate Report')
           .addItem('Snapshot Account Hub', 'takeAccountHubSnapshots')
+          .addItem('Snapshot Portfolio', 'takePortfolioSnapshots')
       )
       .addSubMenu(
         SpreadsheetApp.getUi()

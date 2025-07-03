@@ -6,7 +6,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "yarn typecheck && node ./_esbuild/esbuild.config.js",
-    "deploy:clarity-life": "yarn build && clasp push",
+    "deploy": "yarn build && clasp push",
     "play": "clasp run"
   },
   "author": "evan-moon",
