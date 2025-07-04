@@ -1,7 +1,11 @@
+import { isClarityCreatorKit, isClarityLife } from 'services/_shared/appsScriptProperties';
+import { createEveryMinutesBatchTrigger } from 'services/_shared/sheet';
+
 function onOpen() {
-  if (SpreadsheetApp.getActiveSpreadsheet().getName().includes('Clarity Life')) {
-    SpreadsheetApp.getUi()
-      .createMenu('💎 Clarity Life')
+  const ui = SpreadsheetApp.getUi();
+
+  if (isClarityLife()) {
+    ui.createMenu('💎 Clarity Life')
       .addSubMenu(
         SpreadsheetApp.getUi()
           .createMenu('🔄 Manual Update')
@@ -19,12 +23,12 @@ function onOpen() {
         SpreadsheetApp.getUi()
           .createMenu('⚙️ Settings')
           .addItem('Connect to Notion', 'applySettingsFromSheet')
+          .addItem('Set Trigger', 'setTrigger')
           .addItem('Clean Up Clarity Life ', 'cleanUpClarityLife')
       )
       .addToUi();
-  } else if (SpreadsheetApp.getActiveSpreadsheet().getName().includes('Clarity Creator Kit')) {
-    SpreadsheetApp.getUi()
-      .createMenu('💎 Clarity Creator Kit')
+  } else if (isClarityCreatorKit()) {
+    ui.createMenu('💎 Clarity Creator Kit')
       .addSubMenu(
         SpreadsheetApp.getUi()
           .createMenu('🔄 Manual Update')
@@ -32,7 +36,10 @@ function onOpen() {
           .addItem('Update Realtime Currencies', 'syncRealtimeCurrencies')
       )
       .addSubMenu(
-        SpreadsheetApp.getUi().createMenu('⚙️ Settings').addItem('Connect to Notion', 'applySettingsFromSheet')
+        SpreadsheetApp.getUi()
+          .createMenu('⚙️ Settings')
+          .addItem('Connect to Notion', 'applySettingsFromSheet')
+          .addItem('Set Trigger', 'setTrigger')
       )
       .addToUi();
   }
