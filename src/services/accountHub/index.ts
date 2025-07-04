@@ -9,12 +9,8 @@ export function takeAccountHubSnapshots(originDbId: string, snapshotDbId: string
   assertEnvs(appsScriptProperties);
 
   const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
-  const filter = {
-    property: PENDING_KEY,
-    select: { equals: 'Creating...' },
-  };
   try {
-    const { results: pages } = notion.getPages(originDbId, { filter });
+    const { results: pages } = notion.getPages(originDbId, {});
     Logger.log(`${pages.length}개의 페이지를 발견했습니다. 스냅샷을 찍을게요.`);
 
     if (!pages.length) {
@@ -23,7 +19,7 @@ export function takeAccountHubSnapshots(originDbId: string, snapshotDbId: string
 
     const now = new Date();
 
-    const updates = pages.map(page => {
+    pages.forEach(page => {
       const { properties, id: pageId } = page;
       const snapshotProperties = buildSnapshotProperties(properties, pageId, now);
       try {
@@ -40,8 +36,6 @@ export function takeAccountHubSnapshots(originDbId: string, snapshotDbId: string
         },
       };
     });
-
-    notion.updateAll(updates);
 
     Logger.log(`${pages.length}개의 페이지의 스냅샷을 찍었어요.`);
   } catch (e) {

@@ -63,19 +63,6 @@ export function clearSheet(sheetName: string) {
   }
 }
 
-export function createEveryMinutesBatchTrigger(functionName: string, minutes: 1 | 5 | 10 | 15 | 30) {
-  const triggers = ScriptApp.getProjectTriggers();
-  const alreadyExists = triggers.some(function (trigger) {
-    return trigger.getHandlerFunction() === functionName;
-  });
-
-  if (alreadyExists === true) {
-    return;
-  }
-
-  ScriptApp.newTrigger(functionName).timeBased().everyMinutes(minutes).create();
-}
-
 export function createEveryHoursBatchTrigger(functionName: string, hour: 1 | 2 | 4 | 6 | 8 | 12) {
   const triggers = ScriptApp.getProjectTriggers();
   const alreadyExists = triggers.some(function (trigger) {
@@ -87,4 +74,17 @@ export function createEveryHoursBatchTrigger(functionName: string, hour: 1 | 2 |
   }
 
   ScriptApp.newTrigger(functionName).timeBased().everyHours(hour).create();
+}
+
+export function createEveryMonthBatchTrigger(functionName: string, { month, hour }: { month: number; hour: number }) {
+  const triggers = ScriptApp.getProjectTriggers();
+  const alreadyExists = triggers.some(function (trigger) {
+    return trigger.getHandlerFunction() === functionName;
+  });
+
+  if (alreadyExists === true) {
+    return;
+  }
+
+  ScriptApp.newTrigger(functionName).timeBased().onMonthDay(month).atHour(hour).create();
 }

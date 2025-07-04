@@ -1,5 +1,4 @@
 import { isClarityCreatorKit, isClarityLife } from 'services/_shared/appsScriptProperties';
-import { createEveryMinutesBatchTrigger } from 'services/_shared/sheet';
 
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
