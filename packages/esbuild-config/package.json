@@ -1,0 +1,8 @@
+{
+	"name": "@clarity-suite/esbuild-config",
+	"version": "1.0.0",
+	"description": "공통 esbuild 설정 및 멀티엔트리 빌드 유틸리티 패키지",
+	"exports": {
+		".": "./index.js"
+	}
+}

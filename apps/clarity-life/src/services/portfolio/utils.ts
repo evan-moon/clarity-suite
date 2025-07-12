@@ -1,5 +1,5 @@
 import { SNAPSHOT_PROPERTY_MAP } from './constants';
-import { formatYYYYMM } from '../_shared/date';
+import { formatYYYYMM } from '@clarity-suite/utils';
 import {
 	convertValueToNotionProperty,
 	NotionProperties,

@@ -1,27 +1,23 @@
-const {
-	buildIndividualFunctions,
-	combineBuiltFiles,
-	finalizeBuild,
-} = require('./utils');
-const fs = require('fs');
 const path = require('path');
+const { buildMultiEntry } = require('@clarity-suite/esbuild-config');
 
-const entriesDir = path.resolve(__dirname, '../src/_entries');
-const builds = fs
-	.readdirSync(entriesDir)
-	.filter((file) => file.endsWith('.ts'))
-	.map((file) => path.basename(file, '.ts'));
-
-const runBuild = async () => {
-	try {
-		await buildIndividualFunctions(builds);
-		await combineBuiltFiles(builds);
-		finalizeBuild();
-		console.log('\n✅ 전체 빌드가 완료되었어요.');
-	} catch (error) {
-		console.error('❌ 빌드 중 오류가 발생했어요:', error);
-		process.exit(1);
-	}
+const alias = {
+	batches: path.resolve(__dirname, '../src/batches'),
+	notion: path.resolve(__dirname, '../src/notion'),
+	setting: path.resolve(__dirname, '../src/setting'),
+	i18n: path.resolve(__dirname, '../src/i18n'),
+	asserts: path.resolve(__dirname, '../src/asserts.ts'),
+	appsScriptProperties: path.resolve(
+		__dirname,
+		'../src/appsScriptProperties.ts',
+	),
+	sheet: path.resolve(__dirname, '../src/sheet.ts'),
 };
 
-runBuild();
+buildMultiEntry({
+	entriesDir: path.resolve(__dirname, '../src/_entries'),
+	entryExt: '.ts',
+	outdir: path.resolve(__dirname, '../dist'),
+	alias,
+	appsscriptJsonPath: path.resolve(__dirname, '../appsscript.json'),
+});

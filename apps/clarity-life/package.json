@@ -7,6 +7,7 @@
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@clarity-suite/esbuild-config": "workspace:*",
 		"@clarity-suite/notion": "workspace:*",
 		"@clarity-suite/utils": "workspace:*"
 	}

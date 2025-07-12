@@ -100,8 +100,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@clarity-suite/clarity-life@workspace:apps/clarity-life"
   dependencies:
+    "@clarity-suite/esbuild-config": "workspace:*"
     "@clarity-suite/notion": "workspace:*"
     "@clarity-suite/utils": "workspace:*"
+  languageName: unknown
+  linkType: soft
+
+"@clarity-suite/esbuild-config@workspace:*, @clarity-suite/esbuild-config@workspace:packages/esbuild-config":
+  version: 0.0.0-use.local
+  resolution: "@clarity-suite/esbuild-config@workspace:packages/esbuild-config"
   languageName: unknown
   linkType: soft
 
