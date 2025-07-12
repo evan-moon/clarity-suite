@@ -1,4 +1,7 @@
-import type { NotionPropertyName } from 'services/_shared/notion/types';
+import type { NotionPropertyName } from '@clarity-suite/notion';
 import type { RealtimeGoogleFinanceProperty } from 'services/_shared/sheet';
 
-export const CURRENCY_DATA: [NotionPropertyName, RealtimeGoogleFinanceProperty][] = [['Exchange Rate', '']];
+export const CURRENCY_DATA: [
+	NotionPropertyName,
+	RealtimeGoogleFinanceProperty,
+][] = [['Exchange Rate', '']];

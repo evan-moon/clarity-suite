@@ -1,11 +1,11 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "lib": ["esnext"],
-    "target": "ES6",
-    "experimentalDecorators": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "skipLibCheck": true
-  }
+	"compilerOptions": {
+		"module": "node16",
+		"lib": ["esnext"],
+		"target": "ES6",
+		"experimentalDecorators": true,
+		"strict": true,
+		"noImplicitAny": true,
+		"skipLibCheck": true
+	}
 }

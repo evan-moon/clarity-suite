@@ -1,0 +1,17 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"rootDir": ".",
+		"outDir": "dist",
+		"declaration": true,
+		"declarationMap": true,
+		"composite": true
+	},
+	"include": [
+		"*.ts",
+		"src/api.ts",
+		"src/index.ts",
+		"src/types.ts",
+		"src/utils.ts"
+	]
+}
