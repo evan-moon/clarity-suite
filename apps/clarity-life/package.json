@@ -1,0 +1,9 @@
+{
+  "name": "@clarity-suite/clarity-life",
+  "private": true,
+  "scripts": {
+    "build": "yarn check-types && node ./_esbuild/esbuild.config.js",
+    "deploy": "yarn build && Yes | clasp push",
+    "check-types": "tsc --noEmit"
+  }
+}
