@@ -1,0 +1,17 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "dist",
+		"baseUrl": "src",
+		"paths": {
+			"batches/*": ["batches/*"],
+			"notion/*": ["notion/*"],
+			"setting/*": ["setting/*"],
+			"i18n/*": ["i18n/*"],
+			"asserts": ["asserts"],
+			"appsScriptProperties": ["appsScriptProperties"],
+			"sheet": ["sheet"]
+		}
+	}
+}

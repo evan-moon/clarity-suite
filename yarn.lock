@@ -96,6 +96,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@clarity-suite/adhd-life@workspace:apps/adhd-life":
+  version: 0.0.0-use.local
+  resolution: "@clarity-suite/adhd-life@workspace:apps/adhd-life"
+  dependencies:
+    "@clarity-suite/esbuild-config": "workspace:*"
+    "@clarity-suite/notion": "workspace:*"
+    "@clarity-suite/utils": "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "@clarity-suite/clarity-life@workspace:apps/clarity-life":
   version: 0.0.0-use.local
   resolution: "@clarity-suite/clarity-life@workspace:apps/clarity-life"

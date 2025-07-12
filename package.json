@@ -7,8 +7,11 @@
 		"format": "biome format . --write",
 		"check-types": "turbo run check-types",
 		"deploy": "turbo run deploy",
+		"status": "turbo run status",
 		"build:clarity-life": "turbo run build --filter=@clarity-suite/clarity-life",
-		"deploy:clarity-life": "turbo run deploy --filter=@clarity-suite/clarity-life"
+		"deploy:clarity-life": "turbo run deploy --filter=@clarity-suite/clarity-life",
+		"build:adhd": "turbo run build --filter=@clarity-suite/adhd-life",
+		"deploy:adhd": "turbo run deploy --filter=@clarity-suite/adhd-life"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.1.1",

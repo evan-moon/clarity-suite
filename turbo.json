@@ -16,9 +16,9 @@
 		"deploy": {
 			"dependsOn": ["^deploy"]
 		},
-		"dev": {
-			"cache": false,
-			"persistent": true
+
+		"status": {
+			"dependsOn": ["^status"]
 		}
 	}
 }

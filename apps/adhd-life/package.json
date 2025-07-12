@@ -1,5 +1,5 @@
 {
-	"name": "@clarity-suite/clarity-life",
+	"name": "@clarity-suite/adhd-life",
 	"private": true,
 	"scripts": {
 		"build": "yarn check-types && node ./_esbuild/esbuild.config.js",
