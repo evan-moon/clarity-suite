@@ -1,5 +1,5 @@
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 import { t } from 'services/_shared/i18n';
 import { createNotionClient } from '@clarity-suite/notion';
 

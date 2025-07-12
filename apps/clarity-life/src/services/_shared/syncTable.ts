@@ -7,7 +7,7 @@ import {
 } from '@clarity-suite/notion';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 
 interface Config {
 	getPages: (notionDbId: string) => { results: PageObjectResponse[] };

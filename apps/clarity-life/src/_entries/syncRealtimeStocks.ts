@@ -1,6 +1,6 @@
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { syncRealtimeStocks as _syncRealtimeStocks } from 'services/realtimeStocks';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 
 function syncRealtimeStocks() {
 	const { STOCKS_SHEET_NAME, STOCKS_NOTION_DB_ID } = appsScriptProperties;

@@ -2,7 +2,7 @@ import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { syncTradebookTransactionsCurrencies as _syncTradebookTransactionsCurrencies } from 'services/tradebook';
 import { syncPiggyTransactionsCurrencies as _syncPiggyTransactionsCurrencies } from 'services/piggy';
 
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 
 function syncTransactionsCurrencies() {
 	const {

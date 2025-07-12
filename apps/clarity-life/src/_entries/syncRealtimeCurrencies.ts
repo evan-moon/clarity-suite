@@ -1,6 +1,6 @@
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { syncRealtimeCurrencies as _syncRealtimeCurrencies } from 'services/realtimeCurrencies';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 
 function syncRealtimeCurrencies() {
 	const { CURRENCIES_SHEET_NAME, CURRENCIES_NOTION_DB_ID } =

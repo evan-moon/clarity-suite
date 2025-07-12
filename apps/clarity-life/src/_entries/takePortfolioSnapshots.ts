@@ -1,6 +1,6 @@
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { takePortfolioSnapshots as _takePortfolioSnapshots } from 'services/portfolio';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 
 function takePortfolioSnapshots() {
 	const { PORTFOLIO_NOTION_DB_ID, PORTFOLIO_SNAPSHOT_NOTION_DB_ID } =

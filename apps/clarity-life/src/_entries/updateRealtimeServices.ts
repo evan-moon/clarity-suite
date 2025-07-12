@@ -1,6 +1,6 @@
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { syncRealtimeStocks } from 'services/realtimeStocks';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 import { syncRealtimeCurrencies } from 'services/realtimeCurrencies';
 
 function updateRealtimeServices() {

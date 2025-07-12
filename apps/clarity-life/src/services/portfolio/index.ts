@@ -1,4 +1,4 @@
-import { assertEnvs } from 'services/_shared/asserts';
+import { assertEnvs } from '@clarity-suite/utils';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { createNotionClient } from '@clarity-suite/notion';
 import { buildPortfolioSnapshotProperties } from './utils';

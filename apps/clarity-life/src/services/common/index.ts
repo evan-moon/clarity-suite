@@ -1,6 +1,6 @@
 import { createNotionClient } from '@clarity-suite/notion';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 
 export function clearNotionTable(notionDbId: string) {
 	assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);

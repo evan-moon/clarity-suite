@@ -3,7 +3,7 @@ import { getGoogleFinanceQuery } from 'services/_shared/sheet';
 import { CURRENCY_DATA } from './constants';
 import { t } from 'services/_shared/i18n';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 
 export const calcCurrencyData = (
 	sheet: GoogleAppsScript.Spreadsheet.Sheet,

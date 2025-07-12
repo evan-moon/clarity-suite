@@ -1,6 +1,6 @@
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { takeAccountHubSnapshots as _takeAccountHubSnapshots } from 'services/accountHub';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 
 function takeAccountHubSnapshots() {
 	const { ACCOUNT_HUB_NOTION_DB_ID, ACCOUNT_SNAPSHOT_NOTION_DB_ID } =

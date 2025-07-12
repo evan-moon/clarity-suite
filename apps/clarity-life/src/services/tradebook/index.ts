@@ -3,7 +3,7 @@ import { createNotionClient, isFullPageWithId } from '@clarity-suite/notion';
 import { queryNotionEmptyRatePages } from './utils';
 import { t } from 'services/_shared/i18n';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
-import { assertEnv } from 'services/_shared/asserts';
+import { assertEnv } from '@clarity-suite/utils';
 import { clearSheet } from 'services/_shared/sheet';
 
 export function syncTradebookTransactionsCurrencies(

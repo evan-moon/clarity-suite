@@ -1,5 +1,5 @@
 {
-	"name": "@clarity-suite/notion",
+	"name": "@clarity-suite/utils",
 	"version": "0.1.0",
 	"exports": {
 		".": "./src/index.ts"

@@ -101,12 +101,19 @@ __metadata:
   resolution: "@clarity-suite/clarity-life@workspace:apps/clarity-life"
   dependencies:
     "@clarity-suite/notion": "workspace:*"
+    "@clarity-suite/utils": "workspace:*"
   languageName: unknown
   linkType: soft
 
 "@clarity-suite/notion@workspace:*, @clarity-suite/notion@workspace:packages/notion":
   version: 0.0.0-use.local
   resolution: "@clarity-suite/notion@workspace:packages/notion"
+  languageName: unknown
+  linkType: soft
+
+"@clarity-suite/utils@workspace:*, @clarity-suite/utils@workspace:packages/utils":
+  version: 0.0.0-use.local
+  resolution: "@clarity-suite/utils@workspace:packages/utils"
   languageName: unknown
   linkType: soft
 
