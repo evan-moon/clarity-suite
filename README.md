@@ -1,6 +1,6 @@
-# Clarity Suite Backend
+# Clarity Suite
 
-Clarity Suite Backend는 **Clarity Life** Notion 시스템의 핵심 기능들을 보조하는 Google Apps Script 기반 서버입니다. Google 스프레드시트를 중간 처리 도구로 활용하여 Notion의 tradebook, piggy, realtimeCurrencies, realtimeStocks 데이터베이스와 실시간 데이터를 동기화합니다.
+Clarity Suite **Clarity Life** Notion 시스템의 핵심 기능들을 보조하는 Google Apps Script 기반 서버입니다. Google 스프레드시트를 중간 처리 도구로 활용하여 Notion의 tradebook, piggy, realtimeCurrencies, realtimeStocks 데이터베이스와 실시간 데이터를 동기화합니다.
 
 ## 🗂️ 메뉴 구조
 
