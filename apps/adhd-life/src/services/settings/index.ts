@@ -7,6 +7,6 @@ const config: SettingConfig = {
 	DATABASE_PROPERTIES,
 };
 
-export function applySettingsFromSheetForClarityLife() {
+export function applySettingsFromSheetForAdhdLife() {
 	applySettingsFromSheet(config);
 }

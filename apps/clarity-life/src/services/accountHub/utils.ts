@@ -1,7 +1,7 @@
 import { SNAPSHOT_PROPERTY_MAP } from './constants';
 import { formatYYYYMM } from '@clarity-suite/utils';
 import {
-	convertValueToNotionProperty,
+	extractNotionProperties,
 	NotionProperties,
 	PropertyValue,
 } from '@clarity-suite/notion';
@@ -11,18 +11,9 @@ export function buildSnapshotProperties(
 	pageId: string,
 	now: Date,
 ): NotionProperties {
-	const snapshotProperties = Object.entries(SNAPSHOT_PROPERTY_MAP).reduce(
-		(acc, [snapshotKey, infoKey]) => {
-			const value = properties[infoKey];
-			if (!value) return acc;
-			const handler = convertValueToNotionProperty[value.type];
-			if (handler) {
-				const result = handler(value);
-				if (result !== undefined) acc[snapshotKey] = result;
-			}
-			return acc;
-		},
-		{} as NotionProperties,
+	const snapshotProperties = extractNotionProperties(
+		properties,
+		SNAPSHOT_PROPERTY_MAP,
 	);
 	Logger.log(snapshotProperties);
 
