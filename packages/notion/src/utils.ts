@@ -87,3 +87,27 @@ export const convertValueToNotionProperty: Record<
 	checkbox: handleCheckbox,
 	rich_text: handleRichText,
 };
+
+/**
+ * 원본 DB의 properties에서 지정한 컬럼만 추출해 Notion DB에 쓸 수 있는 properties로 변환합니다.
+ * @param properties 원본 DB의 properties
+ * @param propertyMap {스냅샷DB컬럼:원본DB컬럼} 형태의 매핑
+ */
+export function extractNotionProperties(
+	properties: Record<string, PropertyValue>,
+	propertyMap: Record<string, string>,
+): Record<string, any> {
+	return Object.entries(propertyMap).reduce(
+		(acc, [snapshotKey, originKey]) => {
+			const value = properties[originKey];
+			if (!value) return acc;
+			const handler = convertValueToNotionProperty[value.type];
+			if (handler) {
+				const result = handler(value);
+				if (result !== undefined) acc[snapshotKey] = result;
+			}
+			return acc;
+		},
+		{} as Record<string, any>,
+	);
+}
