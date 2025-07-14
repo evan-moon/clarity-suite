@@ -5,7 +5,7 @@ import {
 import {
 	createEveryHoursBatchTrigger,
 	createEveryMonthBatchTrigger,
-} from 'services/_shared/sheet';
+} from '@clarity-suite/sheets';
 
 function setTrigger() {
 	if (isClarityLife()) {

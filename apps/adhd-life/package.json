@@ -11,6 +11,7 @@
 		"@clarity-suite/esbuild-config": "workspace:*",
 		"@clarity-suite/notion": "workspace:*",
 		"@clarity-suite/settings": "workspace:*",
-		"@clarity-suite/utils": "workspace:*"
+		"@clarity-suite/utils": "workspace:*",
+		"@clarity-suite/sheets": "workspace:*"
 	}
 }

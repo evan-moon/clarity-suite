@@ -1,5 +1,5 @@
 import type { NotionPropertyName } from '@clarity-suite/notion';
-import type { RealtimeGoogleFinanceProperty } from 'services/_shared/sheet';
+import { RealtimeGoogleFinanceProperty } from 'services/_shared/sheet';
 
 export const STOCK_DATA: [NotionPropertyName, RealtimeGoogleFinanceProperty][] =
 	[

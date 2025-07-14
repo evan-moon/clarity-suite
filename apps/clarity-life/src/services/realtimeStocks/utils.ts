@@ -1,8 +1,8 @@
 import { createNotionClient } from '@clarity-suite/notion';
-import { getGoogleFinanceQuery } from 'services/_shared/sheet';
 import { STOCK_DATA } from './constants';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { assertEnv } from '@clarity-suite/utils';
+import { getGoogleFinanceQuery } from 'services/_shared/sheet';
 
 export const calcStockData = (
 	sheet: GoogleAppsScript.Spreadsheet.Sheet,

@@ -4,7 +4,7 @@ import { queryNotionEmptyRatePages } from './utils';
 import { t } from 'services/_shared/i18n';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { assertEnv } from '@clarity-suite/utils';
-import { clearSheet } from 'services/_shared/sheet';
+import { clearSheet } from '@clarity-suite/sheets';
 
 export function syncTradebookTransactionsCurrencies(
 	sheetName: string,

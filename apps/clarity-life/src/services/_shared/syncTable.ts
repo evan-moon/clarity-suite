@@ -1,6 +1,6 @@
 import { isFullPage } from '@notionhq/client';
 import type { PageObjectResponse } from '@notionhq/client';
-import { clearSheet, getSheet } from 'services/_shared/sheet';
+import { clearSheet, getSheet } from '@clarity-suite/sheets';
 import {
 	createNotionClient,
 	getTitleText,

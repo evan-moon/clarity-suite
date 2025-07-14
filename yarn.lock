@@ -114,6 +114,7 @@ __metadata:
     "@clarity-suite/esbuild-config": "workspace:*"
     "@clarity-suite/notion": "workspace:*"
     "@clarity-suite/settings": "workspace:*"
+    "@clarity-suite/sheets": "workspace:*"
     "@clarity-suite/utils": "workspace:*"
   languageName: unknown
   linkType: soft
@@ -130,11 +131,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@clarity-suite/settings@workspace:*, @clarity-suite/settings@workspace:packages/setting":
+"@clarity-suite/settings@workspace:*, @clarity-suite/settings@workspace:packages/settings":
   version: 0.0.0-use.local
-  resolution: "@clarity-suite/settings@workspace:packages/setting"
+  resolution: "@clarity-suite/settings@workspace:packages/settings"
   dependencies:
     "@clarity-suite/notion": "workspace:*"
+  languageName: unknown
+  linkType: soft
+
+"@clarity-suite/sheets@workspace:*, @clarity-suite/sheets@workspace:packages/sheets":
+  version: 0.0.0-use.local
+  resolution: "@clarity-suite/sheets@workspace:packages/sheets"
   languageName: unknown
   linkType: soft
 
