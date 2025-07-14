@@ -14,14 +14,10 @@ export function takeAdhdLifeSnapshots(
 		const { results: pages } = notion.getPages(originDbId, {});
 		Logger.log(`${pages.length}개의 페이지를 발견했습니다. 스냅샷을 찍을게요.`);
 		if (!pages.length) return;
-		const now = new Date();
+
 		pages.forEach((page) => {
-			const { properties, id: pageId } = page;
-			const snapshotProperties = buildAdhdLifeSnapshotProperties(
-				properties,
-				pageId,
-				now,
-			);
+			const { properties } = page;
+			const snapshotProperties = buildAdhdLifeSnapshotProperties(properties);
 			try {
 				notion.createPage(snapshotDbId, snapshotProperties);
 			} catch (e) {

@@ -14,6 +14,7 @@ export function buildSnapshotProperties(
 	const snapshotProperties = extractNotionProperties(
 		properties,
 		SNAPSHOT_PROPERTY_MAP,
+		{ ignoreTitle: true },
 	);
 	Logger.log(snapshotProperties);
 

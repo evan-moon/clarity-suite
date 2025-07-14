@@ -14,6 +14,7 @@ export function buildPortfolioSnapshotProperties(
 	const snapshotProperties = extractNotionProperties(
 		properties,
 		SNAPSHOT_PROPERTY_MAP,
+		{ ignoreTitle: true },
 	);
 	return {
 		...snapshotProperties,

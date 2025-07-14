@@ -9,6 +9,7 @@ export const SNAPSHOT_PROPERTY_MAP: Record<SnapshotDBKey, OriginDBKey> = {
 	'Start Time': 'Start Time',
 	'End Time': 'End Time',
 	Notes: 'Notes',
+	'Due Date': 'Due Date',
 	'Due Date (Text)': 'Due Date (Text)',
 	'Finished On Time?': 'Finished On Time?',
 };

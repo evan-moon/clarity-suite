@@ -1,4 +1,5 @@
-import { isFullPage, PageObjectResponse } from '@notionhq/client';
+import { isFullPage } from '@notionhq/client';
+import type { PageObjectResponse } from '@notionhq/client';
 import { clearSheet, getSheet } from 'services/_shared/sheet';
 import {
 	createNotionClient,

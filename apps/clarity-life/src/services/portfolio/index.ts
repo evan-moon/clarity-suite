@@ -3,8 +3,6 @@ import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { createNotionClient } from '@clarity-suite/notion';
 import { buildPortfolioSnapshotProperties } from './utils';
 
-const PENDING_KEY = 'Snapshot Status';
-
 export function takePortfolioSnapshots(
 	originDbId: string,
 	snapshotDbId: string,
