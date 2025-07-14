@@ -10,6 +10,7 @@ import {
 	handleCheckbox,
 	handleRichText,
 	handleDate,
+	handleTitle,
 } from './handlers';
 
 export const getTitleText = (
@@ -31,6 +32,7 @@ const convertValueToNotionProperty: Record<
 	string,
 	(value: PropertyValue) => any
 > = {
+	title: handleTitle,
 	number: handleNumber,
 	select: handleSelect,
 	multi_select: handleMultiSelect,
