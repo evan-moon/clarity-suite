@@ -1,4 +1,5 @@
 import type {
+	BlockObjectResponse,
 	CreatePageParameters,
 	DatabaseObjectResponse,
 	PageObjectResponse,
@@ -26,6 +27,15 @@ export const createNotionClient = (token: string) => ({
 
 		return JSON.parse(result.getContentText());
 	},
+	getRecentPage: function (databaseId: string): PageObjectResponse | null {
+		// created_time 기준 내림차순, 1개만 반환
+		const result = this.getPages(databaseId, {
+			sorts: [{ timestamp: 'created_time', direction: 'descending' }],
+			page_size: 1,
+		});
+
+		return result.results[0] ?? null;
+	},
 	updateAll: (updates: { pageId: string; data: unknown }[]) => {
 		if (updates.length === 0) {
 			return [];
@@ -40,6 +50,22 @@ export const createNotionClient = (token: string) => ({
 
 		const results = UrlFetchApp.fetchAll(requests);
 		return results.map((result) => JSON.parse(result.getContentText()));
+	},
+	createPage: (
+		databaseId: string,
+		properties: CreatePageParameters['properties'],
+	) => {
+		const url = 'https://api.notion.com/v1/pages';
+		const result = UrlFetchApp.fetch(url, {
+			method: 'post',
+			headers: getRequestHeader(token),
+			payload: JSON.stringify({
+				parent: { database_id: databaseId },
+				properties,
+			}),
+		});
+
+		return JSON.parse(result.getContentText());
 	},
 	findDatabaseByName: (name: string, token: string) => {
 		const queryUrl = 'https://api.notion.com/v1/search';
@@ -69,22 +95,7 @@ export const createNotionClient = (token: string) => ({
 
 		return response;
 	},
-	createPage: (
-		databaseId: string,
-		properties: CreatePageParameters['properties'],
-	) => {
-		const url = 'https://api.notion.com/v1/pages';
-		const result = UrlFetchApp.fetch(url, {
-			method: 'post',
-			headers: getRequestHeader(token),
-			payload: JSON.stringify({
-				parent: { database_id: databaseId },
-				properties,
-			}),
-		});
 
-		return JSON.parse(result.getContentText());
-	},
 	deleteAllPagesInDatabase: (databaseId: string): number => {
 		const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
 		const result = UrlFetchApp.fetch(queryUrl, {
@@ -108,5 +119,51 @@ export const createNotionClient = (token: string) => ({
 		}));
 		UrlFetchApp.fetchAll(requests);
 		return results.length;
+	},
+	getBlockChildren: (blockId: string): BlockObjectResponse[] => {
+		const url = `https://api.notion.com/v1/blocks/${blockId}/children`;
+		const result = UrlFetchApp.fetch(url, {
+			method: 'get',
+			headers: getRequestHeader(token),
+		});
+		return JSON.parse(result.getContentText()).results;
+	},
+	updateBlock: (blockId: string, data: object) => {
+		const url = `https://api.notion.com/v1/blocks/${blockId}`;
+		const result = UrlFetchApp.fetch(url, {
+			method: 'patch',
+			headers: getRequestHeader(token),
+			payload: JSON.stringify(data),
+		});
+		return JSON.parse(result.getContentText());
+	},
+	findBlockRecursively: function (
+		blocks: BlockObjectResponse[],
+		predicate: (
+			block: BlockObjectResponse,
+			idx: number,
+			arr: BlockObjectResponse[],
+		) => boolean,
+	): {
+		block: BlockObjectResponse;
+		index: number;
+		parentBlocks: BlockObjectResponse[];
+	} | null {
+		for (let i = 0; i < blocks.length; i++) {
+			const block = blocks[i];
+			if (predicate(block, i, blocks)) {
+				return { block, index: i, parentBlocks: blocks };
+			}
+
+			if (block.has_children) {
+				const children = this.getBlockChildren(block.id);
+				const found = this.findBlockRecursively(children, predicate);
+
+				if (found) {
+					return found;
+				}
+			}
+		}
+		return null;
 	},
 });
