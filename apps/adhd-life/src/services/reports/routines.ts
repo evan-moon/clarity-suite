@@ -71,7 +71,7 @@ export function updateRoutineSuccessRate(
 		(block) =>
 			block.type === 'heading_3' &&
 			block.heading_3?.rich_text?.some((t) =>
-				t.plain_text?.includes('루틴 성공율'),
+				t.plain_text?.includes('이번 주 루틴 성공율'),
 			),
 	);
 
