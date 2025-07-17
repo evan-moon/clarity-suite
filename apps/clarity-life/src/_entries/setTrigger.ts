@@ -10,7 +10,8 @@ import {
 function setTrigger() {
 	if (isClarityLife()) {
 		createEveryHoursBatchTrigger('syncTransactionsCurrencies', 1);
-		createEveryHoursBatchTrigger('updateRealtimeServices', 1);
+		createEveryHoursBatchTrigger('syncRealtimeCurrencies', 1);
+		createEveryHoursBatchTrigger('syncRealtimeStocks', 1);
 		createEveryMonthBatchTrigger('takeAccountHubSnapshots', {
 			month: 28,
 			hour: 5,
@@ -20,7 +21,8 @@ function setTrigger() {
 			hour: 5,
 		});
 	} else if (isClarityCreatorKit()) {
-		createEveryHoursBatchTrigger('updateRealtimeServices', 1);
+		createEveryHoursBatchTrigger('syncRealtimeCurrencies', 1);
+		createEveryHoursBatchTrigger('syncRealtimeStocks', 1);
 	}
 }
 
