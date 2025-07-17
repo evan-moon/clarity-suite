@@ -24,6 +24,12 @@ function setTrigger() {
 		createEveryHoursBatchTrigger('syncRealtimeCurrencies', 1);
 		createEveryHoursBatchTrigger('syncRealtimeStocks', 1);
 	}
+
+	SpreadsheetApp.getActiveSpreadsheet().toast(
+		'✅ Trigger has been set successfully.',
+		'Complete',
+		5,
+	);
 }
 
 setTrigger();
