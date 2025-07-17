@@ -76,7 +76,7 @@ export function updateRoutineSuccessRate(
 	);
 
 	if (!result) {
-		throw new Error('"루틴 성공율" 블록을 찾을 수 없습니다.');
+		throw new Error('"이번 주 루틴 성공율" 블록을 찾을 수 없습니다.');
 	}
 
 	const { parentBlocks, index } = result;
