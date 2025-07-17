@@ -1,7 +1,7 @@
 import { createNotionClient } from '@clarity-suite/notion';
 import { assertEnv } from '@clarity-suite/utils';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
-import { updateRoutineSuccessRate } from './utils';
+import { updateRoutineSuccessRate } from './routines';
 
 export function generateWeeklyReport(
 	reportDbId: string,
