@@ -6,6 +6,7 @@ export interface I18nConfig {
 		// Common properties
 		name: string;
 		title: string;
+		status: string;
 
 		// Currency properties
 		currencyName: string;

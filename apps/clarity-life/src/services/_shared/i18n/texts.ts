@@ -5,6 +5,7 @@ export const enConfig: I18nConfig = {
 	properties: {
 		name: 'Name',
 		title: 'Title',
+		status: 'Status',
 
 		// Realtime Currencies
 		currencyName: 'Currency Name',

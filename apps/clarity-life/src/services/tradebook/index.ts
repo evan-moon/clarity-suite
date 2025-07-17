@@ -68,6 +68,7 @@ export function syncTradebookTransactionsCurrencies(
 					data: {
 						properties: {
 							[t('exchangeRate')]: { number: rate },
+							[t('status')]: { select: { name: 'Done' } },
 						},
 					},
 				};
