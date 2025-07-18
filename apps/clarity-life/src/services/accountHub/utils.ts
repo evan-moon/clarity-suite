@@ -20,7 +20,7 @@ export function buildSnapshotProperties(
 
 	return {
 		...snapshotProperties,
-		'Account Info': { relation: [{ id: pageId }] },
+		Account: { relation: [{ id: pageId }] },
 		Date: { date: { start: now.toISOString().split('T')[0] } },
 		ID: { title: [{ type: 'text', text: { content: formatYYYYMM(now) } }] },
 	};
