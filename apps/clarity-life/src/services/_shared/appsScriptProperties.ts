@@ -41,10 +41,6 @@ export const appsScriptProperties: Record<
 		PropertiesService.getScriptProperties().getProperty(
 			'ACCOUNT_SNAPSHOT_NOTION_DB_ID',
 		),
-	ACCOUNT_SUMMARY_NOTION_DB_ID:
-		PropertiesService.getScriptProperties().getProperty(
-			'ACCOUNT_SUMMARY_NOTION_DB_ID',
-		),
 	PORTFOLIO_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
 		'PORTFOLIO_NOTION_DB_ID',
 	),
