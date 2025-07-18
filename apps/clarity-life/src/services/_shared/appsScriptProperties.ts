@@ -1,4 +1,4 @@
-import type { ScriptPropertyKeys } from 'services/settings/constants';
+import type { ScriptPropertyKeys } from 'services/settings/types';
 
 /**
  * Apps Script의 프로젝트 설정 > 스크립트 속성에 등록된 값과 이 값은 일치해야합니다.

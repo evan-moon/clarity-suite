@@ -1,7 +1,7 @@
-import { applySettingsFromSheetForClarityLife as _applySettingsFromSheet } from 'services/settings';
+import { applySettingsFromNotionVariablesForClarityLife as _applySettingsFromNotionVariablesForClarityLife } from 'services/settings';
 
 function applySettingsFromSheet() {
-	_applySettingsFromSheet();
+	_applySettingsFromNotionVariablesForClarityLife();
 }
 
 applySettingsFromSheet();
