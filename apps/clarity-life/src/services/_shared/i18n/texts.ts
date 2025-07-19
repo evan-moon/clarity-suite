@@ -1,4 +1,4 @@
-import { I18nConfig } from './types';
+import type { I18nConfig } from './types';
 
 export const enConfig: I18nConfig = {
 	language: 'en',

@@ -1,7 +1,6 @@
 import { STOCK_DATA } from './constants';
 import { calcStockData, getAllStockPages } from './utils';
 import { syncTable } from 'services/_shared/syncTable';
-import { t } from 'services/_shared/i18n';
 
 export function syncRealtimeStocks(sheetName: string, notionDbId: string) {
 	syncTable(sheetName, notionDbId, {
@@ -16,10 +15,10 @@ export function syncRealtimeStocks(sheetName: string, notionDbId: string) {
 
 			return {
 				properties: {
-					[t('ticker')]: {
+					티커: {
 						title: [{ text: { content: data[0] } }],
 					},
-					[t('stockName')]: {
+					종목명: {
 						rich_text: [
 							{
 								text: {
@@ -28,31 +27,31 @@ export function syncRealtimeStocks(sheetName: string, notionDbId: string) {
 							},
 						],
 					},
-					[t('currentPrice')]: {
+					현재가: {
 						number: parseFloat(data[2]),
 					},
-					[t('previousClose')]: {
+					전일종가: {
 						number: parseFloat(data[3]),
 					},
-					[t('change')]: {
+					전일대비: {
 						number: parseFloat(data[4]) / 100,
 					},
-					[t('yearHigh')]: {
+					'52주 최고가': {
 						number: parseFloat(data[5]),
 					},
-					[t('yearLow')]: {
+					'52주 최저가': {
 						number: parseFloat(data[6]),
 					},
-					[t('pe')]: {
+					PE: {
 						number: parseFloat(data[7]),
 					},
-					[t('eps')]: {
+					EPS: {
 						number: parseFloat(data[8]),
 					},
 				},
 			};
 		},
 		getDataColumnCount: STOCK_DATA.length + 1,
-		titlePropertyName: t('ticker'),
+		titlePropertyName: '티커',
 	});
 }

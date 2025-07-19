@@ -1,9 +1,8 @@
 import { createNotionClient } from '@clarity-suite/notion';
-import { CURRENCY_DATA } from './constants';
-import { t } from 'services/_shared/i18n';
-import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { assertEnv } from '@clarity-suite/utils';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { getGoogleFinanceQuery } from 'services/_shared/sheet';
+import { CURRENCY_DATA } from './constants';
 
 export const calcCurrencyData = (
 	sheet: GoogleAppsScript.Spreadsheet.Sheet,
@@ -13,7 +12,7 @@ export const calcCurrencyData = (
 	sheet.getRange(row, 1).setValue(환율이름);
 	const currencyName = 환율이름.replace(/\//, '');
 
-	CURRENCY_DATA.forEach(([, proprety], index) => {
+	CURRENCY_DATA.forEach((proprety, index) => {
 		const column = index + 2;
 		sheet
 			.getRange(row, column)
@@ -27,7 +26,7 @@ export const getAllCurrencyPages = (notionDbId: string) => {
 	const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 	return notion.getPages(notionDbId, {
 		filter: {
-			property: t('name'),
+			property: '이름',
 			title: {
 				is_not_empty: true,
 			},

@@ -1,7 +1,6 @@
+import { syncTable } from 'services/_shared/syncTable';
 import { CURRENCY_DATA } from './constants';
 import { calcCurrencyData, getAllCurrencyPages } from './utils';
-import { syncTable } from 'services/_shared/syncTable';
-import { t } from 'services/_shared/i18n';
 
 export function syncRealtimeCurrencies(sheetName: string, notionDbId: string) {
 	syncTable(sheetName, notionDbId, {
@@ -16,13 +15,13 @@ export function syncRealtimeCurrencies(sheetName: string, notionDbId: string) {
 
 			return {
 				properties: {
-					[t('exchangeRate')]: {
+					환율: {
 						number: parseFloat(data[1]),
 					},
 				},
 			};
 		},
 		getDataColumnCount: CURRENCY_DATA.length + 3,
-		titlePropertyName: t('name'),
+		titlePropertyName: '이름',
 	});
 }
