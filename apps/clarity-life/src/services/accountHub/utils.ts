@@ -1,4 +1,3 @@
-import { SNAPSHOT_PROPERTY_MAP } from './constants';
 import { formatYYYYMM } from '@clarity-suite/utils';
 import {
 	extractNotionProperties,
@@ -13,7 +12,7 @@ export function buildSnapshotProperties(
 ): NotionProperties {
 	const snapshotProperties = extractNotionProperties(
 		properties,
-		SNAPSHOT_PROPERTY_MAP,
+		[], // 제외할 키가 없다면 빈 배열
 		{ ignoreTitle: true },
 	);
 	Logger.log(snapshotProperties);

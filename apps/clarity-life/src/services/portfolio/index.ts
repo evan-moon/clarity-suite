@@ -12,12 +12,12 @@ export function takePortfolioSnapshots(
 	const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 	const { results: pages } = notion.getPages(originDbId, {});
 	const filteredPages = pages.filter((page) => {
-		const shares = page.properties?.Shares;
+		const 보유주수 = page.properties?.보유주수;
 		return (
-			shares &&
-			shares.type === 'formula' &&
-			shares.formula.type === 'number' &&
-			(shares.formula.number ?? 0) > 0
+			보유주수 &&
+			보유주수.type === 'formula' &&
+			보유주수.formula.type === 'number' &&
+			(보유주수.formula.number ?? 0) > 0
 		);
 	});
 
