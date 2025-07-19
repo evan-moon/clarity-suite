@@ -1,7 +1,6 @@
 import { isFullPage } from '@notionhq/client';
 import { createNotionClient, isFullPageWithId } from '@clarity-suite/notion';
 import { queryNotionEmptyRatePages } from './utils';
-import { t } from 'services/_shared/i18n';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { assertEnv } from '@clarity-suite/utils';
 import { clearSheet } from '@clarity-suite/sheets';
@@ -23,9 +22,9 @@ export function syncTradebookTransactionsCurrencies(
 
 		const row = i + 2;
 
-		const dateProperty = page.properties[t('date')];
-		const fromProperty = page.properties[t('tradeCurrency')];
-		const toProperty = page.properties[t('accountCurrency')];
+		const dateProperty = page.properties.날짜;
+		const fromProperty = page.properties.거래통화;
+		const toProperty = page.properties.계좌통화;
 
 		if (
 			dateProperty.type !== 'date' ||
@@ -67,8 +66,8 @@ export function syncTradebookTransactionsCurrencies(
 					pageId: page.id,
 					data: {
 						properties: {
-							[t('exchangeRate')]: { number: rate },
-							[t('status')]: { select: { name: 'Done' } },
+							환율: { number: rate },
+							상태: { select: { name: '완료' } },
 						},
 					},
 				};
