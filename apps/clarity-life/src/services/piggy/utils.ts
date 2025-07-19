@@ -1,7 +1,6 @@
-import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
-import { assertEnv } from '@clarity-suite/utils';
-import { t } from 'services/_shared/i18n';
 import { createNotionClient } from '@clarity-suite/notion';
+import { assertEnv } from '@clarity-suite/utils';
+import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 
 export function queryNotionEmptyRatePiggyPages(notionDbId: string) {
 	assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
@@ -10,13 +9,13 @@ export function queryNotionEmptyRatePiggyPages(notionDbId: string) {
 	const res = notion.getPages(notionDbId, {
 		filter: {
 			and: [
-				{ property: t('date'), date: { is_not_empty: true } },
-				{ property: t('currency'), select: { is_not_empty: true } },
+				{ property: '날짜', date: { is_not_empty: true } },
+				{ property: '거래통화', select: { is_not_empty: true } },
 				{
-					property: t('accountCurrency'),
+					property: '계좌통화',
 					formula: { string: { is_not_empty: true } },
 				},
-				{ property: t('exchangeRate'), number: { is_empty: true } },
+				{ property: '환율', number: { is_empty: true } },
 			],
 		},
 	});
