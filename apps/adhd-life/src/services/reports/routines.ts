@@ -1,5 +1,5 @@
-import { createNotionClient } from '@clarity-suite/notion';
-import { BlockObjectResponse } from '@notionhq/client';
+import type { createNotionClient } from '@clarity-suite/notion';
+import type { BlockObjectResponse } from '@notionhq/client';
 
 function getStartOfThisWeek() {
 	const now = new Date();
@@ -49,15 +49,15 @@ function getRoutineSuccessRate(
 
 function getRoutineMessage(successRate: number): string {
 	if (successRate === 100) {
-		return '완벽한 한 주! 모든 루틴을 달성했어요! 🎉';
+		return 'Perfect week! You completed all your routines! 🎉';
 	} else if (successRate >= 70) {
-		return '거의 다 왔어요! 멋진 루틴러!';
+		return 'Almost there! Great job on your routines!';
 	} else if (successRate > 50) {
-		return '절반을 넘었어요! 꾸준함이 쌓이고 있습니다.';
+		return 'Over halfway! Your consistency is building up.';
 	} else if (successRate > 20) {
-		return '조금씩 습관이 잡히고 있어요. 계속 도전해봐요!';
+		return 'You are starting to build habits. Keep challenging yourself!';
 	} else {
-		return '아직 시작 단계예요! 조금씩 루틴을 늘려봐요.';
+		return 'Just getting started! Try adding more routines little by little.';
 	}
 }
 
@@ -71,18 +71,18 @@ export function updateRoutineSuccessRate(
 		(block) =>
 			block.type === 'heading_3' &&
 			block.heading_3?.rich_text?.some((t) =>
-				t.plain_text?.includes('이번 주 루틴 성공율'),
+				t.plain_text?.includes('Routine Success Rate'),
 			),
 	);
 
 	if (!result) {
-		throw new Error('"이번 주 루틴 성공율" 블록을 찾을 수 없습니다.');
+		throw new Error('"Routine Success Rate" 블록을 찾을 수 없습니다.');
 	}
 
 	const { parentBlocks, index } = result;
 	const quoteBlock = parentBlocks[index + 1];
 	if (!quoteBlock || quoteBlock.type !== 'quote') {
-		throw new Error('"루틴 성공율" 다음에 Quote 블록이 없습니다.');
+		throw new Error('"Routine Success Rate" 다음에 Quote 블록이 없습니다.');
 	}
 
 	const { start, now } = getStartOfThisWeek();
@@ -113,9 +113,13 @@ export function updateRoutineSuccessRate(
 	if (
 		!messageBlock ||
 		messageBlock.type !== 'paragraph' ||
-		!messageBlock.paragraph?.rich_text?.[0]?.plain_text?.includes('성공 문구')
+		!messageBlock.paragraph?.rich_text?.[0]?.plain_text?.includes(
+			'Success Message',
+		)
 	) {
-		throw new Error('Quote 블록 바로 아래에 "성공 문구" 블록이 없습니다.');
+		throw new Error(
+			'Quote 블록 바로 아래에 "Success Message" 블록이 없습니다.',
+		);
 	}
 
 	notion.updateBlock(messageBlock.id, {
