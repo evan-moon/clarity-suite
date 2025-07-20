@@ -5,13 +5,10 @@
 		"outDir": "dist",
 		"baseUrl": "src",
 		"paths": {
-			"batches/*": ["batches/*"],
-			"notion/*": ["notion/*"],
-			"setting/*": ["setting/*"],
-			"i18n/*": ["i18n/*"],
-			"asserts": ["asserts"],
-			"appsScriptProperties": ["appsScriptProperties"],
-			"sheet": ["sheet"]
+			"_shared/*": ["services/_shared/*"],
+			"adhdSnapshot/*": ["services/adhdSnapshot/*"],
+			"setting/*": ["services/setting/*"],
+			"reports": ["services/reports/*"]
 		}
 	}
 }
