@@ -33,16 +33,8 @@ export function applySettingsFromNotionVariables(config: SettingConfig): void {
 			return;
 		}
 		const notion = createNotionClient(notionSecret);
-		Logger.log('[applySettingsFromNotionVariables] Notion 클라이언트 생성됨');
-
-		// 2. VARIABLES DB 찾기
-		Logger.log(
-			'[applySettingsFromNotionVariables] VARIABLES 데이터베이스 검색 중...',
-		);
 		const dbSearch = notion.findDatabaseByName('VARIABLES', notionSecret);
-		Logger.log(
-			`[applySettingsFromNotionVariables] 데이터베이스 검색 결과: ${JSON.stringify(dbSearch)}`,
-		);
+
 		if (!dbSearch.results || dbSearch.results.length === 0) {
 			Logger.log(
 				'[applySettingsFromNotionVariables] VARIABLES DB를 찾을 수 없음',
@@ -66,10 +58,6 @@ export function applySettingsFromNotionVariables(config: SettingConfig): void {
 			`[applySettingsFromNotionVariables] VARIABLES DB ID 발견: ${variablesDbId}`,
 		);
 
-		// 3. VARIABLES DB의 모든 row 읽기
-		Logger.log(
-			'[applySettingsFromNotionVariables] VARIABLES DB에서 모든 페이지 읽는 중...',
-		);
 		const pages = notion.getPages(variablesDbId, { page_size: 100 });
 		Logger.log(
 			`[applySettingsFromNotionVariables] ${pages.results.length}개의 페이지 발견`,
@@ -81,19 +69,11 @@ export function applySettingsFromNotionVariables(config: SettingConfig): void {
 				`[applySettingsFromNotionVariables] 페이지 ${index + 1} 처리 중: ${JSON.stringify(page.id)}`,
 			);
 			const props = page.properties;
-			Logger.log(
-				`[applySettingsFromNotionVariables] 페이지 속성 키들: ${Object.keys(props)}`,
-			);
-
-			// property key는 실제 DB의 property명과 일치해야 함 (예: 'Name', 'Value')
-			const nameProp = props['Name'];
-			const valueProp = props['Value'];
+			const nameProp = props.Name;
+			const valueProp = props.Value;
 
 			Logger.log(
-				`[applySettingsFromNotionVariables] Name 속성: ${JSON.stringify(nameProp)}`,
-			);
-			Logger.log(
-				`[applySettingsFromNotionVariables] Value 속성: ${JSON.stringify(valueProp)}`,
+				`[applySettingsFromNotionVariables] ${JSON.stringify(nameProp)}:${JSON.stringify(valueProp)} 발견`,
 			);
 
 			if (!nameProp || !valueProp) {
@@ -106,6 +86,7 @@ export function applySettingsFromNotionVariables(config: SettingConfig): void {
 			const name =
 				nameProp.type === 'title' ? nameProp.title[0]?.plain_text?.trim() : '';
 			Logger.log(`[applySettingsFromNotionVariables] 추출된 이름: "${name}"`);
+
 			if (!name) {
 				Logger.log(
 					'[applySettingsFromNotionVariables] 이름이 비어있음, 건너뜀',

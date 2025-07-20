@@ -1,9 +1,6 @@
+import type { NotionProperties, PropertyValue } from '@clarity-suite/notion';
+import { extractNotionProperties } from '@clarity-suite/notion';
 import { formatYYYYMM } from '@clarity-suite/utils';
-import {
-	extractNotionProperties,
-	NotionProperties,
-	PropertyValue,
-} from '@clarity-suite/notion';
 
 export function buildSnapshotProperties(
 	properties: Record<string, PropertyValue>,
@@ -12,15 +9,17 @@ export function buildSnapshotProperties(
 ): NotionProperties {
 	const snapshotProperties = extractNotionProperties(
 		properties,
-		[], // 제외할 키가 없다면 빈 배열
-		{ ignoreTitle: true },
+		['스냅샷 목록'],
+		{
+			ignoreTitle: true,
+		},
 	);
 	Logger.log(snapshotProperties);
 
 	return {
 		...snapshotProperties,
-		Account: { relation: [{ id: pageId }] },
-		Date: { date: { start: now.toISOString().split('T')[0] } },
+		연결계좌: { relation: [{ id: pageId }] },
+		날짜: { date: { start: now.toISOString().split('T')[0] } },
 		ID: { title: [{ type: 'text', text: { content: formatYYYYMM(now) } }] },
 	};
 }
