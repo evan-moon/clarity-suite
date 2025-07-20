@@ -5,15 +5,15 @@ import { clearNotionTable } from 'services/common/index';
 function cleanUpClarityLife() {
 	const ui = SpreadsheetApp.getUi();
 	const response = ui.alert(
-		'Are you sure you want to delete all data?',
-		'This action cannot be undone. Do you want to continue?',
+		'정말 모든 데이터를 지우시겠어요?',
+		'이 동작은 되돌릴 수 없습니다. 신중하게 확인해주세요.',
 		ui.ButtonSet.OK_CANCEL,
 	);
 
 	if (response !== ui.Button.OK) {
 		SpreadsheetApp.getActiveSpreadsheet().toast(
-			'Operation cancelled.',
-			'Cancelled',
+			'청소가 취소되었습니다.',
+			'취소',
 			3,
 		);
 		return;
@@ -36,8 +36,8 @@ function cleanUpClarityLife() {
 	clearNotionTable(PORTFOLIO_NOTION_DB_ID);
 
 	SpreadsheetApp.getActiveSpreadsheet().toast(
-		'✅ Clarity Life cleaned up successfully',
-		'Complete',
+		'✅ Clarity Life가 성공적으로 청소되었습니다.',
+		'완료',
 		5,
 	);
 }

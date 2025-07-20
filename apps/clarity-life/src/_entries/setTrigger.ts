@@ -26,8 +26,8 @@ function setTrigger() {
 	}
 
 	SpreadsheetApp.getActiveSpreadsheet().toast(
-		'✅ Trigger has been set successfully.',
-		'Complete',
+		'✅ 트리거가 성공적으로 설정되었어요.',
+		'완료',
 		5,
 	);
 }
