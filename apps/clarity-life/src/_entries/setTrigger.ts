@@ -1,29 +1,20 @@
 import {
-	isClarityCreatorKit,
-	isClarityLife,
-} from 'services/_shared/appsScriptProperties';
-import {
 	createEveryHoursBatchTrigger,
 	createEveryMonthBatchTrigger,
 } from '@clarity-suite/sheets';
 
 function setTrigger() {
-	if (isClarityLife()) {
-		createEveryHoursBatchTrigger('syncTransactionsCurrencies', 1);
-		createEveryHoursBatchTrigger('syncRealtimeCurrencies', 1);
-		createEveryHoursBatchTrigger('syncRealtimeStocks', 1);
-		createEveryMonthBatchTrigger('takeAccountHubSnapshots', {
-			month: 28,
-			hour: 5,
-		});
-		createEveryMonthBatchTrigger('takePortfolioSnapshots', {
-			month: 28,
-			hour: 5,
-		});
-	} else if (isClarityCreatorKit()) {
-		createEveryHoursBatchTrigger('syncRealtimeCurrencies', 1);
-		createEveryHoursBatchTrigger('syncRealtimeStocks', 1);
-	}
+	createEveryHoursBatchTrigger('syncTransactionsCurrencies', 1);
+	createEveryHoursBatchTrigger('syncRealtimeCurrencies', 1);
+	createEveryHoursBatchTrigger('syncRealtimeStocks', 1);
+	createEveryMonthBatchTrigger('takeAccountHubSnapshots', {
+		month: 28,
+		hour: 5,
+	});
+	createEveryMonthBatchTrigger('takePortfolioSnapshots', {
+		month: 28,
+		hour: 5,
+	});
 
 	SpreadsheetApp.getActiveSpreadsheet().toast(
 		'✅ 트리거가 성공적으로 설정되었어요.',

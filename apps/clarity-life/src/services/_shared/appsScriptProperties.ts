@@ -49,8 +49,3 @@ export const appsScriptProperties: Record<
 			'PORTFOLIO_SNAPSHOT_NOTION_DB_ID',
 		),
 };
-
-const isValidSheet = (sheetName: string) =>
-	SpreadsheetApp.getActiveSpreadsheet().getName().includes(sheetName);
-export const isClarityLife = () => isValidSheet('Clarity Life');
-export const isClarityCreatorKit = () => isValidSheet('Clarity Creator Kit');
