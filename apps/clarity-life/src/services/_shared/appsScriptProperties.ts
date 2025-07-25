@@ -6,8 +6,7 @@ import type { ScriptPropertyKeys } from 'services/settings/types';
 type SheetNameProperties =
 	| 'STOCKS_SHEET_NAME'
 	| 'CURRENCIES_SHEET_NAME'
-	| 'STOCK_TRANSACTION_CURRENCIES_SHEET_NAME'
-	| 'PIGGY_TRANSACTION_SHEET_NAME';
+	| 'STOCK_TRANSACTION_CURRENCIES_SHEET_NAME';
 
 export const appsScriptProperties: Record<
 	ScriptPropertyKeys | SheetNameProperties,
@@ -16,7 +15,6 @@ export const appsScriptProperties: Record<
 	STOCKS_SHEET_NAME: 'Stocks',
 	CURRENCIES_SHEET_NAME: 'Currencies',
 	STOCK_TRANSACTION_CURRENCIES_SHEET_NAME: 'Stock Transaction Currencies',
-	PIGGY_TRANSACTION_SHEET_NAME: 'Piggy Transaction Currencies',
 	NOTION_SECRET:
 		PropertiesService.getScriptProperties().getProperty('NOTION_SECRET') ??
 		'INVALID_SECRET',
@@ -29,17 +27,6 @@ export const appsScriptProperties: Record<
 	STOCK_TRANSACTION_NOTION_DB_ID:
 		PropertiesService.getScriptProperties().getProperty(
 			'STOCK_TRANSACTION_NOTION_DB_ID',
-		),
-	PIGGY_TRANSACTION_NOTION_DB_ID:
-		PropertiesService.getScriptProperties().getProperty(
-			'PIGGY_TRANSACTION_NOTION_DB_ID',
-		),
-	ACCOUNT_HUB_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
-		'ACCOUNT_HUB_NOTION_DB_ID',
-	),
-	ACCOUNT_SNAPSHOT_NOTION_DB_ID:
-		PropertiesService.getScriptProperties().getProperty(
-			'ACCOUNT_SNAPSHOT_NOTION_DB_ID',
 		),
 	PORTFOLIO_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
 		'PORTFOLIO_NOTION_DB_ID',

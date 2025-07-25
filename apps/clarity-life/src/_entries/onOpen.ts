@@ -12,7 +12,6 @@ function onOpen() {
 		.addSubMenu(
 			SpreadsheetApp.getUi()
 				.createMenu('📜 기록하기')
-				.addItem('현재 계좌 상태 기록하기', 'takeAccountHubSnapshots')
 				.addItem('현재 포트폴리오 상태 기록하기', 'takePortfolioSnapshots'),
 		)
 		.addSubMenu(

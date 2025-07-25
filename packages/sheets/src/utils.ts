@@ -16,16 +16,18 @@ export function clearSheet(sheetName: string) {
 	}
 }
 
+const isExistTrigger = (
+	triggers: GoogleAppsScript.Script.Trigger[],
+	functionName: string,
+) => triggers.some((trigger) => trigger.getHandlerFunction() === functionName);
+
 export function createEveryHoursBatchTrigger(
 	functionName: string,
 	hour: 1 | 2 | 4 | 6 | 8 | 12,
 ) {
 	const triggers = ScriptApp.getProjectTriggers();
-	const alreadyExists = triggers.some(function (trigger) {
-		return trigger.getHandlerFunction() === functionName;
-	});
 
-	if (alreadyExists === true) {
+	if (isExistTrigger(triggers, functionName) === true) {
 		return;
 	}
 
@@ -37,11 +39,8 @@ export function createEveryDaysBatchTrigger(
 	hour: number,
 ) {
 	const triggers = ScriptApp.getProjectTriggers();
-	const alreadyExists = triggers.some(function (trigger) {
-		return trigger.getHandlerFunction() === functionName;
-	});
 
-	if (alreadyExists === true) {
+	if (isExistTrigger(triggers, functionName) === true) {
 		return;
 	}
 
@@ -57,11 +56,8 @@ export function createEveryMonthBatchTrigger(
 	{ month, hour }: { month: number; hour: number },
 ) {
 	const triggers = ScriptApp.getProjectTriggers();
-	const alreadyExists = triggers.some(function (trigger) {
-		return trigger.getHandlerFunction() === functionName;
-	});
 
-	if (alreadyExists === true) {
+	if (isExistTrigger(triggers, functionName) === true) {
 		return;
 	}
 

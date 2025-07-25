@@ -21,18 +21,10 @@ function cleanUpClarityLife() {
 
 	assertEnvs(appsScriptProperties);
 
-	const {
-		PIGGY_TRANSACTION_NOTION_DB_ID,
-		STOCK_TRANSACTION_NOTION_DB_ID,
-		ACCOUNT_HUB_NOTION_DB_ID,
-		ACCOUNT_SNAPSHOT_NOTION_DB_ID,
-		PORTFOLIO_NOTION_DB_ID,
-	} = appsScriptProperties;
+	const { STOCK_TRANSACTION_NOTION_DB_ID, PORTFOLIO_NOTION_DB_ID } =
+		appsScriptProperties;
 
-	clearNotionTable(PIGGY_TRANSACTION_NOTION_DB_ID);
 	clearNotionTable(STOCK_TRANSACTION_NOTION_DB_ID);
-	clearNotionTable(ACCOUNT_HUB_NOTION_DB_ID);
-	clearNotionTable(ACCOUNT_SNAPSHOT_NOTION_DB_ID);
 	clearNotionTable(PORTFOLIO_NOTION_DB_ID);
 
 	SpreadsheetApp.getActiveSpreadsheet().toast(
