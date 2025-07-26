@@ -8,7 +8,7 @@ import {
 } from '@clarity-suite/notion';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 
-import { assertEnv } from '@clarity-suite/utils';
+import { assert } from '@clarity-suite/utils';
 
 interface Config {
 	getPages: (notionDbId: string) => { results: PageObjectResponse[] };
@@ -71,7 +71,7 @@ export function syncTable(
 		.filter((update): update is NonNullable<typeof update> => update != null);
 
 	if (updates.length > 0) {
-		assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+		assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
 
 		const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 		notion.updateAll(updates);

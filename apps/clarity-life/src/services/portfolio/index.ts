@@ -1,4 +1,4 @@
-import { assertEnvs } from '@clarity-suite/utils';
+import { assert } from '@clarity-suite/utils';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { createNotionClient } from '@clarity-suite/notion';
 import { buildPortfolioSnapshotProperties } from './utils';
@@ -7,7 +7,7 @@ export function takePortfolioSnapshots(
 	originDbId: string,
 	snapshotDbId: string,
 ) {
-	assertEnvs(appsScriptProperties);
+	assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
 
 	const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 	const { results: pages } = notion.getPages(originDbId, {});

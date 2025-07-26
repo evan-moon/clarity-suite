@@ -2,7 +2,7 @@ import { isFullPage } from '@notionhq/client';
 import { createNotionClient, isFullPageWithId } from '@clarity-suite/notion';
 import { queryNotionEmptyRatePages } from './utils';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
-import { assertEnv } from '@clarity-suite/utils';
+import { assert } from '@clarity-suite/utils';
 import { clearSheet } from '@clarity-suite/sheets';
 
 export function syncTradebookTransactionsCurrencies(
@@ -77,7 +77,7 @@ export function syncTradebookTransactionsCurrencies(
 		.filter((update): update is NonNullable<typeof update> => update != null);
 
 	if (updates.length > 0) {
-		assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+		assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
 
 		const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 		notion.updateAll(updates);

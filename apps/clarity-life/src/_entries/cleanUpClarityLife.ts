@@ -1,4 +1,4 @@
-import { assertEnvs } from '@clarity-suite/utils';
+import { assert } from '@clarity-suite/utils';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { clearNotionTable } from 'services/common/index';
 
@@ -19,10 +19,13 @@ function cleanUpClarityLife() {
 		return;
 	}
 
-	assertEnvs(appsScriptProperties);
+	assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
 
 	const { STOCK_TRANSACTION_NOTION_DB_ID, PORTFOLIO_NOTION_DB_ID } =
 		appsScriptProperties;
+
+	assert(STOCK_TRANSACTION_NOTION_DB_ID, 'The script property "STOCK_TRANSACTION_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.');
+	assert(PORTFOLIO_NOTION_DB_ID, 'The script property "PORTFOLIO_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.');
 
 	clearNotionTable(STOCK_TRANSACTION_NOTION_DB_ID);
 	clearNotionTable(PORTFOLIO_NOTION_DB_ID);

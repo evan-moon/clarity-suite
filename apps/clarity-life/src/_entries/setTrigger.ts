@@ -7,10 +7,6 @@ function setTrigger() {
 	createEveryHoursBatchTrigger('syncTransactionsCurrencies', 1);
 	createEveryHoursBatchTrigger('syncRealtimeCurrencies', 1);
 	createEveryHoursBatchTrigger('syncRealtimeStocks', 1);
-	createEveryMonthBatchTrigger('takeAccountHubSnapshots', {
-		month: 28,
-		hour: 5,
-	});
 	createEveryMonthBatchTrigger('takePortfolioSnapshots', {
 		month: 28,
 		hour: 5,

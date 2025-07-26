@@ -1,13 +1,13 @@
 import { appsScriptProperties } from '../_shared/appsScriptProperties';
 import { createNotionClient } from '@clarity-suite/notion';
 import { buildAdhdLifeSnapshotProperties } from './utils';
-import { assertEnv } from '@clarity-suite/utils';
+import { assert } from '@clarity-suite/utils';
 
 export function takeAdhdLifeSnapshots(
 	originDbId: string,
 	snapshotDbId: string,
 ) {
-	assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+	assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
 
 	const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 	try {

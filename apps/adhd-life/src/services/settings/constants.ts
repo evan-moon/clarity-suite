@@ -1,8 +1,7 @@
 export type ScriptPropertyKeys =
 	| 'NOTION_SECRET'
 	| 'TASKS_NOTION_DB_ID'
-	| 'TASKS_SNAPSHOT_NOTION_DB_ID'
-	| 'WEEKLY_REPORTS_NOTION_DB_ID';
+	| 'TASKS_SNAPSHOT_NOTION_DB_ID';
 
 type DatabasePropertyKeys = Exclude<ScriptPropertyKeys, 'NOTION_SECRET'>;
 
@@ -19,5 +18,4 @@ export const SCRIPT_PROPERTIES_MAP: Record<
 export const DATABASE_PROPERTIES: DatabasePropertyKeys[] = [
 	'TASKS_NOTION_DB_ID',
 	'TASKS_SNAPSHOT_NOTION_DB_ID',
-	'WEEKLY_REPORTS_NOTION_DB_ID',
 ];

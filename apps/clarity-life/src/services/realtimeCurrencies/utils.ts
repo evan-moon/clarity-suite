@@ -1,5 +1,5 @@
 import { createNotionClient } from '@clarity-suite/notion';
-import { assertEnv } from '@clarity-suite/utils';
+import { assert } from '@clarity-suite/utils';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { getGoogleFinanceQuery } from 'services/_shared/sheet';
 import { CURRENCY_DATA } from './constants';
@@ -21,7 +21,7 @@ export const calcCurrencyData = (
 };
 
 export const getAllCurrencyPages = (notionDbId: string) => {
-	assertEnv('NOTION_SECRET', appsScriptProperties.NOTION_SECRET);
+	assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
 
 	const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 	return notion.getPages(notionDbId, {

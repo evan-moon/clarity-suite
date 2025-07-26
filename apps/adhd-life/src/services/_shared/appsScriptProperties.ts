@@ -15,8 +15,4 @@ export const appsScriptProperties: Record<
 		PropertiesService.getScriptProperties().getProperty(
 			'TASKS_SNAPSHOT_NOTION_DB_ID',
 		),
-	WEEKLY_REPORTS_NOTION_DB_ID:
-		PropertiesService.getScriptProperties().getProperty(
-			'WEEKLY_REPORTS_NOTION_DB_ID',
-		),
 } as const;
