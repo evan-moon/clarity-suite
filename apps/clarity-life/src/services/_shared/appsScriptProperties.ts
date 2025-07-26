@@ -35,4 +35,16 @@ export const appsScriptProperties: Record<
 		PropertiesService.getScriptProperties().getProperty(
 			'PORTFOLIO_SNAPSHOT_NOTION_DB_ID',
 		),
+	ASSETS_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
+		'ASSETS_NOTION_DB_ID',
+	),
+	ASSETS_SUMMARY_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
+		'ASSETS_SUMMARY_NOTION_DB_ID',
+	),
+	CASH_FLOW_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
+		'CASH_FLOW_NOTION_DB_ID',
+	),
+	CASH_FLOW_SUMMARY_NOTION_DB_ID: PropertiesService.getScriptProperties().getProperty(
+		'CASH_FLOW_SUMMARY_NOTION_DB_ID',
+	),
 };

@@ -19,16 +19,46 @@ function cleanUpClarityLife() {
 		return;
 	}
 
-	assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
+	const {
+		STOCK_TRANSACTION_NOTION_DB_ID,
+		PORTFOLIO_NOTION_DB_ID,
+		ASSETS_NOTION_DB_ID,
+		ASSETS_SUMMARY_NOTION_DB_ID,
+		CASH_FLOW_NOTION_DB_ID,
+		CASH_FLOW_SUMMARY_NOTION_DB_ID,
+	} = appsScriptProperties;
 
-	const { STOCK_TRANSACTION_NOTION_DB_ID, PORTFOLIO_NOTION_DB_ID } =
-		appsScriptProperties;
-
-	assert(STOCK_TRANSACTION_NOTION_DB_ID, 'The script property "STOCK_TRANSACTION_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.');
-	assert(PORTFOLIO_NOTION_DB_ID, 'The script property "PORTFOLIO_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.');
+	assert(
+		STOCK_TRANSACTION_NOTION_DB_ID,
+		'The script property "STOCK_TRANSACTION_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.',
+	);
+	assert(
+		PORTFOLIO_NOTION_DB_ID,
+		'The script property "PORTFOLIO_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.',
+	);
+	assert(
+		ASSETS_NOTION_DB_ID,
+		'The script property "ASSETS_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.',
+	);
+	assert(
+		ASSETS_SUMMARY_NOTION_DB_ID,
+		'The script property "ASSETS_SUMMARY_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.',
+	);
+	assert(
+		CASH_FLOW_NOTION_DB_ID,
+		'The script property "CASH_FLOW_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.',
+	);
+	assert(
+		CASH_FLOW_SUMMARY_NOTION_DB_ID,
+		'The script property "CASH_FLOW_SUMMARY_NOTION_DB_ID" is not set. Please check Project Settings > Script properties.',
+	);
 
 	clearNotionTable(STOCK_TRANSACTION_NOTION_DB_ID);
 	clearNotionTable(PORTFOLIO_NOTION_DB_ID);
+	clearNotionTable(ASSETS_NOTION_DB_ID);
+	clearNotionTable(ASSETS_SUMMARY_NOTION_DB_ID);
+	clearNotionTable(CASH_FLOW_NOTION_DB_ID);
+	clearNotionTable(CASH_FLOW_SUMMARY_NOTION_DB_ID);
 
 	SpreadsheetApp.getActiveSpreadsheet().toast(
 		'✅ Clarity Life가 성공적으로 청소되었습니다.',

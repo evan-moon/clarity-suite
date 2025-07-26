@@ -15,6 +15,10 @@ const SCRIPT_PROPERTIES_MAP: Record<
 	'Tradebook DB': 'STOCK_TRANSACTION_NOTION_DB_ID',
 	'Portfolio DB': 'PORTFOLIO_NOTION_DB_ID',
 	'Portfolio Snapshot DB': 'PORTFOLIO_SNAPSHOT_NOTION_DB_ID',
+	'Assets DB': 'ASSETS_NOTION_DB_ID',
+	'Assets Summary DB': 'ASSETS_SUMMARY_NOTION_DB_ID',
+	'Cash Flow DB': 'CASH_FLOW_NOTION_DB_ID',
+	'Cash Flow Summary DB': 'CASH_FLOW_SUMMARY_NOTION_DB_ID',
 };
 
 const DATABASE_PROPERTIES: DatabasePropertyKeys[] = [
@@ -23,6 +27,10 @@ const DATABASE_PROPERTIES: DatabasePropertyKeys[] = [
 	'STOCK_TRANSACTION_NOTION_DB_ID',
 	'PORTFOLIO_NOTION_DB_ID',
 	'PORTFOLIO_SNAPSHOT_NOTION_DB_ID',
+	'ASSETS_NOTION_DB_ID',
+	'ASSETS_SUMMARY_NOTION_DB_ID',
+	'CASH_FLOW_NOTION_DB_ID',
+	'CASH_FLOW_SUMMARY_NOTION_DB_ID',
 ];
 
 export function applySettingsFromNotionVariablesForClarityLife() {
