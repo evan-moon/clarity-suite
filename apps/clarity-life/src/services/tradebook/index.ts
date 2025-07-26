@@ -12,6 +12,8 @@ export function syncTradebookTransactionsCurrencies(
 	const sheet = getSheet(sheetName);
 
 	const pages = queryNotionEmptyRatePages(notionDbId);
+	Logger.log(`${pages.length}개의 대상 로우를 찾았어요.`);
+
 	if (pages.length === 0) return;
 
 	pages.forEach((page, i) => {
@@ -23,21 +25,21 @@ export function syncTradebookTransactionsCurrencies(
 
 		const dateProperty = page.properties.날짜;
 		const fromProperty = page.properties.거래통화;
-		const toProperty = page.properties.계좌통화;
+		const toProperty = page.properties.변환통화;
 
 		if (
 			dateProperty.type !== 'date' ||
 			fromProperty.type !== 'select' ||
-			toProperty.type !== 'formula'
+			toProperty.type !== 'select'
 		) {
 			return;
 		}
 
 		const date = dateProperty.date?.start;
 		const fromSelect = fromProperty.select;
-		const toFormula = toProperty.formula;
-		const from = fromSelect ? fromSelect.name : '';
-		const to = toFormula.type === 'string' ? (toFormula.string ?? '') : '';
+		const toFormula = toProperty.select;
+		const from = fromSelect?.name ?? '';
+		const to = toFormula?.name ?? '';
 
 		const isSameCurrency = from === to;
 
@@ -80,7 +82,10 @@ export function syncTradebookTransactionsCurrencies(
 		.filter((update): update is NonNullable<typeof update> => update != null);
 
 	if (updates.length > 0) {
-		assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
+		assert(
+			appsScriptProperties.NOTION_SECRET,
+			'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.',
+		);
 
 		const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 		notion.updateAll(updates);

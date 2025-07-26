@@ -3,7 +3,10 @@ import { assert } from '@clarity-suite/utils';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 
 export function queryNotionEmptyRatePages(notionDbId: string) {
-	assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
+	assert(
+		appsScriptProperties.NOTION_SECRET,
+		'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.',
+	);
 
 	const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 	const res = notion.getPages(notionDbId, {
@@ -12,8 +15,8 @@ export function queryNotionEmptyRatePages(notionDbId: string) {
 				{ property: '날짜', date: { is_not_empty: true } },
 				{ property: '거래통화', select: { is_not_empty: true } },
 				{
-					property: '계좌통화',
-					formula: { string: { is_not_empty: true } },
+					property: '변환통화',
+					select: { is_not_empty: true },
 				},
 				{ property: '환율', number: { is_empty: true } },
 			],
