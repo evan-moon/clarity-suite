@@ -3,14 +3,13 @@ import { createNotionClient, isFullPageWithId } from '@clarity-suite/notion';
 import { queryNotionEmptyRatePages } from './utils';
 import { appsScriptProperties } from 'services/_shared/appsScriptProperties';
 import { assert } from '@clarity-suite/utils';
-import { clearSheet } from '@clarity-suite/sheets';
+import { clearSheet, getSheet } from '@clarity-suite/sheets';
 
 export function syncTradebookTransactionsCurrencies(
 	sheetName: string,
 	notionDbId: string,
 ) {
-	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
-	if (!sheet) throw new Error(`Sheet not found: ${sheetName}`);
+	const sheet = getSheet(sheetName);
 
 	const pages = queryNotionEmptyRatePages(notionDbId);
 	if (pages.length === 0) return;
@@ -45,13 +44,17 @@ export function syncTradebookTransactionsCurrencies(
 		sheet.getRange(row, 1).setValue(date);
 		sheet.getRange(row, 2).setValue(from);
 		sheet.getRange(row, 3).setValue(to);
-		sheet
-			.getRange(row, 4)
-			.setFormula(
-				isSameCurrency
-					? '1'
-					: `=iferror(index(googlefinance(B${row}&C${row},"price",A${row},A${row} + 2), 2, 2), "")`,
-			);
+		try {
+			sheet
+				.getRange(row, 4)
+				.setFormula(
+					isSameCurrency
+						? '1'
+						: `=iferror(index(googlefinance(B${row}&C${row},"price",A${row},A${row} + 2), 2, 2), "")`,
+				);
+		} catch (error) {
+			Logger.log(`Error setting formula for row ${row}: ${error}`);
+		}
 	});
 
 	SpreadsheetApp.flush();

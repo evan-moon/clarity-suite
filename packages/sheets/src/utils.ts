@@ -1,10 +1,11 @@
 export function getSheet(sheetName: string) {
-	return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+	if (!sheet) throw new Error(`Sheet not found: ${sheetName}`);
+	return sheet;
 }
 
 export function clearSheet(sheetName: string) {
 	const sheet = getSheet(sheetName);
-	if (!sheet) return;
 	const lastRow = sheet.getLastRow();
 	if (lastRow > 0) {
 		sheet.deleteRows(1, lastRow);

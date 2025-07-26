@@ -19,13 +19,18 @@ export const createNotionClient = (token: string) => ({
 	): { results: PageObjectResponse[] } => {
 		const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
 
-		const result = UrlFetchApp.fetch(queryUrl, {
-			method: 'post',
-			headers: getRequestHeader(token),
-			payload: JSON.stringify(data),
-		});
+		try {
+			const result = UrlFetchApp.fetch(queryUrl, {
+				method: 'post',
+				headers: getRequestHeader(token),
+				payload: JSON.stringify(data),
+			});
 
-		return JSON.parse(result.getContentText());
+			return JSON.parse(result.getContentText());
+		} catch (error) {
+			Logger.log(`Error fetching pages from database ${databaseId}: ${error}`);
+			throw new Error(`Failed to fetch pages from database ${databaseId}: ${error}`);
+		}
 	},
 	getRecentPage: function (databaseId: string): PageObjectResponse | null {
 		// created_time 기준 내림차순, 1개만 반환
@@ -48,24 +53,35 @@ export const createNotionClient = (token: string) => ({
 			payload: JSON.stringify(data),
 		}));
 
-		const results = UrlFetchApp.fetchAll(requests);
-		return results.map((result) => JSON.parse(result.getContentText()));
+		try {
+			const results = UrlFetchApp.fetchAll(requests);
+			return results.map((result) => JSON.parse(result.getContentText()));
+		} catch (error) {
+			Logger.log(`Error updating ${updates.length} pages: ${error}`);
+			throw new Error(`Failed to update pages: ${error}`);
+		}
 	},
 	createPage: (
 		databaseId: string,
 		properties: CreatePageParameters['properties'],
 	) => {
 		const url = 'https://api.notion.com/v1/pages';
-		const result = UrlFetchApp.fetch(url, {
-			method: 'post',
-			headers: getRequestHeader(token),
-			payload: JSON.stringify({
-				parent: { database_id: databaseId },
-				properties,
-			}),
-		});
+		
+		try {
+			const result = UrlFetchApp.fetch(url, {
+				method: 'post',
+				headers: getRequestHeader(token),
+				payload: JSON.stringify({
+					parent: { database_id: databaseId },
+					properties,
+				}),
+			});
 
-		return JSON.parse(result.getContentText());
+			return JSON.parse(result.getContentText());
+		} catch (error) {
+			Logger.log(`Error creating page in database ${databaseId}: ${error}`);
+			throw new Error(`Failed to create page in database ${databaseId}: ${error}`);
+		}
 	},
 	findDatabaseByName: (name: string, token: string) => {
 		const queryUrl = 'https://api.notion.com/v1/search';
@@ -98,27 +114,34 @@ export const createNotionClient = (token: string) => ({
 
 	deleteAllPagesInDatabase: (databaseId: string): number => {
 		const queryUrl = `https://api.notion.com/v1/databases/${databaseId}/query`;
-		const result = UrlFetchApp.fetch(queryUrl, {
-			method: 'post',
-			headers: getRequestHeader(token),
-			payload: JSON.stringify({}),
-		});
+		
+		try {
+			const result = UrlFetchApp.fetch(queryUrl, {
+				method: 'post',
+				headers: getRequestHeader(token),
+				payload: JSON.stringify({}),
+			});
 
-		const { results } = JSON.parse(result.getContentText());
+			const { results } = JSON.parse(result.getContentText());
 
-		Logger.log(
-			`${databaseId} 테이블에서 ${results.length}개의 Row를 발견했어요.`,
-		);
-		if (!results || results.length === 0) return 0;
+			Logger.log(
+				`${databaseId} 테이블에서 ${results.length}개의 Row를 발견했어요.`,
+			);
+			if (!results || results.length === 0) return 0;
 
-		const requests = results.map((page: { id: string }) => ({
-			url: `https://api.notion.com/v1/pages/${page.id}`,
-			method: 'patch' as const,
-			headers: getRequestHeader(token),
-			payload: JSON.stringify({ archived: true }),
-		}));
-		UrlFetchApp.fetchAll(requests);
-		return results.length;
+			const requests = results.map((page: { id: string }) => ({
+				url: `https://api.notion.com/v1/pages/${page.id}`,
+				method: 'patch' as const,
+				headers: getRequestHeader(token),
+				payload: JSON.stringify({ archived: true }),
+			}));
+			
+			UrlFetchApp.fetchAll(requests);
+			return results.length;
+		} catch (error) {
+			Logger.log(`Error deleting pages from database ${databaseId}: ${error}`);
+			throw new Error(`Failed to delete pages from database ${databaseId}: ${error}`);
+		}
 	},
 	getBlockChildren: (blockId: string): BlockObjectResponse[] => {
 		const url = `https://api.notion.com/v1/blocks/${blockId}/children`;
