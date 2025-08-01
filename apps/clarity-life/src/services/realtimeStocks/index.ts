@@ -48,6 +48,9 @@ export function syncRealtimeStocks(sheetName: string, notionDbId: string) {
 					EPS: {
 						number: parseFloat(data[8]),
 					},
+					시가총액: {
+						number: parseFloat(data[9]),
+					},
 				},
 			};
 		},
