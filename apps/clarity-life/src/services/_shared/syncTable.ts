@@ -71,7 +71,10 @@ export function syncTable(
 		.filter((update): update is NonNullable<typeof update> => update != null);
 
 	if (updates.length > 0) {
-		assert(appsScriptProperties.NOTION_SECRET, 'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.');
+		assert(
+			appsScriptProperties.NOTION_SECRET,
+			'The script property "NOTION_SECRET" is not set. Please check Project Settings > Script properties.',
+		);
 
 		const notion = createNotionClient(appsScriptProperties.NOTION_SECRET);
 		notion.updateAll(updates);
