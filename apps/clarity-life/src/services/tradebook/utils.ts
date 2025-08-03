@@ -14,10 +14,6 @@ export function queryNotionEmptyRatePages(notionDbId: string) {
 			and: [
 				{ property: '날짜', date: { is_not_empty: true } },
 				{ property: '거래통화', select: { is_not_empty: true } },
-				{
-					property: '변환통화',
-					select: { is_not_empty: true },
-				},
 				{ property: '환율', number: { is_empty: true } },
 			],
 		},

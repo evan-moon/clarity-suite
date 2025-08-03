@@ -30,16 +30,17 @@ export function syncTradebookTransactionsCurrencies(
 		if (
 			dateProperty.type !== 'date' ||
 			fromProperty.type !== 'select' ||
-			toProperty.type !== 'select'
+			toProperty.type !== 'formula' ||
+			toProperty.formula.type !== 'string'
 		) {
 			return;
 		}
 
 		const date = dateProperty.date?.start;
 		const fromSelect = fromProperty.select;
-		const toFormula = toProperty.select;
+		const toFormula = toProperty.formula.string;
 		const from = fromSelect?.name ?? '';
-		const to = toFormula?.name ?? '';
+		const to = toFormula ?? '';
 
 		const isSameCurrency = from === to;
 
